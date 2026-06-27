@@ -8,13 +8,13 @@ export function ContactSection({ t }) {
       label: 'GitHub',
       value: 'barzzly',
       href: 'https://github.com/barzzly/',
-      icon: <Github className="w-6 h-6 text-text/85" />,
+      Icon: Github,
     },
     {
       label: 'Discord',
       value: 'BarzzLy',
       href: 'https://discord.com/users/1189813545018347580',
-      icon: <Discord className="w-6 h-6 text-text/85" />,
+      Icon: Discord,
     },
   ]
 
@@ -43,7 +43,10 @@ export function ContactSection({ t }) {
         </div>
 
         <div className="reveal-right delay-150 grid grid-cols-1 sm:grid-cols-2 gap-5">
-          {contactLinks.map((item) => (
+          {contactLinks.map((item) => {
+            const Icon = item.Icon
+
+            return (
             <a
               key={item.label}
               href={item.href}
@@ -52,10 +55,15 @@ export function ContactSection({ t }) {
               className="group block h-full"
             >
               <Card hoverable={true} className="contact-link-card h-full bg-surface/35 border-border/40 p-6">
-                <div className="flex h-full min-h-[170px] flex-col justify-between gap-8">
+                <Icon
+                  aria-hidden="true"
+                  className="contact-card-watermark pointer-events-none absolute -right-10 -bottom-11 z-0 h-40 w-40 -rotate-12 text-text/[0.04] transition-all duration-500 group-hover:-translate-y-1 group-hover:rotate-[-8deg] group-hover:scale-105 group-hover:text-text/[0.075]"
+                />
+
+                <div className="relative z-10 flex h-full min-h-[170px] flex-col justify-between gap-8">
                   <div className="flex items-center justify-between gap-4">
                     <div className="contact-link-icon flex h-13 w-13 items-center justify-center rounded-2xl border border-border bg-text/[0.04]">
-                      {item.icon}
+                      <Icon className="w-6 h-6 text-text/85" />
                     </div>
                     <ExternalLink className="h-4 w-4 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-text" />
                   </div>
@@ -71,7 +79,8 @@ export function ContactSection({ t }) {
                 </div>
               </Card>
             </a>
-          ))}
+            )
+          })}
         </div>
       </div>
     </section>
