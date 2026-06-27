@@ -4,87 +4,188 @@ export const translations = {
       home: "Home",
       about: "About",
       projects: "Projects",
-      skills: "Tech-Stack",
+      skills: "Tech Stack",
+      testimonials: "Testimonials",
       contact: "Contact",
       hire: "Hire Me"
     },
     hero: {
-      status: "AVAILABLE FOR FREELANCE",
-      desc: "I build and design Minecraft servers with clean, stable, and polished systems from plugin configuration and economy setup to a smooth, memorable player experience.",
+      status: "AVAILABLE FOR MINECRAFT SERVER WORK",
+      eyebrow: "Minecraft Server",
+      desc: "I design and build Minecraft servers with clean systems, stable performance, and polished player experiences. I handle plugins, economy, proxy setup, and launch ready operations.",
+      descLines: [
+        "I design and build Minecraft servers with clean systems,",
+        "stable performance, and polished player experiences.",
+        "I handle plugins, economy, proxy setup, and launch ready operations."
+      ],
+      stats: [
+        { label: "FAST", value: "RESPONSE" },
+        { label: "FRIENDLY", value: "SERVICE" },
+        { label: "DETAIL", value: "ORIENTED" }
+      ],
       ctaProjects: "Explore Projects",
       ctaContact: "Start a Conversation"
     },
     about: {
-      badge: "01. WHO AM I",
+      badge: "WHO AM I",
       heading: "About",
       headingAccent: "Me",
-      desc1: "Hello! I'm BarzzLy, a digital craftsman focused on building rich interactive environments. I bridge the gap between design systems and complex engineering architectures, ensuring websites are fast, accessible, and exciting to navigate.",
-      desc2: "I don't just write templates. I customize every scroll transition, spacing element, and glassmorphic container to construct websites with unique identities. By combining modern frameworks with native CSS custom variables, my work achieves high performance and scalable themes.",
+      desc1: "Hello! I'm BarzzLy, a Minecraft server developer focused on building stable, neat, and comfortable multiplayer environments. I handle server configuration, plugin ecosystems, economy, permissions, proxy networks, optimization, and player experience.",
+      desc2: "I do not just install plugins and call it done. I refine the whole system so ranks, menus, rewards, performance, security, and every small detail feel consistent. Fun fact, I am a perfectionist, so your server will be handled with as much detail as possible.",
       labelName: "NAME",
       labelLocation: "LOCATION",
       labelFuel: "FUEL",
       labelPortfolio: "PORTFOLIO",
       qualities: [
-        { title: "Responsive Design", desc: "Interfaces look impeccable on every resolution, adapting natively to screen size." },
-        { title: "Interactive Flow", desc: "Micro-interactions and spring physics animations that feel alive and engaging." },
-        { title: "Clean Architecture", desc: "Modular components, structured styling tokens, and optimized builds for speeds." }
+        { title: "Server Setup", desc: "Clean Paper, Velocity, plugin, permission, and database setups built for stable launches." },
+        { title: "Gameplay Systems", desc: "Economy, ranks, menus, rewards, and player progression tuned to feel balanced." },
+        { title: "Performance Care", desc: "Configuration, monitoring, and maintenance choices that keep gameplay smooth." }
       ]
     },
     projects: {
-      badge: "02. PORTFOLIO SHOWCASE",
-      heading: "Selected",
-      headingAccent: "Projects",
-      filterAll: "all",
-      source: "Source",
-      demo: "Demo",
+      badge: "SERVER SHOWCASE",
+      heading: "Big",
+      headingAccent: "Project",
+      onlineLabel: "Online Players",
+      loadingPlayers: "Checking",
+      offlineLabel: "Offline",
+      eolLabel: "End of Life",
+      joinLabel: "Join IP",
+      copyLabel: "Copy",
+      copiedLabel: "Copied",
       items: [
         {
           id: 1,
-          title: "Aether OS Terminal",
-          description: "An interactive in-browser shell emulator with a virtual file system, system telemetry simulations, and keyboard shortcut overrides."
+          title: "Aetherium Network",
+          role: "Developer, Owner",
+          description: "A server network I built in 2023 as my second major project after BarzzSMP in 2021. Aetherium reached 150 active players with RPG, faction, economy, Slimefun, and vanilla survival systems."
         },
         {
           id: 2,
-          title: "NeoMetrics Analytics",
-          description: "Futuristic system monitoring portal featuring real-time stream graphs, server health trackers, database loads, and custom notification systems."
+          title: "Noesantara Network",
+          role: "Developer, Owner",
+          description: "A server network rebranded from Aetherium Network in early 2025. Noesantara grew with a stronger identity and reached 250 active players through RPG, faction, and economy systems."
         },
         {
           id: 3,
-          title: "Synapse Code Link",
-          description: "A collaborative terminal-inspired markdown editor and execution sandboxing tool for secure remote pairing sessions."
+          title: "Rebel Roleplay",
+          role: "Owner",
+          description: "A roleplay server with Rebel that I recently joined as an owner. This project focuses on a polished city roleplay experience with an active economy, race systems, and a comfortable community."
         }
       ]
     },
     skills: {
-      badge: "03. CAPABILITIES",
-      heading: "Technical",
+      badge: "SERVER STACK",
+      heading: "Minecraft",
       headingAccent: "Stack",
+      marquee: [
+        "Bedrock Vanilla", "Geyser", "Velocity", "Waterfall", "BungeeCord",
+        "Vanilla", "Fabric", "NeoForge", "PurpurFish", "Sponge",
+        "Leaf", "Paper", "Purpur", "Spigot", "Leaves"
+      ],
       categories: {
-        frontend: "Frontend Stack",
-        backend: "Backend & Systems",
-        workflow: "Development Workflow"
+        serverCore: "Server Core",
+        modeGameplay: "Gameplay Modes",
+        serverOperations: "Server Operations"
+      },
+      items: {
+        paperSpigot: "PaperMC / Spigot",
+        networkProxy: "Network Proxy",
+        pluginConfiguration: "Plugin Configuration",
+        permissionsRanks: "Permissions & Ranks",
+        guiMenus: "GUI Menus",
+        developPlugin: "Develop Plugin",
+        rpg: "RPG",
+        economy: "Economy",
+        slimefun: "Slimefun",
+        minigames: "Minigames",
+        velocity: "Velocity",
+        etc: "Other",
+        serverTesting: "Server Testing",
+        serverAnalysis: "Server Analysis",
+        maintenance: "Maintenance",
+        optimizeSpigotConfig: "Optimize Spigot Config",
+        optimizePluginConfig: "Optimize Plugin Config",
+        errorDebugging: "Error Debugging"
       }
     },
+    testimonials: {
+      badge: "TESTIMONIALS",
+      heading: "Client",
+      headingAccent: "Feedback",
+      items: [
+        {
+          name: "Arif",
+          project: "Owner Cornez & Shadow EM",
+          text: "In my opinion the files work, but the plugins still feel less original and there are still red console logs. Overall, it is good."
+        },
+        {
+          name: "Eraz",
+          project: "MineFiveID",
+          text: "A trusted store, unlike that other one with the initial S. The work feels safer and more reliable."
+        },
+        {
+          name: "Zetex",
+          project: "Owner Zetex",
+          text: "Great work. The pack did not disappoint, with many setups that are not common. The DeluxeMenus config I bought matched my request perfectly. Barzz is one of the best developers."
+        },
+        {
+          name: "Silvavita",
+          project: "Owner Silvavita",
+          text: "The optimization was great. The server went from 15 TPS to 20 TPS with 80 players."
+        },
+        {
+          name: "Tenny",
+          project: "Owner Karura",
+          text: "Friendly service, fast process, and the result matched expectations. Highly recommended, I will order again when needed. Thank you."
+        },
+        {
+          name: "Nexalith",
+          project: "Owner Nexalith",
+          text: "The custom fishing system is really nice, complete with custom textures similar to Fish In. The plugin work is excellent."
+        },
+        {
+          name: "PotatoSMP",
+          project: "Owner PotatoSMP",
+          text: "I really like the optimization. My server is smooth now and no longer laggy. It used to hit 4 TPS with 120 players, now it stays at 20 stable TPS with 180 players."
+        },
+        {
+          name: "Natt",
+          project: "Dev Queen Craft",
+          text: "The optimization is excellent. The result is strong and very satisfying."
+        },
+        {
+          name: "GenzSMP",
+          project: "Owner GenzSMP",
+          text: "Thanks for helping bring my server up. Next month I will order again for renewal."
+        },
+        {
+          name: "Valtherion",
+          project: "Owner Valtherion",
+          text: "Very good work. You built me an RPG fantasy themed server, fast and polished. The lobby is neat, premium plugins were added, and the result is really cool. Big W for Dev Barzz."
+        }
+      ]
+    },
     contact: {
-      badge: "04. GET IN TOUCH",
+      badge: "GET IN TOUCH",
       heading: "Start a",
-      headingAccent: "Project",
-      subheading: "Let's build something exceptional.",
-      desc: "If you have a concept, project, or full-time opportunity you'd like to discuss, feel free to drop a message or reach out directly via email.",
+      headingAccent: "Server",
+      subheading: "Let's build a server players want to stay in.",
+      desc: "If you need a Minecraft server setup, plugin configuration, economy design, proxy network, or long term maintenance, send a message and we can map the build together.",
       directMail: "DIRECT MAIL",
-      responseTime: "Average response time: < 12 hours",
+      responseTime: "Average response time under 12 hours",
       formName: "Name",
       formEmail: "Email",
       formMessage: "Message",
-      formNamePlaceholder: "e.g. John Doe",
-      formEmailPlaceholder: "e.g. john@example.com",
-      formMessagePlaceholder: "Hi, I'd like to work with you on a custom analytics dashboard...",
+      formNamePlaceholder: "Example John Doe",
+      formEmailPlaceholder: "Example john@example.com",
+      formMessagePlaceholder: "Hi, I want to build a Minecraft survival server with economy, ranks, and custom systems",
       formSubmit: "Send Message",
-      formSending: "Sending...",
+      formSending: "Sending",
       formSuccess: "Message received! I'll get back to you shortly."
     },
     footer: {
-      tagline: "Crafting premium interactive digital experiences."
+      tagline: "Building stable Minecraft server experiences."
     }
   },
   id: {
@@ -93,86 +194,187 @@ export const translations = {
       about: "Tentang",
       projects: "Proyek",
       skills: "Keahlian",
+      testimonials: "Testimoni",
       contact: "Kontak",
       hire: "Hubungi Saya"
     },
     hero: {
-      status: "TERSEDIA UNTUK FREELANCE",
-      desc: "Saya membangun dan merancang server Minecraft secara rapi, stabil, dan maksimal mulai dari konfigurasi plugin, sistem ekonomi, hingga pengalaman bermain yang smooth dan berkesan.",
+      status: "TERSEDIA UNTUK PROJECT SERVER MINECRAFT",
+      eyebrow: "Minecraft Server",
+      desc: "Saya membangun server Minecraft dengan sistem yang rapi, performa stabil, dan pengalaman bermain yang matang. Saya mengurus plugin, ekonomi, proxy, dan persiapan rilis.",
+      descLines: [
+        "Saya membangun server Minecraft dengan sistem yang rapi,",
+        "performa stabil, dan pengalaman bermain yang matang.",
+        "Saya mengurus plugin, ekonomi, proxy, dan persiapan rilis."
+      ],
+      stats: [
+        { label: "FAST", value: "RESPON" },
+        { label: "FRIENDLY", value: "SERVICE" },
+        { label: "DETAIL", value: "RAPI" }
+      ],
       ctaProjects: "Lihat Proyek",
       ctaContact: "Mulai Diskusi"
     },
     about: {
-      badge: "01. SIAPA SAYA",
+      badge: "SIAPA SAYA",
       heading: "Tentang",
       headingAccent: "Saya",
-      desc1: "Halo! Saya BarzzLy, seorang pengrajin digital yang berfokus pada pembuatan lingkungan interaktif yang kaya. Saya menjembatani celah antara sistem desain dan arsitektur rekayasa yang kompleks, memastikan situs web cepat, mudah diakses, dan menarik untuk dinavigasi.",
-      desc2: "Saya tidak hanya menulis templat. Saya menyesuaikan setiap transisi gulir, elemen spasi, dan wadah glassmorphic untuk membangun situs web dengan identitas unik. Dengan menggabungkan kerangka kerja modern dengan variabel kustom CSS asli, pekerjaan saya mencapai performa tinggi dan tema yang dapat diskalakan.",
+      desc1: "Halo! Saya BarzzLy, developer server Minecraft yang fokus membangun lingkungan multiplayer yang stabil, rapi, dan nyaman dimainkan. Saya mengurus konfigurasi server, ekosistem plugin, ekonomi, permission, proxy network, optimalisasi, dan pengalaman pemain.",
+      desc2: "Saya tidak sekadar memasang plugin lalu selesai. Saya merapikan sistem agar rank, menu, reward, performa, keamanan, dan detail kecil lainnya terasa konsisten. Fun fact, saya perfeksionis, jadi server Anda akan saya kerjakan sedetail mungkin.",
       labelName: "NAMA",
       labelLocation: "LOKASI",
       labelFuel: "BAHAN BAKAR",
       labelPortfolio: "PORTFOLIO",
       qualities: [
-        { title: "Desain Responsif", desc: "Antarmuka terlihat sempurna pada setiap resolusi, beradaptasi secara asli dengan ukuran layar." },
-        { title: "Aliran Interaktif", desc: "Mikro-interaksi dan animasi fisika pegas yang terasa hidup dan menarik." },
-        { title: "Arsitektur Bersih", desc: "Komponen modular, token gaya terstruktur, dan build yang dioptimalkan untuk kecepatan." }
+        { title: "Setup Server", desc: "Setup Paper, Velocity, plugin, permission, dan database yang rapi untuk launch stabil." },
+        { title: "Sistem Gameplay", desc: "Ekonomi, rank, menu, reward, dan progres pemain dibuat seimbang dan nyaman." },
+        { title: "Performa Stabil", desc: "Konfigurasi, monitoring, dan maintenance agar gameplay tetap smooth." }
       ]
     },
     projects: {
-      badge: "02. PORTFOLIO PROYEK",
-      heading: "Proyek",
-      headingAccent: "Pilihan",
-      filterAll: "semua",
-      source: "Sumber",
-      demo: "Demo",
+      badge: "SHOWCASE SERVER",
+      heading: "Big",
+      headingAccent: "Project",
+      onlineLabel: "Player Online",
+      loadingPlayers: "Mengecek",
+      offlineLabel: "Offline",
+      eolLabel: "End of Life",
+      joinLabel: "IP Join",
+      copyLabel: "Salin",
+      copiedLabel: "Disalin",
       items: [
         {
           id: 1,
-          title: "Aether OS Terminal",
-          description: "Emulator shell dalam browser yang interaktif dengan sistem file virtual, simulasi telemetri sistem, dan override pintasan keyboard."
+          title: "Aetherium Network",
+          role: "Developer, Owner",
+          description: "Server network yang saya bangun pada tahun 2023 sebagai project kedua setelah BarzzSMP pada 2021. Aetherium pernah mencapai 150 pemain aktif dengan mode RPG, faction, ekonomi, Slimefun, dan vanilla survival."
         },
         {
           id: 2,
-          title: "NeoMetrics Analytics",
-          description: "Portal pemantauan sistem futuristik yang menampilkan grafik aliran waktu nyata, pelacak kesehatan server, beban database, dan sistem notifikasi khusus."
+          title: "Noesantara Network",
+          role: "Developer, Owner",
+          description: "Server network hasil rebranding dari Aetherium Network pada awal tahun 2025. Noesantara berkembang dengan identitas yang lebih matang dan pernah mencapai 250 pemain aktif melalui sistem RPG, faction, dan ekonomi."
         },
         {
           id: 3,
-          title: "Synapse Code Link",
-          description: "Editor markdown kolaboratif yang terinspirasi dari terminal dan alat kotak pasir eksekusi untuk sesi pemasangan jarak jauh yang aman."
+          title: "Rebel Roleplay",
+          role: "Owner",
+          description: "Server roleplay bersama Rebel yang baru baru ini saya join sebagai owner. Project ini berfokus pada pengalaman city roleplay yang rapi, ekonomi aktif, sistem race, dan komunitas yang nyaman dimainkan."
         }
       ]
     },
     skills: {
-      badge: "03. KEMAMPUAN",
-      heading: "Keahlian",
-      headingAccent: "Teknis",
+      badge: "STACK SERVER",
+      heading: "Minecraft",
+      headingAccent: "Stack",
+      marquee: [
+        "Bedrock Vanilla", "Geyser", "Velocity", "Waterfall", "BungeeCord",
+        "Vanilla", "Fabric", "NeoForge", "PurpurFish", "Sponge",
+        "Leaf", "Paper", "Purpur", "Spigot", "Leaves"
+      ],
       categories: {
-        frontend: "Kumpulan Frontend",
-        backend: "Backend & Sistem",
-        workflow: "Alur Kerja Pengembangan"
+        serverCore: "Core Server",
+        modeGameplay: "Mode Gameplay",
+        serverOperations: "Operasional Server"
+      },
+      items: {
+        paperSpigot: "PaperMC / Spigot",
+        networkProxy: "Network Proxy",
+        pluginConfiguration: "Konfigurasi Plugin",
+        permissionsRanks: "Permission & Rank",
+        guiMenus: "Menu GUI",
+        developPlugin: "Develop Plugin",
+        rpg: "RPG",
+        economy: "Ekonomi",
+        slimefun: "Slimefun",
+        minigames: "Minigames",
+        velocity: "Velocity",
+        etc: "Lainnya",
+        serverTesting: "Testing Server",
+        serverAnalysis: "Analisis Server",
+        maintenance: "Maintenance",
+        optimizeSpigotConfig: "Optimasi Config Spigot",
+        optimizePluginConfig: "Optimasi Config Plugin",
+        errorDebugging: "Debug Error"
       }
     },
+    testimonials: {
+      badge: "TESTIMONI",
+      heading: "Kata",
+      headingAccent: "Client",
+      items: [
+        {
+          name: "Arif",
+          project: "Owner Cornez & Shadow EM",
+          text: "Menurut saya filenya work, tapi pluginnya kurang ori dan masih ada merah pada console. Overall bagus lah."
+        },
+        {
+          name: "Eraz",
+          project: "MineFiveID",
+          text: "Store terpercaya, tidak seperti sebelah inisial S. Kerjaannya terasa lebih aman dan bisa dipercaya."
+        },
+        {
+          name: "Zetex",
+          project: "Owner Zetex",
+          text: "GG, packnya tidak mengecewakan. Banyak setup yang tidak pasaran, apalagi config DeluxeMenus yang saya beli. Sesuai banget dengan request saya. Pokoknya terbaik dev Barzz."
+        },
+        {
+          name: "Silvavita",
+          project: "Owner Silvavita",
+          text: "Bagus optimizenya, dari 15 TPS jadi 20 TPS dengan 80 player."
+        },
+        {
+          name: "Tenny",
+          project: "Owner Karura",
+          text: "Pelayanannya ramah, prosesnya cepat, hasilnya juga sesuai ekspektasi. Recommended banget, bakal order lagi kalau butuh. Terima kasih."
+        },
+        {
+          name: "Nexalith",
+          project: "Owner Nexalith",
+          text: "Custom fishingnya cakep banget, ada custom texture yang mirip Fish In. Gacor dah pokoknya pluginnya."
+        },
+        {
+          name: "PotatoSMP",
+          project: "Owner PotatoSMP",
+          text: "Gacor, saya sangat suka dengan optimize kamu. Server saya jadi lancar dan tidak lag lagi. Awalnya 120 player 4 TPS, sekarang jadi 20 TPS stabil di 180 player."
+        },
+        {
+          name: "Natt",
+          project: "Dev Queen Craft",
+          text: "Gacor optimizenya. Hasilnya mantap dan sangat memuaskan."
+        },
+        {
+          name: "GenzSMP",
+          project: "Owner GenzSMP",
+          text: "Thanks om sudah mau bantu naikkan serverku. Bulan depan nanti order buat perpanjang."
+        },
+        {
+          name: "Valtherion",
+          project: "Owner Valtherion",
+          text: "Wah bagus banget, kau buatin gw server tema RPG fantasy. Sudah cepat, bagus lagi. Lobby-nya rapi, ditambahin plugin premium juga. Keren banget, auto kasih bintang 5. W buat Dev Barzz."
+        }
+      ]
+    },
     contact: {
-      badge: "04. HUBUNGI KAMI",
+      badge: "HUBUNGI SAYA",
       heading: "Mulai",
-      headingAccent: "Proyek",
-      subheading: "Mari membangun sesuatu yang luar biasa.",
-      desc: "Jika Anda memiliki konsep, proyek, atau peluang purna waktu yang ingin Anda diskusikan, silakan tinggalkan pesan atau hubungi langsung via email.",
+      headingAccent: "Server",
+      subheading: "Mari bangun server yang bikin pemain betah.",
+      desc: "Kalau kamu butuh setup server Minecraft, konfigurasi plugin, desain ekonomi, proxy network, atau maintenance jangka panjang, kirim pesan dan kita susun kebutuhan buildnya.",
       directMail: "EMAIL LANGSUNG",
-      responseTime: "Rata-rata waktu respons: < 12 jam",
+      responseTime: "Rata rata waktu respons di bawah 12 jam",
       formName: "Nama",
       formEmail: "Email",
       formMessage: "Pesan",
-      formNamePlaceholder: "mis. John Doe",
-      formEmailPlaceholder: "mis. john@example.com",
-      formMessagePlaceholder: "Halo, saya ingin bekerja sama dengan Anda dalam membuat dasbor analitik...",
+      formNamePlaceholder: "Contoh John Doe",
+      formEmailPlaceholder: "Contoh john@example.com",
+      formMessagePlaceholder: "Halo, saya ingin membuat server survival Minecraft dengan ekonomi, rank, dan sistem custom",
       formSubmit: "Kirim Pesan",
-      formSending: "Mengirim...",
+      formSending: "Mengirim",
       formSuccess: "Pesan diterima! Saya akan segera menghubungi Anda kembali."
     },
     footer: {
-      tagline: "Merancang pengalaman digital interaktif premium."
+      tagline: "Membangun pengalaman server Minecraft yang stabil."
     }
   }
 }

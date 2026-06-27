@@ -23,8 +23,16 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
     { label: t.about, href: '#about' },
     { label: t.projects, href: '#projects' },
     { label: t.skills, href: '#tech-stack' },
+    { label: t.testimonials, href: '#testimonials' },
     { label: t.contact, href: '#contact' },
   ]
+
+  const handleNavClick = (event, href) => {
+    event.preventDefault()
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
+    window.history.replaceState(null, '', window.location.pathname + window.location.search)
+    setIsMobileMenuOpen(false)
+  }
 
   return (
     <header 
@@ -43,7 +51,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
         `}
       >
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text hover:opacity-70 transition-all duration-200 group">
+        <a href="#home" onClick={(event) => handleNavClick(event, '#home')} className="flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text hover:opacity-70 transition-all duration-200 group">
           <img src={logoNoBg} alt="Barzz Logo" className="w-6 h-6 object-contain brand-logo" />
           <span>BARZZ<span className="text-muted">.LY</span></span>
         </a>
@@ -54,6 +62,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
             <a 
               key={link.label}
               href={link.href} 
+              onClick={(event) => handleNavClick(event, link.href)}
               className="font-mono text-[11px] tracking-[0.1em] uppercase font-medium text-muted hover:text-text transition-colors duration-200"
             >
               {link.label}
@@ -128,7 +137,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
             <a 
               key={link.label}
               href={link.href} 
-              onClick={() => setIsMobileMenuOpen(false)}
+              onClick={(event) => handleNavClick(event, link.href)}
               className="font-sans font-bold text-base tracking-wide text-text/80 hover:text-primary transition-colors py-2 border-b border-border/20"
             >
               {link.label}

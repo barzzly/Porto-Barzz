@@ -7,6 +7,7 @@ import { HeroSection } from './sections/HeroSection'
 import { AboutSection } from './sections/AboutSection'
 import { ProjectsSection } from './sections/ProjectsSection'
 import { SkillsSection } from './sections/SkillsSection'
+import { TestimonialsSection } from './sections/TestimonialsSection'
 import { ContactSection } from './sections/ContactSection'
 import { GlowGrid } from './components/ui/GlowGrid'
 import { translations } from './data/translations'
@@ -19,8 +20,17 @@ function App() {
 
   const toggleLang = () => {
     const nextLang = lang === 'en' ? 'id' : 'en'
-    setLang(nextLang)
-    localStorage.setItem('porto-lang', nextLang)
+    const applyLanguage = () => {
+      setLang(nextLang)
+      localStorage.setItem('porto-lang', nextLang)
+    }
+
+    if (document.startViewTransition) {
+      document.startViewTransition(applyLanguage)
+      return
+    }
+
+    applyLanguage()
   }
 
   // Register scroll reveal animation handler globally on layout mount
@@ -52,6 +62,7 @@ function App() {
         <AboutSection t={t.about} />
         <ProjectsSection t={t.projects} />
         <SkillsSection t={t.skills} />
+        <TestimonialsSection t={t.testimonials} />
         <ContactSection t={t.contact} />
       </main>
 

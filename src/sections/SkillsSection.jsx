@@ -3,19 +3,13 @@ import { Card } from '../components/ui/Card'
 import { Code2, Settings, Terminal } from 'lucide-react'
 
 export function SkillsSection({ t }) {
-  const marqueeTech = [
-    "React", "Tailwind CSS", "Vite", "Node.js", "Express", "TypeScript", 
-    "PostgreSQL", "Docker", "Git", "GitHub", "REST APIs", "GraphQL", 
-    "MongoDB", "WebSockets", "Next.js", "JavaScript"
-  ]
-
-  // Double the list to make the loop seamless
+  const marqueeTech = t.marquee || []
   const marqueeList = [...marqueeTech, ...marqueeTech]
 
-  const getCategoryIcon = (title) => {
-    if (title.includes("Frontend")) return <Code2 className="w-5 h-5 text-primary" />
-    if (title.includes("Backend")) return <Terminal className="w-5 h-5 text-secondary" />
-    return <Settings className="w-5 h-5 text-primary" />
+  const getCategoryIcon = (icon) => {
+    if (icon === 'code') return <Code2 className="skill-card-icon w-5 h-5 text-primary" />
+    if (icon === 'terminal') return <Terminal className="skill-card-icon w-5 h-5 text-secondary" />
+    return <Settings className="skill-card-icon w-5 h-5 text-primary" />
   }
 
   return (
@@ -40,7 +34,7 @@ export function SkillsSection({ t }) {
         <div className="animate-marquee gap-8">
           {marqueeList.map((tech, index) => (
             <span 
-              key={index} 
+              key={`${tech}-${index}`} 
               className="font-mono font-semibold text-sm md:text-base text-text/70 hover:text-primary transition-colors select-none tracking-wider px-4 flex items-center gap-2"
             >
               <span className="text-primary font-bold">&lt;</span>
@@ -53,39 +47,36 @@ export function SkillsSection({ t }) {
 
       {/* Skills Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillCategories.map((category, catIndex) => {
-          const categoryTitle = category.title.includes("Frontend") 
-            ? t.categories.frontend 
-            : category.title.includes("Backend") 
-            ? t.categories.backend 
-            : t.categories.workflow
-
-          return (
-            <Card 
-              key={catIndex} 
-              className="reveal-up bg-surface/30 border-border/40 hover:border-primary/45 flex flex-col h-full"
-              style={{ transitionDelay: `${catIndex * 100}ms` }}
-            >
-              {/* Category Header */}
-              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border/20">
-                {getCategoryIcon(category.title)}
-                <h3 className="font-mono text-base font-bold text-text">
-                  {categoryTitle}
-                </h3>
-              </div>
+        {skillCategories.map((category, catIndex) => (
+          <Card 
+            key={category.key} 
+            className="skill-card reveal-up bg-surface/30 border-border/40 hover:border-primary/45 flex flex-col h-full"
+            style={{ transitionDelay: `${catIndex * 100}ms` }}
+          >
+            {/* Category Header */}
+            <div className="skill-card-header flex items-center gap-3 mb-6 pb-4 border-b border-border/20">
+              {getCategoryIcon(category.icon)}
+              <h3 className="font-mono text-base font-bold text-text">
+                {t.categories[category.key]}
+              </h3>
+            </div>
 
             {/* List of Skills */}
             <div className="flex flex-col gap-5 flex-grow">
               {category.skills.map((skill, skillIndex) => (
-                <div key={skillIndex} className="flex flex-col gap-1.5">
-                  <div className="flex justify-between items-center text-xs font-mono">
-                    <span className="text-text/90 font-medium">{skill.name}</span>
-                    <span className="text-muted">{skill.level}</span>
+                <div
+                  key={skill.key}
+                  className="skill-row flex flex-col gap-1.5"
+                  style={{ '--skill-delay': `${skillIndex * 60}ms` }}
+                >
+                  <div className="flex justify-between items-center gap-3 text-xs font-mono">
+                    <span className="text-text/90 font-medium leading-snug">{t.items[skill.key]}</span>
+                    <span className="text-muted shrink-0">{skill.level}</span>
                   </div>
                   {/* Progress Bar Container */}
-                  <div className="w-full h-1.5 bg-border/20 rounded-full overflow-hidden">
+                  <div className="skill-track w-full h-1.5 bg-border/20 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out"
+                      className="skill-progress h-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out"
                       style={{ width: skill.level }}
                     />
                   </div>
@@ -93,7 +84,7 @@ export function SkillsSection({ t }) {
               ))}
             </div>
           </Card>
-        )})}
+        ))}
       </div>
     </section>
   )

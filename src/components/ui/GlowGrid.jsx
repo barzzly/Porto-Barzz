@@ -44,7 +44,7 @@ export function GlowGrid({ contained = false }) {
   useEffect(() => {
     const fn = (e) => {
       if (orbRef.current)
-        orbRef.current.style.transform = `translate(${e.clientX - 200}px,${e.clientY - 200}px)`
+        orbRef.current.style.transform = `translate(${e.clientX - 260}px,${e.clientY - 260}px)`
     }
     window.addEventListener('mousemove', fn, { passive: true })
     return () => window.removeEventListener('mousemove', fn)
@@ -58,12 +58,21 @@ export function GlowGrid({ contained = false }) {
     <>
       <div ref={orbRef} style={{
         position: contained ? 'absolute' : 'fixed',
-        top:0,left:0,width:400,height:400,borderRadius:'50%',
+        top: 0,
+        left: 0,
+        width: 520,
+        height: 520,
+        borderRadius: '50%',
         background: isLight
-          ? 'radial-gradient(circle,rgba(0,0,0,0.05) 0%,transparent 65%)'
-          : 'radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 65%)',
-        pointerEvents:'none',zIndex:1,
-        transition:'transform 0.2s ease-out',willChange:'transform',
+          ? 'radial-gradient(circle, rgba(0,0,0,0.13) 0%, rgba(0,0,0,0.075) 24%, rgba(0,0,0,0.035) 45%, transparent 72%)'
+          : 'radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.065) 25%, rgba(255,255,255,0.026) 48%, transparent 74%)',
+        filter: 'blur(10px)',
+        opacity: isLight ? 0.62 : 0.78,
+        mixBlendMode: isLight ? 'multiply' : 'screen',
+        pointerEvents: 'none',
+        zIndex: 1,
+        transition: 'transform 0.18s ease-out, opacity 0.3s ease, background 0.3s ease',
+        willChange: 'transform',
       }}/>
 
       <div style={{

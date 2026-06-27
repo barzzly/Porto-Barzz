@@ -1,7 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
-import { Button } from '../components/ui/Button'
-import { Badge } from '../components/ui/Badge'
 
 // ── Chip icons as minimal SVG ──────────────────────────────────────────────
 const JavaIcon = () => (
@@ -37,11 +35,11 @@ const PaperIcon = () => (
   </svg>
 )
 
-const WORDS = ["DEVELOPER", "OWNER"]
+const WORDS = ["OWNER", "DEVELOPER"]
 
 export function HeroSection({ t }) {
   const [wordIdx, setWordIdx] = useState(0)
-  const [displayText, setDisplayText] = useState("D")
+  const [displayText, setDisplayText] = useState("S")
   const [phase, setPhase] = useState('typing')
   const timeoutRef = useRef(null)
 
@@ -73,7 +71,7 @@ export function HeroSection({ t }) {
     {
       icon: <JavaIcon />,
       label: 'Java',
-      sub: 'Language',
+      sub: 'Runtime',
       pos: 'top-[22%] left-[4%] md:left-[7%]',
       delay: '0s',
       dur: '7s',
@@ -81,7 +79,7 @@ export function HeroSection({ t }) {
     {
       icon: <DBIcon />,
       label: 'MySQL',
-      sub: 'Database',
+      sub: 'Player Data',
       pos: 'bottom-[26%] left-[3%] md:left-[6%]',
       delay: '1.2s',
       dur: '8.5s',
@@ -89,21 +87,32 @@ export function HeroSection({ t }) {
     {
       icon: <VelocityIcon />,
       label: 'Velocity',
-      sub: 'Proxy',
+      sub: 'Network Proxy',
       pos: 'top-[18%] right-[3%] md:right-[7%]',
       delay: '0.6s',
       dur: '6s',
     },
     {
       icon: <PaperIcon />,
-      label: 'Paper',
-      sub: 'Spigot API',
+      label: 'PaperMC',
+      sub: 'Core Server',
       pos: 'bottom-[28%] right-[2%] md:right-[5%]',
       delay: '1.8s',
       dur: '9s',
     },
   ]
-
+  const serverSignals = t.stats || [
+    { label: 'FAST', value: 'RESPONSE' },
+    { label: 'FRIENDLY', value: 'SERVICE' },
+    { label: 'DETAIL', value: 'ORIENTED' },
+  ]
+  const descriptionLines = t.descLines || [t.desc]
+  const languageMotionKey = [
+    ...descriptionLines,
+    ...serverSignals.map((item) => `${item.label}-${item.value}`),
+    t.ctaProjects,
+    t.ctaContact,
+  ].join('|')
   return (
     <section
       id="home"
@@ -116,6 +125,12 @@ export function HeroSection({ t }) {
           filter: 'blur(18px)',
         }}
       />
+      <div className="absolute inset-x-6 top-[30%] hidden h-[42%] pointer-events-none -z-10 md:block">
+        <div className="absolute left-[14%] right-[14%] top-1/2 h-px bg-gradient-to-r from-transparent via-text/18 to-transparent animate-server-scan" />
+        <div className="absolute left-[25%] top-[18%] h-2 w-2 rounded-full bg-text/50 shadow-[0_0_24px_rgba(232,232,232,0.35)] animate-node-pulse" />
+        <div className="absolute right-[24%] top-[30%] h-2 w-2 rounded-full bg-text/45 shadow-[0_0_24px_rgba(232,232,232,0.28)] animate-node-pulse delay-300" />
+        <div className="absolute left-[47%] bottom-[16%] h-2 w-2 rounded-full bg-text/40 shadow-[0_0_24px_rgba(232,232,232,0.22)] animate-node-pulse delay-600" />
+      </div>
       {/* ── Background: large ambient light top ── */}
       <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[70%] h-[500px] pointer-events-none -z-10">
         <div className="absolute inset-0 rounded-full bg-gradient-radial from-white/[0.055] to-transparent blur-[120px] animate-idle-glow" />
@@ -185,7 +200,7 @@ export function HeroSection({ t }) {
 
         {/* Eyebrow label */}
         <p className="font-mono text-xs text-text/50 tracking-[0.3em] uppercase mb-5 border border-border/40 px-4 py-1.5 rounded-full inline-block">
-          Minecraft Server
+          {t.eyebrow}
         </p>
 
         {/* Giant typewriter word */}
@@ -220,36 +235,62 @@ export function HeroSection({ t }) {
 
       {/* ── Description ── */}
       <p
-        className="mt-6 max-w-2xl px-2 text-[15px] md:text-lg font-medium leading-8 md:leading-9 text-text/76"
+        key={`desc-${languageMotionKey}`}
+        className="animate-lang-content mt-6 min-h-[7.5rem] max-w-[46rem] px-2 text-[15px] md:min-h-[6.75rem] md:text-lg font-medium leading-8 md:leading-9 text-text/76"
         style={{
-          animation: 'fadeIn 0.9s ease-out 0.5s both',
+          animationDelay: '0.5s',
           textWrap: 'balance',
           textShadow: '0 2px 18px var(--color-bg)',
         }}
       >
-        {t.desc}
+        {descriptionLines.map((line, index) => (
+          <span key={line} className="md:block">
+            {line}
+            {index < descriptionLines.length - 1 ? <span className="md:hidden"> </span> : null}
+          </span>
+        ))}
       </p>
+      <div
+        key={`signals-${languageMotionKey}`}
+        className="animate-lang-content mt-7 hidden flex-wrap items-center justify-center gap-2.5 sm:flex"
+        style={{ animationDelay: '0.58s' }}
+      >
+        {serverSignals.map((item, index) => (
+          <div
+            key={`${item.label}-${item.value}`}
+            className="hero-signal-pill group inline-flex items-center gap-2 rounded-full border border-card-border bg-surface/55 px-3.5 py-2 font-mono text-[10px] uppercase tracking-[0.16em] text-muted backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-text/20 hover:text-text"
+            style={{ animationDelay: `${index * 0.18}s` }}
+          >
+            <span className="hero-signal-dot h-1.5 w-1.5 rounded-full bg-text/55 group-hover:bg-text" />
+            <span>{item.label}</span>
+            <span className="text-text/80">{item.value}</span>
+          </div>
+        ))}
+      </div>
 
       {/* ── CTA Buttons ── */}
       <div
-        className="mt-8 flex flex-wrap gap-3 justify-center"
-        style={{ animation: 'fadeIn 0.9s ease-out 0.65s both' }}
+        key={`cta-${languageMotionKey}`}
+        className="animate-lang-content mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
+        style={{ animationDelay: '0.65s' }}
       >
         <button
           onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
+          className="hero-cta-button hero-cta-primary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
             bg-text text-bg hover:bg-text/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]
             shadow-[0_4px_20px_rgba(255,255,255,0.08)]"
         >
-          {t.ctaProjects} <ArrowRight className="w-4 h-4" />
+          <span className="relative z-10">{t.ctaProjects}</span>
+          <ArrowRight className="hero-cta-icon relative z-10 w-4 h-4" />
         </button>
         <button
           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
+          className="hero-cta-button hero-cta-secondary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
             bg-transparent text-text border border-card-border hover:bg-surface hover:border-text/20
             transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
-          {t.ctaContact} <Sparkles className="w-4 h-4 opacity-70" />
+          <span className="relative z-10">{t.ctaContact}</span>
+          <Sparkles className="hero-cta-icon relative z-10 w-4 h-4 opacity-70" />
         </button>
       </div>
 

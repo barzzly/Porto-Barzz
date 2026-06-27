@@ -1,35 +1,38 @@
 export const skillCategories = [
   {
-    title: "Frontend Stack",
+    key: "serverCore",
+    icon: "code",
     skills: [
-      { name: "React", level: "90%" },
-      { name: "Vite", level: "85%" },
-      { name: "Tailwind CSS", level: "95%" },
-      { name: "JavaScript (ES6+)", level: "90%" },
-      { name: "TypeScript", level: "80%" },
-      { name: "HTML5 / CSS3", level: "95%" }
+      { key: "paperSpigot", level: "98%" },
+      { key: "networkProxy", level: "80%" },
+      { key: "pluginConfiguration", level: "100%" },
+      { key: "permissionsRanks", level: "95%" },
+      { key: "guiMenus", level: "100%" },
+      { key: "developPlugin", level: "30%" }
     ]
   },
   {
-    title: "Backend & Systems",
+    key: "modeGameplay",
+    icon: "terminal",
     skills: [
-      { name: "Node.js", level: "85%" },
-      { name: "Express.js", level: "90%" },
-      { name: "PostgreSQL", level: "80%" },
-      { name: "MongoDB", level: "75%" },
-      { name: "RESTful APIs", level: "90%" },
-      { name: "GraphQL", level: "70%" }
+      { key: "rpg", level: "95%" },
+      { key: "economy", level: "100%" },
+      { key: "slimefun", level: "10%" },
+      { key: "minigames", level: "85%" },
+      { key: "velocity", level: "90%" },
+      { key: "etc", level: "80%" }
     ]
   },
   {
-    title: "Development Workflow",
+    key: "serverOperations",
+    icon: "settings",
     skills: [
-      { name: "Git & GitHub", level: "90%" },
-      { name: "Docker", level: "75%" },
-      { name: "Linux Bash", level: "80%" },
-      { name: "CI/CD Actions", level: "70%" },
-      { name: "WebSockets", level: "80%" },
-      { name: "Vercel / Netlify", level: "85%" }
+      { key: "serverTesting", level: "90%" },
+      { key: "serverAnalysis", level: "100%" },
+      { key: "maintenance", level: "75%" },
+      { key: "optimizeSpigotConfig", level: "95%" },
+      { key: "optimizePluginConfig", level: "95%" },
+      { key: "errorDebugging", level: "100%" }
     ]
   }
 ]
