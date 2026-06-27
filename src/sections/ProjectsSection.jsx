@@ -59,10 +59,10 @@ export function ProjectsSection() {
         {filteredProjects.map((project, index) => {
           // Calculate subtle rotation values based on index
           const rotClass = index % 3 === 0 
-            ? 'hover:rotate-0.5' 
+            ? 'hover:rotate-1.5' 
             : index % 3 === 1 
-            ? 'hover:-rotate-0.5' 
-            : 'hover:rotate-0.5'
+            ? 'hover:-rotate-1.5' 
+            : 'hover:rotate-[1deg]'
 
           return (
             <Card 

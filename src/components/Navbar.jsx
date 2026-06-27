@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
-import { Sun, Moon, Menu, X, Terminal, ArrowRight } from 'lucide-react'
+import { Sun, Moon, Menu, X, ArrowRight } from 'lucide-react'
 import { Button } from './ui/Button'
+import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
 export function Navbar({ isDark, toggleTheme }) {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -43,8 +44,8 @@ export function Navbar({ isDark, toggleTheme }) {
         `}
       >
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2 font-mono font-bold tracking-tight text-lg text-text hover:text-primary transition-colors">
-          <Terminal className="w-5 h-5 text-primary" />
+        <a href="#home" className="flex items-center gap-2.5 font-mono font-bold tracking-tight text-lg text-text hover:text-primary transition-all duration-300 hover:rotate-[-3deg] hover:-translate-y-0.5 group">
+          <img src={logoNoBg} alt="Barzz Logo" className="w-6.5 h-6.5 object-contain transition-transform duration-300 group-hover:scale-105" />
           <span>BARZZ<span className="text-primary">.LY</span></span>
         </a>
 

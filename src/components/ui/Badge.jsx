@@ -5,7 +5,7 @@ export function Badge({
   className = '', 
   ...props 
 }) {
-  const baseStyle = 'inline-flex items-center gap-1.5 font-mono text-xs font-medium px-3 py-1 rounded-full transition-all duration-300'
+  const baseStyle = 'inline-flex items-center gap-1.5 font-mono text-xs font-medium px-3 py-1 rounded-full transition-all duration-300 hover:-translate-y-0.5 hover:scale-[1.05] hover:rotate-2 cursor-pointer'
   
   const variants = {
     default: 'bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20',
