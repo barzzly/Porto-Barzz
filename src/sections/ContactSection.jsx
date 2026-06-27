@@ -4,13 +4,13 @@ import { Button } from '../components/ui/Button'
 import { Github, Linkedin, Twitter } from '../components/ui/BrandIcons'
 import { Mail, Send, Copy, Check, Sparkles } from 'lucide-react'
 
-export function ContactSection() {
+export function ContactSection({ t }) {
   const [formState, setFormState] = useState({ name: '', email: '', message: '' })
   const [isSending, setIsSending] = useState(false)
   const [isSent, setIsSent] = useState(false)
   const [isCopied, setIsCopied] = useState(false)
 
-  const emailAddress = "barzzly@gmail.com"
+  const emailAddress = "hidayathulfikri.biz@gmail.com"
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(emailAddress)
@@ -23,7 +23,7 @@ export function ContactSection() {
     if (!formState.name || !formState.email || !formState.message) return
     
     setIsSending(true)
-    // Simulate API call
+    // Simulate API request
     setTimeout(() => {
       setIsSending(false)
       setIsSent(true)
@@ -38,10 +38,10 @@ export function ContactSection() {
       className="max-w-6xl mx-auto px-6 py-20 w-full"
     >
       {/* Section Header */}
-      <div className="reveal-element flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 04. GET IN TOUCH</span>
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
-          Start a <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Project</span>
+      <div className="reveal-up flex flex-col items-center md:items-start mb-12">
+        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
+          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
         </h2>
         <div className="w-12 h-[2px] bg-primary mt-4" />
       </div>
@@ -49,19 +49,19 @@ export function ContactSection() {
       {/* 2-Column Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
         {/* Left Column: Direct Info & Socials */}
-        <div className="reveal-element flex flex-col gap-6">
+        <div className="reveal-left flex flex-col gap-6">
           <div className="flex flex-col gap-4 text-center md:text-left">
             <h3 className="font-mono text-lg font-bold text-text">
-              Let's build something exceptional.
+              {t.subheading}
             </h3>
             <p className="text-sm text-muted leading-relaxed">
-              If you have a concept, project, or full-time opportunity you'd like to discuss, feel free to drop a message or reach out directly via email.
+              {t.desc}
             </p>
           </div>
 
           {/* Quick Copy Email Card */}
           <Card hoverable={false} className="bg-surface/30 border-border/40 p-5 flex flex-col gap-3">
-            <span className="font-mono text-[10px] text-muted block">// DIRECT MAIL</span>
+            <span className="font-mono text-[10px] text-muted block">{t.directMail}</span>
             <div className="flex items-center justify-between gap-3 bg-surface/50 border border-border/40 p-3 rounded-xl">
               <div className="flex items-center gap-2 overflow-hidden">
                 <Mail className="w-4 h-4 text-primary shrink-0" />
@@ -80,7 +80,7 @@ export function ContactSection() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
-              <span className="text-[10px] font-mono text-muted">Average response time: &lt; 12 hours</span>
+              <span className="text-[10px] font-mono text-muted">{t.responseTime}</span>
             </div>
           </Card>
 
@@ -123,13 +123,13 @@ export function ContactSection() {
         </div>
 
         {/* Right Column: Glassmorphic Contact Form */}
-        <Card hoverable={false} className="reveal-element bg-surface/40 border-border/40 p-6 md:p-8">
+        <Card hoverable={false} className="reveal-right delay-150 bg-surface/40 border-border/40 p-6 md:p-8">
           <form onSubmit={handleSubmit} className="flex flex-col gap-5">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Name Field */}
               <div className="flex flex-col gap-1.5 text-left">
                 <label htmlFor="form-name" className="font-mono text-xs text-text/80 font-medium">
-                  Name <span className="text-primary">*</span>
+                  {t.formName} <span className="text-primary">*</span>
                 </label>
                 <input 
                   type="text" 
@@ -137,7 +137,7 @@ export function ContactSection() {
                   required
                   value={formState.name}
                   onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  placeholder="e.g. John Doe"
+                  placeholder={t.formNamePlaceholder}
                   className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all"
                 />
               </div>
@@ -145,7 +145,7 @@ export function ContactSection() {
               {/* Email Field */}
               <div className="flex flex-col gap-1.5 text-left">
                 <label htmlFor="form-email" className="font-mono text-xs text-text/80 font-medium">
-                  Email <span className="text-primary">*</span>
+                  {t.formEmail} <span className="text-primary">*</span>
                 </label>
                 <input 
                   type="email" 
@@ -153,7 +153,7 @@ export function ContactSection() {
                   required
                   value={formState.email}
                   onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  placeholder="e.g. john@example.com"
+                  placeholder={t.formEmailPlaceholder}
                   className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all"
                 />
               </div>
@@ -162,7 +162,7 @@ export function ContactSection() {
             {/* Message Field */}
             <div className="flex flex-col gap-1.5 text-left">
               <label htmlFor="form-message" className="font-mono text-xs text-text/80 font-medium">
-                Message <span className="text-primary">*</span>
+                {t.formMessage} <span className="text-primary">*</span>
               </label>
               <textarea 
                 id="form-message"
@@ -170,7 +170,7 @@ export function ContactSection() {
                 rows="5"
                 value={formState.message}
                 onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                placeholder="Hi, I'd like to work with you on a custom analytics dashboard..."
+                placeholder={t.formMessagePlaceholder}
                 className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all resize-none"
               />
             </div>
@@ -181,7 +181,7 @@ export function ContactSection() {
                 {isSent && (
                   <p className="text-xs font-mono text-primary flex items-center gap-1.5 animate-pulse text-left">
                     <Sparkles className="w-4 h-4 text-secondary" /> 
-                    Message received! I'll get back to you shortly.
+                    {t.formSuccess}
                   </p>
                 )}
               </div>
@@ -191,9 +191,9 @@ export function ContactSection() {
                 className="w-full md:w-auto min-w-[150px] gap-2 h-11"
               >
                 {isSending ? (
-                  <span className="w-4 h-4 border-2 border-bg border-t-transparent rounded-full animate-spin" />
+                  <>{t.formSending} <span className="w-4 h-4 border-2 border-bg border-t-transparent rounded-full animate-spin" /></>
                 ) : (
-                  <>Send Message <Send className="w-3.5 h-3.5" /></>
+                  <>{t.formSubmit} <Send className="w-3.5 h-3.5" /></>
                 )}
               </Button>
             </div>

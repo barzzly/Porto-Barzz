@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 
 export function GlowGrid() {
-  const totalCells = 48
+  const totalCells = 80
+  const staticFilledCells = [3, 12, 19, 28, 35, 47, 54, 62, 71, 78] // Aligned abstract boxes to fill 80 cells
+
   const getRandomCells = () => {
     const count = Math.floor(Math.random() * 6) + 4 // 4 to 10 active cells
     const indices = []
@@ -16,21 +18,34 @@ export function GlowGrid() {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveCells(getRandomCells())
-    }, 5000) // change every 5 seconds
+    }, 6000) // change every 6 seconds
 
     return () => clearInterval(interval)
   }, [])
 
   return (
-    <div className="absolute inset-0 -z-20 grid grid-cols-6 sm:grid-cols-8 md:grid-cols-12 gap-[1.5px] opacity-40 pointer-events-none">
-      {Array.from({ length: 96 }).map((_, i) => {
-        const isActive = activeCells.includes(i % 48)
+    <div 
+      className="absolute inset-x-0 top-0 h-[850px] -z-20 grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 gap-[1px] opacity-100 pointer-events-none"
+      style={{
+        maskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)'
+      }}
+    >
+      {Array.from({ length: totalCells }).map((_, i) => {
+        const isActive = activeCells.includes(i)
+        const isStaticFilled = staticFilledCells.includes(i)
+
         return (
           <div 
             key={i} 
             className={`
-              aspect-square transition-all duration-[2000ms] border-[0.5px] border-border/10
-              ${isActive ? 'bg-primary/5 shadow-[inset_0_0_15px_rgba(0,255,136,0.08)] border-primary/25' : 'bg-transparent'}
+              aspect-square transition-all duration-[2000ms] border-[0.5px]
+              ${isActive 
+                ? 'bg-gradient-to-br from-primary/12 to-secondary/6 border-primary/45 shadow-[inset_0_0_20px_rgba(0,255,136,0.15)]' 
+                : isStaticFilled 
+                ? 'bg-grid-fill border-grid-line' 
+                : 'bg-transparent border-grid-line'
+              }
             `}
           />
         )

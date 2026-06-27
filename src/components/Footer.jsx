@@ -2,12 +2,12 @@ import { Github, Linkedin, Twitter } from './ui/BrandIcons'
 import { Mail, ArrowUp } from 'lucide-react'
 import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
-export function Footer() {
+export function Footer({ t }) {
   const socialLinks = [
     { icon: <Github className="w-5 h-5" />, href: 'https://github.com', label: 'GitHub' },
     { icon: <Linkedin className="w-5 h-5" />, href: 'https://linkedin.com', label: 'LinkedIn' },
     { icon: <Twitter className="w-5 h-5" />, href: 'https://twitter.com', label: 'Twitter' },
-    { icon: <Mail className="w-5 h-5" />, href: 'mailto:barzzly@gmail.com', label: 'Email' }
+    { icon: <Mail className="w-5 h-5" />, href: 'mailto:hidayathulfikri.biz@gmail.com', label: 'Email' }
   ]
 
   const handleScrollTop = () => {
@@ -23,11 +23,11 @@ export function Footer() {
         {/* Left: Branding & Tagline */}
         <div className="text-center md:text-left">
           <p className="font-mono font-bold text-lg text-text flex items-center justify-center md:justify-start gap-2 hover:scale-[1.02] hover:translate-x-0.5 transition-all duration-300">
-            <img src={logoNoBg} alt="Barzz Logo" className="w-5.5 h-5.5 object-contain" />
+            <img src={logoNoBg} alt="Barzz Logo" className="w-5.5 h-5.5 object-contain brand-logo" />
             <span>BARZZ<span className="text-primary">.LY</span></span>
           </p>
           <p className="text-sm text-muted mt-2">
-            Crafting premium interactive digital experiences.
+            {t.tagline}
           </p>
         </div>
 

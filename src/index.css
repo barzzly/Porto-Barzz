@@ -12,10 +12,12 @@
   --color-border: var(--color-border);
   --color-card-border: var(--color-card-border);
   --color-shadow: var(--color-shadow);
+  --color-grid-line: var(--color-grid-line);
+  --color-grid-fill: var(--color-grid-fill);
   
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --font-display: "Outfit", "Space Grotesk", sans-serif;
+  --font-display: "Space Grotesk", sans-serif;
 }
 
 :root {
@@ -24,13 +26,15 @@
   --color-primary-glow: rgba(0, 255, 136, 0.15);
   --color-secondary: #ff4d6d;
   --color-secondary-glow: rgba(255, 77, 109, 0.15);
-  --color-bg: #050a0e;
+  --color-bg: #000000;
   --color-text: #e2e8f0;
   --color-muted: #8ba3c7;
-  --color-surface: rgba(10, 18, 26, 0.75);
-  --color-border: rgba(0, 255, 136, 0.12);
-  --color-card-border: rgba(0, 255, 136, 0.2);
-  --color-shadow: rgba(0, 0, 0, 0.6);
+  --color-surface: rgba(12, 12, 12, 0.75);
+  --color-border: rgba(255, 255, 255, 0.08);
+  --color-card-border: rgba(255, 255, 255, 0.12);
+  --color-shadow: rgba(0, 0, 0, 0.8);
+  --color-grid-line: rgba(255, 255, 255, 0.08);
+  --color-grid-fill: rgba(255, 255, 255, 0.04);
   
   color-scheme: dark;
 }
@@ -48,6 +52,8 @@ html.light, :root[class~="light"] {
   --color-border: rgba(15, 23, 42, 0.08);
   --color-card-border: rgba(15, 23, 42, 0.12);
   --color-shadow: rgba(0, 0, 0, 0.05);
+  --color-grid-line: rgba(15, 23, 42, 0.095);
+  --color-grid-fill: rgba(15, 23, 42, 0.045);
   
   color-scheme: light;
 }
@@ -55,6 +61,12 @@ html.light, :root[class~="light"] {
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
+}
+
+/* Custom Text Selection Styling */
+::selection {
+  background-color: var(--color-primary);
+  color: #050a0e;
 }
 
 body {
@@ -65,6 +77,7 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
 
 /* Webkit Scrollbar Styling */
 ::-webkit-scrollbar {
@@ -86,17 +99,46 @@ body {
 }
 
 /* Scroll reveal initial classes */
-.reveal-element {
+.reveal-element, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale {
   opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.reveal-element.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.reveal-element, .reveal-up {
+  transform: translateY(40px);
 }
+.reveal-down {
+  transform: translateY(-40px);
+}
+.reveal-left {
+  transform: translateX(-40px);
+}
+.reveal-right {
+  transform: translateX(40px);
+}
+.reveal-scale {
+  transform: scale(0.95);
+}
+
+.reveal-element.is-visible,
+.reveal-up.is-visible,
+.reveal-down.is-visible,
+.reveal-left.is-visible,
+.reveal-right.is-visible,
+.reveal-scale.is-visible {
+  opacity: 1;
+  transform: translateY(0) translateX(0) scale(1);
+}
+
+/* Stagger transition delay helpers */
+.delay-75 { transition-delay: 75ms; }
+.delay-100 { transition-delay: 100ms; }
+.delay-150 { transition-delay: 150ms; }
+.delay-200 { transition-delay: 200ms; }
+.delay-300 { transition-delay: 300ms; }
+.delay-450 { transition-delay: 450ms; }
+.delay-600 { transition-delay: 600ms; }
 
 /* Radial Cyber Grid Background for Opsi A */
 .cyber-bg {
@@ -104,10 +146,6 @@ body {
   inset: 0;
   z-index: -10;
   background-color: var(--color-bg);
-  background-image: 
-    linear-gradient(var(--color-border) 1px, transparent 1px),
-    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
-  background-size: 60px 60px;
   pointer-events: none;
 }
 
@@ -136,6 +174,16 @@ body {
     backdrop-filter: none !important;
     background-color: var(--color-bg) !important;
   }
+}
+
+/* Logo visibility adjustments (White in dark mode, original black in light mode) */
+.brand-logo {
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+html.light .brand-logo {
+  filter: none;
 }
 
 @import "./styles/animations.css";

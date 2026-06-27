@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react'
-import { Sun, Moon, Menu, X, ArrowRight } from 'lucide-react'
-import { Button } from './ui/Button'
+import { Sun, Moon, Menu, X } from 'lucide-react'
 import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
-export function Navbar({ isDark, toggleTheme }) {
+export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -20,11 +19,11 @@ export function Navbar({ isDark, toggleTheme }) {
   }, [])
 
   const navLinks = [
-    { label: '// home', href: '#home' },
-    { label: '// about', href: '#about' },
-    { label: '// projects', href: '#projects' },
-    { label: '// tech-stack', href: '#tech-stack' },
-    { label: '// contact', href: '#contact' },
+    { label: t.home, href: '#home' },
+    { label: t.about, href: '#about' },
+    { label: t.projects, href: '#projects' },
+    { label: t.skills, href: '#tech-stack' },
+    { label: t.contact, href: '#contact' },
   ]
 
   return (
@@ -36,16 +35,16 @@ export function Navbar({ isDark, toggleTheme }) {
     >
       <nav 
         className={`
-          flex items-center justify-between w-full max-w-6xl transition-all duration-500
+          flex items-center justify-between w-full transition-all duration-500
           ${isScrolled 
-            ? 'rounded-2xl border border-card-border bg-surface/75 backdrop-blur-2xl px-6 py-3 shadow-xl' 
-            : 'border-b border-border/30 bg-transparent px-4 py-5 md:px-8'
+            ? 'max-w-3xl rounded-full border border-card-border bg-surface/75 backdrop-blur-2xl px-6 py-2.5 shadow-xl' 
+            : 'max-w-6xl border-b border-border/30 bg-transparent px-4 py-5 md:px-8'
           }
         `}
       >
         {/* Logo */}
         <a href="#home" className="flex items-center gap-2.5 font-mono font-bold tracking-tight text-lg text-text hover:text-primary transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 group">
-          <img src={logoNoBg} alt="Barzz Logo" className="w-6.5 h-6.5 object-contain transition-transform duration-300 group-hover:scale-105" />
+          <img src={logoNoBg} alt="Barzz Logo" className="w-6.5 h-6.5 object-contain transition-transform duration-300 group-hover:scale-105 brand-logo" />
           <span>BARZZ<span className="text-primary">.LY</span></span>
         </a>
 
@@ -65,6 +64,15 @@ export function Navbar({ isDark, toggleTheme }) {
 
         {/* Right Action Area */}
         <div className="hidden md:flex items-center gap-4">
+          {/* Language Toggle */}
+          <button 
+            onClick={toggleLang}
+            className="font-mono text-xs font-semibold px-2.5 py-2.5 rounded-xl border border-border bg-surface/40 hover:border-primary/45 hover:text-primary transition-all duration-200 cursor-pointer"
+            aria-label="Toggle language"
+          >
+            {lang.toUpperCase()}
+          </button>
+
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
@@ -73,15 +81,19 @@ export function Navbar({ isDark, toggleTheme }) {
           >
             {isDark ? <Sun className="w-4.5 h-4.5" /> : <Moon className="w-4.5 h-4.5" />}
           </button>
-          
-          {/* Contact CTA */}
-          <Button variant="secondary" onClick={() => document.getElementById('contact')?.scrollIntoView()}>
-            Hire Me <ArrowRight className="w-4 h-4 ml-1.5" />
-          </Button>
         </div>
 
         {/* Mobile Navbar Buttons */}
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-2.5 md:hidden">
+          {/* Language Toggle for Mobile */}
+          <button 
+            onClick={toggleLang}
+            className="font-mono text-[10px] font-semibold px-2.5 py-2 rounded-xl border border-border bg-surface/40 hover:border-primary/45 transition-all cursor-pointer text-text"
+            aria-label="Toggle language"
+          >
+            {lang.toUpperCase()}
+          </button>
+
           {/* Theme Toggle for Mobile */}
           <button 
             onClick={toggleTheme}
@@ -123,15 +135,7 @@ export function Navbar({ isDark, toggleTheme }) {
               {link.label}
             </a>
           ))}
-          <Button 
-            className="w-full mt-4" 
-            onClick={() => {
-              setIsMobileMenuOpen(false)
-              document.getElementById('contact')?.scrollIntoView()
-            }}
-          >
-            Hire Me <ArrowRight className="w-4 h-4 ml-1.5" />
-          </Button>
+
         </div>
       </div>
     </header>

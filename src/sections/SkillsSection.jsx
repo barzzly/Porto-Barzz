@@ -2,7 +2,7 @@ import { skillCategories } from '../data/skills'
 import { Card } from '../components/ui/Card'
 import { Code2, Settings, Terminal } from 'lucide-react'
 
-export function SkillsSection() {
+export function SkillsSection({ t }) {
   const marqueeTech = [
     "React", "Tailwind CSS", "Vite", "Node.js", "Express", "TypeScript", 
     "PostgreSQL", "Docker", "Git", "GitHub", "REST APIs", "GraphQL", 
@@ -24,16 +24,16 @@ export function SkillsSection() {
       className="max-w-6xl mx-auto px-6 py-20 w-full overflow-hidden"
     >
       {/* Section Header */}
-      <div className="reveal-element flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 03. CAPABILITIES</span>
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
-          Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Stack</span>
+      <div className="reveal-up flex flex-col items-center md:items-start mb-12">
+        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
+          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
         </h2>
         <div className="w-12 h-[2px] bg-primary mt-4" />
       </div>
 
       {/* Infinite Horizontal Marquee */}
-      <div className="reveal-element relative w-full mb-16 py-4 border-y border-border/20 bg-surface/20 backdrop-blur-sm overflow-hidden rounded-xl">
+      <div className="reveal-scale relative w-full mb-16 py-4 border-y border-border/20 bg-surface/20 backdrop-blur-sm overflow-hidden rounded-xl">
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
         
@@ -53,19 +53,26 @@ export function SkillsSection() {
 
       {/* Skills Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {skillCategories.map((category, catIndex) => (
-          <Card 
-            key={catIndex} 
-            className="reveal-element bg-surface/30 border-border/40 hover:border-primary/45 flex flex-col h-full"
-            style={{ transitionDelay: `${catIndex * 100}ms` }}
-          >
-            {/* Category Header */}
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border/20">
-              {getCategoryIcon(category.title)}
-              <h3 className="font-mono text-base font-bold text-text">
-                {category.title}
-              </h3>
-            </div>
+        {skillCategories.map((category, catIndex) => {
+          const categoryTitle = category.title.includes("Frontend") 
+            ? t.categories.frontend 
+            : category.title.includes("Backend") 
+            ? t.categories.backend 
+            : t.categories.workflow
+
+          return (
+            <Card 
+              key={catIndex} 
+              className="reveal-up bg-surface/30 border-border/40 hover:border-primary/45 flex flex-col h-full"
+              style={{ transitionDelay: `${catIndex * 100}ms` }}
+            >
+              {/* Category Header */}
+              <div className="flex items-center gap-3 mb-6 pb-4 border-b border-border/20">
+                {getCategoryIcon(category.title)}
+                <h3 className="font-mono text-base font-bold text-text">
+                  {categoryTitle}
+                </h3>
+              </div>
 
             {/* List of Skills */}
             <div className="flex flex-col gap-5 flex-grow">
@@ -86,7 +93,7 @@ export function SkillsSection() {
               ))}
             </div>
           </Card>
-        ))}
+        )})}
       </div>
     </section>
   )

@@ -10,7 +10,7 @@ export function Card({
       className={`
         relative overflow-hidden rounded-2xl border border-card-border bg-surface 
         backdrop-blur-xl p-6 shadow-lg transition-all duration-300
-        ${hoverable ? 'hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl hover:border-primary/45 hover:shadow-primary-glow/15' : ''}
+        ${hoverable ? 'hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl hover:border-primary/45 hover:shadow-primary-glow/15 cursor-pointer' : ''}
         ${className}
       `}
       {...props}

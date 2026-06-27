@@ -1,22 +1,17 @@
 import { Card } from '../components/ui/Card'
 import { User, MapPin, Coffee, Code2, Globe } from 'lucide-react'
 
-export function AboutSection() {
-  const qualities = [
-    { title: 'Responsive Design', desc: 'Interfaces look impeccable on every resolution, adapting natively to screen size.', delay: '100ms' },
-    { title: 'Interactive Flow', desc: 'Micro-interactions and spring physics animations that feel alive and engaging.', delay: '200ms' },
-    { title: 'Clean Architecture', desc: 'Modular components, structured styling tokens, and optimized builds for speeds.', delay: '300ms' },
-  ]
-
+export function AboutSection({ t }) {
   const terminalLines = [
     { type: 'input', text: 'neofetch' },
     { type: 'output', label: 'OS', val: 'BarzzOS v2.4.0 x86_64' },
     { type: 'output', label: 'Host', val: 'Creative-Terminal-Vite' },
     { type: 'output', label: 'Kernel', val: 'React-Fiber-Engine' },
-    { type: 'output', label: 'Shell', val: 'zsh-interactive-mode' },
-    { type: 'output', label: 'UX-Core', val: 'Glassmorphism / Spring Physics' },
-    { type: 'output', label: 'Theme', val: 'Cyber-Neon-Green (Default)' },
-    { type: 'input', text: 'cat stats.json' },
+    { type: 'output', label: 'Uptime', val: '24 days, 7 hours' },
+    { type: 'output', label: 'Shell', val: 'zsh 5.8.1' },
+    { type: 'output', label: 'Resolution', val: 'Responsive Fluid Viewports' },
+    { type: 'output', label: 'Theme', val: 'Cyberpunk Neon (Dark/Light)' },
+    { type: 'output', label: 'Terminal', val: 'Glassmorphic Web UI' },
     { type: 'json', val: { "status": "Available", "freelance": true, "coffee_intake": "high" } }
   ]
 
@@ -26,10 +21,10 @@ export function AboutSection() {
       className="max-w-6xl mx-auto px-6 py-20 w-full"
     >
       {/* Section Header */}
-      <div className="reveal-element flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 01. WHO AM I</span>
-        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
-          About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Me</span>
+      <div className="reveal-up flex flex-col items-center md:items-start mb-12">
+        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
+          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
         </h2>
         <div className="w-12 h-[2px] bg-primary mt-4" />
       </div>
@@ -37,12 +32,12 @@ export function AboutSection() {
       {/* Main Grid: Asymmetrical Layout */}
       <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_0.8fr] gap-10 items-start">
         {/* Left Column: Story and Details */}
-        <div className="reveal-element flex flex-col gap-6 text-center md:text-left">
+        <div className="reveal-left flex flex-col gap-6 text-center md:text-left">
           <p className="text-text/90 leading-relaxed text-base md:text-lg">
-            Hello! I'm <span className="text-primary font-semibold font-mono">BarzzLy</span>, a digital craftsman focused on building rich interactive environments. I bridge the gap between design systems and complex engineering architectures, ensuring websites are fast, accessible, and exciting to navigate.
+            Hello! I'm <span className="text-primary font-semibold font-mono">BarzzLy</span>, {t.desc1.replace("Hello! I'm BarzzLy, ", "")}
           </p>
           <p className="text-muted leading-relaxed text-sm md:text-base">
-            I don't just write templates. I customize every scroll transition, spacing element, and glassmorphic container to construct websites with unique identities. By combining modern frameworks with native CSS custom variables, my work achieves high performance and scalable themes.
+            {t.desc2}
           </p>
 
           {/* Personal Info Grid */}
@@ -50,28 +45,28 @@ export function AboutSection() {
             <div className="flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30">
               <User className="w-4 h-4 text-primary" />
               <div>
-                <span className="text-muted block text-[10px]">// NAME</span>
+                <span className="text-muted block text-[10px]">{t.labelName}</span>
                 <span className="text-text font-medium">Hidayathul Fikri (Barzz)</span>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30">
               <MapPin className="w-4 h-4 text-secondary" />
               <div>
-                <span className="text-muted block text-[10px]">// LOCATION</span>
+                <span className="text-muted block text-[10px]">{t.labelLocation}</span>
                 <span className="text-text font-medium">Indonesia (Remote)</span>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30">
               <Coffee className="w-4 h-4 text-primary" />
               <div>
-                <span className="text-muted block text-[10px]">// FUEL</span>
+                <span className="text-muted block text-[10px]">{t.labelFuel}</span>
                 <span className="text-text font-medium">Espresso & Coding</span>
               </div>
             </div>
             <div className="flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30">
               <Globe className="w-4 h-4 text-secondary" />
               <div>
-                <span className="text-muted block text-[10px]">// PORTFOLIO</span>
+                <span className="text-muted block text-[10px]">{t.labelPortfolio}</span>
                 <span className="text-text font-medium">barzz.ly</span>
               </div>
             </div>
@@ -79,22 +74,25 @@ export function AboutSection() {
 
           {/* Qualities Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6 text-left">
-            {qualities.map((item, i) => (
-              <Card key={i} hoverable={true} className="p-5 flex flex-col gap-2 bg-surface/40">
-                <h3 className="font-mono text-sm font-semibold text-text flex items-center gap-2">
-                  <Code2 className="w-4.5 h-4.5 text-primary" />
-                  {item.title}
-                </h3>
-                <p className="text-xs text-muted leading-relaxed">
-                  {item.desc}
-                </p>
-              </Card>
-            ))}
+            {t.qualities.map((item, i) => {
+              const delays = ['delay-75', 'delay-150', 'delay-300']
+              return (
+                <Card key={i} hoverable={true} className={`p-5 flex flex-col gap-2 bg-surface/40 reveal-up ${delays[i] || ''}`}>
+                  <h3 className="font-mono text-sm font-semibold text-text flex items-center gap-2">
+                    <Code2 className="w-4.5 h-4.5 text-primary" />
+                    {item.title}
+                  </h3>
+                  <p className="text-xs text-muted leading-relaxed">
+                    {item.desc}
+                  </p>
+                </Card>
+              )
+            })}
           </div>
         </div>
 
         {/* Right Column: Code Terminal Illustration (Highly Premium) */}
-        <div className="reveal-element">
+        <div className="reveal-right delay-200">
           <div className="rounded-2xl border border-card-border bg-surface/60 backdrop-blur-xl shadow-2xl overflow-hidden">
             {/* Terminal Window Header */}
             <div className="flex items-center justify-between px-4 py-3 bg-surface border-b border-border/40 font-mono text-[11px] text-muted">

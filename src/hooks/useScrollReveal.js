@@ -19,7 +19,7 @@ export function useScrollReveal(dependency) {
     }, observerOptions)
 
     // Select all elements that want reveal styling
-    const elements = document.querySelectorAll('.reveal-element')
+    const elements = document.querySelectorAll('.reveal-element, .reveal-up, .reveal-down, .reveal-left, .reveal-right, .reveal-scale')
     elements.forEach((el) => observer.observe(el))
 
     return () => {
