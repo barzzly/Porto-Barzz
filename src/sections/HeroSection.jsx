@@ -33,7 +33,8 @@ export function HeroSection() {
         </div>
       ))}
 
-      {/* 1. Status / Availability Badge */}
+
+      {/* 2. Status / Availability Badge */}
       <div className="mb-6 reveal-element animate-fade-in">
         <Badge variant="glass" className="border-primary/20">
           <span className="relative flex h-2 w-2">
@@ -44,10 +45,10 @@ export function HeroSection() {
         </Badge>
       </div>
 
-      {/* 2. Main Title (Fluid clamp typography + Stagger character reveal) */}
-      <h1 className="font-mono font-bold tracking-tighter text-text leading-[0.92] select-none flex flex-col items-center gap-2">
+      {/* 3. Main Title (Fluid clamp typography + Stagger character reveal) */}
+      <h1 className="font-display font-black tracking-tight text-text leading-[0.9] select-none flex flex-col items-center gap-1">
         {/* Word 1: CREATIVE */}
-        <span className="text-4xl sm:text-6xl md:text-8xl flex gap-x-[0.1em] overflow-hidden py-1">
+        <span className="text-[2.6rem] sm:text-[4rem] md:text-[6rem] lg:text-[7rem] xl:text-[8.5rem] flex gap-x-[0.02em] overflow-hidden py-1">
           {headingText.split("").map((char, index) => (
             <span 
               key={index} 
@@ -60,7 +61,7 @@ export function HeroSection() {
         </span>
         
         {/* Word 2: DEVELOPER */}
-        <span className="text-5xl sm:text-7xl md:text-9xl text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/80 to-secondary flex gap-x-[0.1em] overflow-hidden py-2">
+        <span className="text-[3.2rem] sm:text-[4.8rem] md:text-[7.2rem] lg:text-[8.2rem] xl:text-[10rem] text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary/95 to-secondary flex gap-x-[0.02em] overflow-hidden py-2">
           {headingAccent.split("").map((char, index) => (
             <span 
               key={index} 

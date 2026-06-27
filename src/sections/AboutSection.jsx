@@ -28,7 +28,7 @@ export function AboutSection() {
       {/* Section Header */}
       <div className="reveal-element flex flex-col items-center md:items-start mb-12">
         <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 01. WHO AM I</span>
-        <h2 className="font-mono font-bold text-3xl md:text-4xl text-text">
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
           About <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Me</span>
         </h2>
         <div className="w-12 h-[2px] bg-primary mt-4" />

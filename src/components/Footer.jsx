@@ -22,7 +22,7 @@ export function Footer() {
       <div className="flex flex-col md:flex-row items-center justify-between gap-8">
         {/* Left: Branding & Tagline */}
         <div className="text-center md:text-left">
-          <p className="font-mono font-bold text-lg text-text flex items-center justify-center md:justify-start gap-2 hover:rotate-[2deg] hover:translate-x-0.5 transition-all duration-300">
+          <p className="font-mono font-bold text-lg text-text flex items-center justify-center md:justify-start gap-2 hover:scale-[1.02] hover:translate-x-0.5 transition-all duration-300">
             <img src={logoNoBg} alt="Barzz Logo" className="w-5.5 h-5.5 object-contain" />
             <span>BARZZ<span className="text-primary">.LY</span></span>
           </p>

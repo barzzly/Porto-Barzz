@@ -44,7 +44,7 @@ export function Navbar({ isDark, toggleTheme }) {
         `}
       >
         {/* Logo */}
-        <a href="#home" className="flex items-center gap-2.5 font-mono font-bold tracking-tight text-lg text-text hover:text-primary transition-all duration-300 hover:rotate-[-3deg] hover:-translate-y-0.5 group">
+        <a href="#home" className="flex items-center gap-2.5 font-mono font-bold tracking-tight text-lg text-text hover:text-primary transition-all duration-300 hover:scale-[1.02] hover:-translate-y-0.5 group">
           <img src={logoNoBg} alt="Barzz Logo" className="w-6.5 h-6.5 object-contain transition-transform duration-300 group-hover:scale-105" />
           <span>BARZZ<span className="text-primary">.LY</span></span>
         </a>

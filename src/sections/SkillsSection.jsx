@@ -26,7 +26,7 @@ export function SkillsSection() {
       {/* Section Header */}
       <div className="reveal-element flex flex-col items-center md:items-start mb-12">
         <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 03. CAPABILITIES</span>
-        <h2 className="font-mono font-bold text-3xl md:text-4xl text-text">
+        <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
           Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Stack</span>
         </h2>
         <div className="w-12 h-[2px] bg-primary mt-4" />

@@ -14,7 +14,8 @@
   --color-shadow: var(--color-shadow);
   
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "Inter", system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
+  --font-display: "Outfit", "Space Grotesk", sans-serif;
 }
 
 :root {

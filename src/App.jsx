@@ -7,6 +7,7 @@ import { AboutSection } from './sections/AboutSection'
 import { ProjectsSection } from './sections/ProjectsSection'
 import { SkillsSection } from './sections/SkillsSection'
 import { ContactSection } from './sections/ContactSection'
+import { GlowGrid } from './components/ui/GlowGrid'
 
 function App() {
   const { toggleTheme, isDark } = useTheme()
@@ -18,6 +19,7 @@ function App() {
     <div className={`min-h-screen text-text bg-bg transition-colors duration-300 relative selection:bg-primary/20 selection:text-primary`}>
       {/* Interactive Neon-Green Matrix Cyber Background */}
       <div className="cyber-bg" />
+      <GlowGrid />
 
       {/* Navigation Bar */}
       <Navbar isDark={isDark} toggleTheme={toggleTheme} />

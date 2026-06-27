@@ -26,7 +26,7 @@ export function ProjectsSection() {
         <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">// 02. PORTFOLIO SHOWCASE</span>
         <div className="flex flex-col md:flex-row md:items-end justify-between w-full gap-4">
           <div>
-            <h2 className="font-mono font-bold text-3xl md:text-4xl text-text">
+            <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tight">
               Selected <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Projects</span>
             </h2>
             <div className="w-12 h-[2px] bg-primary mt-4" />
@@ -57,19 +57,10 @@ export function ProjectsSection() {
       {/* Projects Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {filteredProjects.map((project, index) => {
-          // Calculate subtle rotation values based on index
-          const rotClass = index % 3 === 0 
-            ? 'hover:rotate-1.5' 
-            : index % 3 === 1 
-            ? 'hover:-rotate-1.5' 
-            : 'hover:rotate-[1deg]'
-
           return (
             <Card 
               key={project.id}
-              className={`
-                reveal-element flex flex-col h-full bg-surface/40 overflow-hidden ${rotClass}
-              `}
+              className="reveal-element flex flex-col h-full bg-surface/40 overflow-hidden"
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               {/* Project Image Wrapper */}
