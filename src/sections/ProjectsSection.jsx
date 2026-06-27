@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+﻿import { useEffect, useState } from 'react'
 import { projects } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Check, Server, Users } from 'lucide-react'
+import { Server, Users } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})

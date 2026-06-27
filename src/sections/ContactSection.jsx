@@ -1,36 +1,22 @@
-import { useState } from 'react'
 import { Card } from '../components/ui/Card'
-import { Button } from '../components/ui/Button'
-import { Github, Linkedin, Twitter } from '../components/ui/BrandIcons'
-import { Mail, Send, Copy, Check, Sparkles } from 'lucide-react'
+import { Github, Discord } from '../components/ui/BrandIcons'
+import { ExternalLink } from 'lucide-react'
 
 export function ContactSection({ t }) {
-  const [formState, setFormState] = useState({ name: '', email: '', message: '' })
-  const [isSending, setIsSending] = useState(false)
-  const [isSent, setIsSent] = useState(false)
-  const [isCopied, setIsCopied] = useState(false)
-
-  const emailAddress = "hidayathulfikri.biz@gmail.com"
-
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(emailAddress)
-    setIsCopied(true)
-    setTimeout(() => setIsCopied(false), 2000)
-  }
-
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    if (!formState.name || !formState.email || !formState.message) return
-    
-    setIsSending(true)
-    // Simulate API request
-    setTimeout(() => {
-      setIsSending(false)
-      setIsSent(true)
-      setFormState({ name: '', email: '', message: '' })
-      setTimeout(() => setIsSent(false), 5000)
-    }, 1500)
-  }
+  const contactLinks = [
+    {
+      label: 'GitHub',
+      value: 'barzzly',
+      href: 'https://github.com/barzzly/',
+      icon: <Github className="w-6 h-6 text-text/85" />,
+    },
+    {
+      label: 'Discord',
+      value: 'BarzzLy',
+      href: 'https://discord.com/users/1189813545018347580',
+      icon: <Discord className="w-6 h-6 text-text/85" />,
+    },
+  ]
 
   return (
     <section 
@@ -46,159 +32,47 @@ export function ContactSection({ t }) {
         <div className="w-12 h-[2px] bg-primary mt-4" />
       </div>
 
-      {/* 2-Column Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-[0.8fr_1.2fr] gap-10 items-start">
-        {/* Left Column: Direct Info & Socials */}
-        <div className="reveal-left flex flex-col gap-6">
-          <div className="flex flex-col gap-4 text-center md:text-left">
-            <h3 className="font-mono text-lg font-bold text-text">
-              {t.subheading}
-            </h3>
-            <p className="text-sm text-muted leading-relaxed">
-              {t.desc}
-            </p>
-          </div>
-
-          {/* Quick Copy Email Card */}
-          <Card hoverable={false} className="bg-surface/30 border-border/40 p-5 flex flex-col gap-3">
-            <span className="font-mono text-[10px] text-muted block">{t.directMail}</span>
-            <div className="flex items-center justify-between gap-3 bg-surface/50 border border-border/40 p-3 rounded-xl">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <Mail className="w-4 h-4 text-primary shrink-0" />
-                <span className="font-mono text-xs text-text truncate">{emailAddress}</span>
-              </div>
-              <button 
-                onClick={handleCopyEmail}
-                className="p-2 rounded-lg border border-border hover:border-primary/45 hover:text-primary transition-colors cursor-pointer shrink-0"
-                title="Copy email to clipboard"
-              >
-                {isCopied ? <Check className="w-3.5 h-3.5 text-primary" /> : <Copy className="w-3.5 h-3.5" />}
-              </button>
-            </div>
-            <div className="flex items-center gap-2 mt-1">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              <span className="text-[10px] font-mono text-muted">{t.responseTime}</span>
-            </div>
-          </Card>
-
-          {/* Social Links Cards */}
-          <div className="flex gap-3 justify-center md:justify-start">
-            <a 
-              href="https://github.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex-1 max-w-[100px] text-center"
-            >
-              <Card hoverable={true} className="bg-surface/20 border-border/20 hover:border-primary/45 p-3 flex flex-col items-center gap-1">
-                <Github className="w-4 h-4 text-text/80" />
-                <span className="font-mono text-[9px] text-muted">GitHub</span>
-              </Card>
-            </a>
-            <a 
-              href="https://linkedin.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex-1 max-w-[100px] text-center"
-            >
-              <Card hoverable={true} className="bg-surface/20 border-border/20 hover:border-primary/45 p-3 flex flex-col items-center gap-1">
-                <Linkedin className="w-4 h-4 text-text/80" />
-                <span className="font-mono text-[9px] text-muted">LinkedIn</span>
-              </Card>
-            </a>
-            <a 
-              href="https://twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="flex-1 max-w-[100px] text-center"
-            >
-              <Card hoverable={true} className="bg-surface/20 border-border/20 hover:border-primary/45 p-3 flex flex-col items-center gap-1">
-                <Twitter className="w-4 h-4 text-text/80" />
-                <span className="font-mono text-[9px] text-muted">Twitter</span>
-              </Card>
-            </a>
-          </div>
+        <div className="reveal-left flex flex-col gap-4 text-center md:text-left">
+          <h3 className="font-mono text-lg md:text-xl font-bold leading-8 text-text">
+            {t.subheading}
+          </h3>
+          <p className="text-sm md:text-base text-muted leading-8 max-w-xl">
+            {t.desc}
+          </p>
         </div>
 
-        {/* Right Column: Glassmorphic Contact Form */}
-        <Card hoverable={false} className="reveal-right delay-150 bg-surface/40 border-border/40 p-6 md:p-8">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-              {/* Name Field */}
-              <div className="flex flex-col gap-1.5 text-left">
-                <label htmlFor="form-name" className="font-mono text-xs text-text/80 font-medium">
-                  {t.formName} <span className="text-primary">*</span>
-                </label>
-                <input 
-                  type="text" 
-                  id="form-name"
-                  required
-                  value={formState.name}
-                  onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                  placeholder={t.formNamePlaceholder}
-                  className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all"
-                />
-              </div>
+        <div className="reveal-right delay-150 grid grid-cols-1 sm:grid-cols-2 gap-5">
+          {contactLinks.map((item) => (
+            <a
+              key={item.label}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block h-full"
+            >
+              <Card hoverable={true} className="contact-link-card h-full bg-surface/35 border-border/40 p-6">
+                <div className="flex h-full min-h-[170px] flex-col justify-between gap-8">
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="contact-link-icon flex h-13 w-13 items-center justify-center rounded-2xl border border-border bg-text/[0.04]">
+                      {item.icon}
+                    </div>
+                    <ExternalLink className="h-4 w-4 text-muted transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:text-text" />
+                  </div>
 
-              {/* Email Field */}
-              <div className="flex flex-col gap-1.5 text-left">
-                <label htmlFor="form-email" className="font-mono text-xs text-text/80 font-medium">
-                  {t.formEmail} <span className="text-primary">*</span>
-                </label>
-                <input 
-                  type="email" 
-                  id="form-email"
-                  required
-                  value={formState.email}
-                  onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                  placeholder={t.formEmailPlaceholder}
-                  className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all"
-                />
-              </div>
-            </div>
-
-            {/* Message Field */}
-            <div className="flex flex-col gap-1.5 text-left">
-              <label htmlFor="form-message" className="font-mono text-xs text-text/80 font-medium">
-                {t.formMessage} <span className="text-primary">*</span>
-              </label>
-              <textarea 
-                id="form-message"
-                required
-                rows="5"
-                value={formState.message}
-                onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                placeholder={t.formMessagePlaceholder}
-                className="w-full font-mono text-xs px-4 py-3 rounded-xl border border-border bg-surface/50 text-text placeholder-muted/60 focus:outline-none focus:border-primary/80 focus:ring-1 focus:ring-primary/40 transition-all resize-none"
-              />
-            </div>
-
-            {/* Form Submit & Feedback Message */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-4 mt-2">
-              <div>
-                {isSent && (
-                  <p className="text-xs font-mono text-primary flex items-center gap-1.5 animate-pulse text-left">
-                    <Sparkles className="w-4 h-4 text-secondary" /> 
-                    {t.formSuccess}
-                  </p>
-                )}
-              </div>
-              <Button 
-                type="submit" 
-                disabled={isSending || isSent}
-                className="w-full md:w-auto min-w-[150px] gap-2 h-11"
-              >
-                {isSending ? (
-                  <>{t.formSending} <span className="w-4 h-4 border-2 border-bg border-t-transparent rounded-full animate-spin" /></>
-                ) : (
-                  <>{t.formSubmit} <Send className="w-3.5 h-3.5" /></>
-                )}
-              </Button>
-            </div>
-          </form>
-        </Card>
+                  <div>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+                      {item.label}
+                    </p>
+                    <p className="mt-2 break-all font-mono text-sm md:text-base font-bold text-text">
+                      {item.value}
+                    </p>
+                  </div>
+                </div>
+              </Card>
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   )

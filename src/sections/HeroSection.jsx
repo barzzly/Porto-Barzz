@@ -1,7 +1,7 @@
-import { useState, useEffect, useRef } from 'react'
+﻿import { useState, useEffect, useRef } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
-// ── Chip icons as minimal SVG ──────────────────────────────────────────────
+// â”€â”€ Chip icons as minimal SVG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 const JavaIcon = () => (
   <svg viewBox="0 0 24 24" className="w-4 h-4 fill-current" xmlns="http://www.w3.org/2000/svg">
     <path d="M8.851 18.56s-.917.534.653.714c1.902.218 2.874.187 4.969-.211 0 0 .552.346 1.321.646-4.699 2.013-10.633-.118-6.943-1.149M8.276 15.933s-1.028.761.542.924c2.032.209 3.636.227 6.413-.308 0 0 .384.389.987.602-5.679 1.661-12.007.13-7.942-1.218M13.116 11.475c1.158 1.333-.304 2.533-.304 2.533s2.939-1.518 1.589-3.418c-1.261-1.772-2.228-2.652 3.007-5.688 0-.001-8.216 2.051-4.292 6.573"/>
@@ -59,14 +59,16 @@ export function HeroSection({ t }) {
         timeoutRef.current = setTimeout(() =>
           setDisplayText(current.slice(0, displayText.length - 1)), 45)
       } else {
-        setWordIdx(i => (i + 1) % WORDS.length)
-        setPhase('typing')
+        timeoutRef.current = setTimeout(() => {
+          setWordIdx(i => (i + 1) % WORDS.length)
+          setPhase('typing')
+        }, 0)
       }
     }
     return () => clearTimeout(timeoutRef.current)
   }, [displayText, phase, wordIdx])
 
-  // ── Floating chips ───────────────────────────────────────────────────────
+  // â”€â”€ Floating chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const chips = [
     {
       icon: <JavaIcon />,
@@ -131,7 +133,7 @@ export function HeroSection({ t }) {
         <div className="absolute right-[24%] top-[30%] h-2 w-2 rounded-full bg-text/45 shadow-[0_0_24px_rgba(232,232,232,0.28)] animate-node-pulse delay-300" />
         <div className="absolute left-[47%] bottom-[16%] h-2 w-2 rounded-full bg-text/40 shadow-[0_0_24px_rgba(232,232,232,0.22)] animate-node-pulse delay-600" />
       </div>
-      {/* ── Background: large ambient light top ── */}
+      {/* â”€â”€ Background: large ambient light top â”€â”€ */}
       <div className="absolute top-[-15%] left-1/2 -translate-x-1/2 w-[70%] h-[500px] pointer-events-none -z-10">
         <div className="absolute inset-0 rounded-full bg-gradient-radial from-white/[0.055] to-transparent blur-[120px] animate-idle-glow" />
       </div>
@@ -141,7 +143,7 @@ export function HeroSection({ t }) {
         style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(0,0,0,0.04) 0%, transparent 70%)' }}
       />
 
-      {/* ── Decorative corner lines (monochrome geo) ── */}
+      {/* â”€â”€ Decorative corner lines (monochrome geo) â”€â”€ */}
       <div className="absolute top-24 left-6 md:left-10 w-16 h-16 pointer-events-none opacity-20">
         <div className="absolute top-0 left-0 w-5 h-[1px] bg-text" />
         <div className="absolute top-0 left-0 h-5 w-[1px] bg-text" />
@@ -159,7 +161,7 @@ export function HeroSection({ t }) {
         <div className="absolute bottom-0 right-0 h-5 w-[1px] bg-text" />
       </div>
 
-      {/* ── Floating tech chips ── */}
+      {/* â”€â”€ Floating tech chips â”€â”€ */}
       {chips.map((chip, i) => (
         <div
           key={i}
@@ -184,7 +186,7 @@ export function HeroSection({ t }) {
         </div>
       ))}
 
-      {/* ── Status badge ── */}
+      {/* â”€â”€ Status badge â”€â”€ */}
       <div className="mb-8 animate-fade-in" style={{ animationDelay: '0.1s', animationFillMode: 'both' }}>
         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-card-border bg-surface/60 backdrop-blur-md">
           <span className="relative flex h-1.5 w-1.5">
@@ -195,7 +197,7 @@ export function HeroSection({ t }) {
         </div>
       </div>
 
-      {/* ── Main heading ── */}
+      {/* â”€â”€ Main heading â”€â”€ */}
       <div className="flex flex-col items-center" style={{ animation: 'fadeIn 0.9s ease-out 0.2s both' }}>
 
         {/* Eyebrow label */}
@@ -220,7 +222,7 @@ export function HeroSection({ t }) {
           </h1>
         </div>
 
-        {/* Secondary line — static, slightly faded */}
+        {/* Secondary line â€” static, slightly faded */}
         <div
           className="mt-3 font-display font-black tracking-[-0.025em] leading-none text-text/36 select-none"
           style={{ fontSize: 'clamp(2.8rem, 9vw, 7.8rem)', textShadow: '0 8px 32px var(--color-bg)' }}
@@ -230,10 +232,10 @@ export function HeroSection({ t }) {
         </div>
       </div>
 
-      {/* ── Divider line ── */}
+      {/* â”€â”€ Divider line â”€â”€ */}
       <div className="mt-8 w-px h-10 bg-gradient-to-b from-border to-transparent" />
 
-      {/* ── Description ── */}
+      {/* â”€â”€ Description â”€â”€ */}
       <p
         key={`desc-${languageMotionKey}`}
         className="animate-lang-content mt-6 min-h-[7.5rem] max-w-[46rem] px-2 text-[15px] md:min-h-[6.75rem] md:text-lg font-medium leading-8 md:leading-9 text-text/76"
@@ -268,7 +270,7 @@ export function HeroSection({ t }) {
         ))}
       </div>
 
-      {/* ── CTA Buttons ── */}
+      {/* â”€â”€ CTA Buttons â”€â”€ */}
       <div
         key={`cta-${languageMotionKey}`}
         className="animate-lang-content mt-8 flex w-full max-w-xs flex-col gap-3 sm:max-w-none sm:flex-row sm:flex-wrap sm:justify-center"
@@ -294,7 +296,7 @@ export function HeroSection({ t }) {
         </button>
       </div>
 
-      {/* ── Scroll indicator ── */}
+      {/* â”€â”€ Scroll indicator â”€â”€ */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-scroll-bounce pointer-events-none">
         <span className="font-mono text-[8px] text-muted/40 tracking-[0.25em] uppercase">scroll</span>
         <div className="w-px h-7 bg-gradient-to-b from-text/25 to-transparent" />
@@ -302,3 +304,4 @@ export function HeroSection({ t }) {
     </section>
   )
 }
+

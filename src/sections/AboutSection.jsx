@@ -1,5 +1,5 @@
 import { Card } from '../components/ui/Card'
-import renderSkin from '../assets/images/renderskin.png'
+import renderSkin from '../assets/images/renderskin.webp'
 import { User, MapPin, Coffee, Code2, Globe, Server, Users } from 'lucide-react'
 
 function MinecraftSkinRender() {

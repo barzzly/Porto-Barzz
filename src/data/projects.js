@@ -1,6 +1,6 @@
-import aetheriumImage from '../assets/images/aetherium.png'
-import noesantaraImage from '../assets/images/noesantara.png'
-import rebelImage from '../assets/images/rebel.png'
+import aetheriumImage from '../assets/images/aetherium.webp'
+import noesantaraImage from '../assets/images/noesantara.webp'
+import rebelImage from '../assets/images/rebel.webp'
 
 export const projects = [
   {

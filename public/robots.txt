@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://barzz.noesantara.id/sitemap.xml

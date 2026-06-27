@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
-import logoNoBg from '../assets/images/Logo_No_Backround.png'
+import logoNoBg from '../assets/images/Logo_No_Backround.webp'
 
 export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
   const [isScrolled, setIsScrolled] = useState(false)
@@ -45,25 +45,25 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
         className={`
           flex items-center justify-between w-full transition-all duration-500
           ${isScrolled 
-            ? 'max-w-2xl rounded-full border border-card-border bg-surface/80 backdrop-blur-2xl px-5 py-2.5 shadow-[0_8px_40px_rgba(0,0,0,0.3)]' 
+            ? 'max-w-4xl rounded-full border border-card-border bg-surface/82 backdrop-blur-2xl px-5 py-2.5 shadow-[0_12px_46px_rgba(0,0,0,0.34)]' 
             : 'max-w-6xl border-b border-border/20 bg-transparent px-4 py-5 md:px-8'
           }
         `}
       >
         {/* Logo */}
-        <a href="#home" onClick={(event) => handleNavClick(event, '#home')} className="flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text hover:opacity-70 transition-all duration-200 group">
+        <a href="#home" onClick={(event) => handleNavClick(event, '#home')} className="navbar-brand flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text transition-all duration-300 group">
           <img src={logoNoBg} alt="Barzz Logo" className="w-6 h-6 object-contain brand-logo" />
           <span>BARZZ<span className="text-muted">.LY</span></span>
         </a>
 
         {/* Desktop Navigation Links */}
-        <div className="hidden md:flex items-center gap-7">
+        <div className="hidden md:flex items-center gap-2 lg:gap-3">
           {navLinks.map((link) => (
             <a 
               key={link.label}
               href={link.href} 
               onClick={(event) => handleNavClick(event, link.href)}
-              className="font-mono text-[11px] tracking-[0.1em] uppercase font-medium text-muted hover:text-text transition-colors duration-200"
+              className="navbar-link rounded-full px-2.5 py-2 font-mono text-[10px] lg:text-[11px] tracking-[0.08em] lg:tracking-[0.1em] uppercase font-medium text-muted transition-colors duration-200"
             >
               {link.label}
             </a>
@@ -75,7 +75,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
           {/* Language Toggle */}
           <button 
             onClick={toggleLang}
-            className="font-mono text-[10px] font-semibold px-3 py-2 rounded-lg border border-border bg-surface/40 hover:bg-surface text-muted hover:text-text transition-all duration-200 cursor-pointer tracking-widest"
+            className="navbar-action font-mono text-[10px] font-semibold px-3 py-2 rounded-xl border border-border bg-surface/40 text-muted transition-all duration-200 cursor-pointer tracking-widest"
             aria-label="Toggle language"
           >
             {lang.toUpperCase()}
@@ -84,7 +84,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
           {/* Theme Toggle */}
           <button 
             onClick={toggleTheme}
-            className="p-2 rounded-lg border border-border bg-surface/40 hover:bg-surface text-muted hover:text-text transition-all duration-200 cursor-pointer"
+            className="navbar-action p-2 rounded-xl border border-border bg-surface/40 text-muted transition-all duration-200 cursor-pointer"
             aria-label="Toggle theme"
           >
             {isDark ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}

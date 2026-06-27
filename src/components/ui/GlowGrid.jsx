@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+﻿import { useEffect, useState, useRef, useCallback } from 'react'
 
 const CELL = 96
 
@@ -23,10 +23,9 @@ export function GlowGrid({ contained = false }) {
     return set
   }, [grid.total])
 
-  const [active, setActive] = useState(() => new Set())
+  const [active, setActive] = useState(() => getRandomCells(160))
   const [isLight, setIsLight] = useState(() => document.documentElement.classList.contains('light'))
 
-  useEffect(() => { setActive(getRandomCells()) }, [getRandomCells])
   useEffect(() => {
     const id = setInterval(() => setActive(getRandomCells()), 2000)
     return () => clearInterval(id)
@@ -95,3 +94,4 @@ export function GlowGrid({ contained = false }) {
     </>
   )
 }
+

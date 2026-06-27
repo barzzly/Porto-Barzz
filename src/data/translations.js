@@ -1,4 +1,4 @@
-export const translations = {
+﻿export const translations = {
   en: {
     nav: {
       home: "Home",
@@ -170,10 +170,8 @@ export const translations = {
       badge: "GET IN TOUCH",
       heading: "Start a",
       headingAccent: "Server",
-      subheading: "Let's build a server players want to stay in.",
-      desc: "If you need a Minecraft server setup, plugin configuration, economy design, proxy network, or long term maintenance, send a message and we can map the build together.",
-      directMail: "DIRECT MAIL",
-      responseTime: "Average response time under 12 hours",
+      subheading: "Reach me directly through GitHub or Discord.",
+      desc: "For server setup, plugin configuration, optimization, or long term maintenance, use the links here and we can discuss the build directly.",
       formName: "Name",
       formEmail: "Email",
       formMessage: "Message",
@@ -185,7 +183,16 @@ export const translations = {
       formSuccess: "Message received! I'll get back to you shortly."
     },
     footer: {
-      tagline: "Building stable Minecraft server experiences."
+      tagline: "Building stable Minecraft server experiences.",
+      links: {
+        about: "About",
+        projects: "Projects",
+        skills: "Tech Stack",
+        testimonials: "Testimonials",
+        contact: "Contact"
+      },
+      copyright: "2026 BarzzLy. Minecraft server developer.",
+      backToTop: "Back to top"
     }
   },
   id: {
@@ -220,7 +227,7 @@ export const translations = {
       heading: "Tentang",
       headingAccent: "Saya",
       desc1: "Halo! Saya BarzzLy, developer server Minecraft yang fokus membangun lingkungan multiplayer yang stabil, rapi, dan nyaman dimainkan. Saya mengurus konfigurasi server, ekosistem plugin, ekonomi, permission, proxy network, optimalisasi, dan pengalaman pemain.",
-      desc2: "Saya tidak sekadar memasang plugin lalu selesai. Saya merapikan sistem agar rank, menu, reward, performa, keamanan, dan detail kecil lainnya terasa konsisten. Fun fact, saya perfeksionis, jadi server Anda akan saya kerjakan sedetail mungkin.",
+      desc2: "Saya tidak sekadar memasang plugin lalu selesai. Saya merapikan sistem agar rank, menu, reward, performa, keamanan, dan detail kecil lainnya terasa konsisten. Fun fact, saya perfeksionis, jadi server kamu akan saya kerjakan sedetail mungkin.",
       labelName: "NAMA",
       labelLocation: "LOKASI",
       labelFuel: "BAHAN BAKAR",
@@ -351,7 +358,7 @@ export const translations = {
         {
           name: "Valtherion",
           project: "Owner Valtherion",
-          text: "Wah bagus banget, kau buatin gw server tema RPG fantasy. Sudah cepat, bagus lagi. Lobby-nya rapi, ditambahin plugin premium juga. Keren banget, auto kasih bintang 5. W buat Dev Barzz."
+          text: "Wah bagus banget, kau buatin gw server tema RPG fantasy. Sudah cepat, bagus lagi. Lobbynya rapi, ditambahin plugin premium juga. Keren banget, auto kasih bintang 5. W buat Dev Barzz."
         }
       ]
     },
@@ -359,10 +366,8 @@ export const translations = {
       badge: "HUBUNGI SAYA",
       heading: "Mulai",
       headingAccent: "Server",
-      subheading: "Mari bangun server yang bikin pemain betah.",
-      desc: "Kalau kamu butuh setup server Minecraft, konfigurasi plugin, desain ekonomi, proxy network, atau maintenance jangka panjang, kirim pesan dan kita susun kebutuhan buildnya.",
-      directMail: "EMAIL LANGSUNG",
-      responseTime: "Rata rata waktu respons di bawah 12 jam",
+      subheading: "Hubungi saya langsung lewat GitHub atau Discord.",
+      desc: "Kalau kamu butuh setup server, konfigurasi plugin, optimasi, atau maintenance jangka panjang, pakai link ini dan kita bahas buildnya langsung.",
       formName: "Nama",
       formEmail: "Email",
       formMessage: "Pesan",
@@ -374,7 +379,17 @@ export const translations = {
       formSuccess: "Pesan diterima! Saya akan segera menghubungi Anda kembali."
     },
     footer: {
-      tagline: "Membangun pengalaman server Minecraft yang stabil."
+      tagline: "Membangun pengalaman server Minecraft yang stabil.",
+      links: {
+        about: "Tentang",
+        projects: "Proyek",
+        skills: "Keahlian",
+        testimonials: "Testimoni",
+        contact: "Kontak"
+      },
+      copyright: "2026 BarzzLy. Developer server Minecraft.",
+      backToTop: "Kembali ke atas"
     }
   }
 }
+
