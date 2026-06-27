@@ -1,55 +1,55 @@
-/* Custom Keyframe Animations for Porto Barzz */
+﻿/* Custom Keyframe Animations for Porto Barzz */
 
-/* ── Hero letter slide up ── */
+/* â”€â”€ Hero letter slide up â”€â”€ */
 @keyframes heroLetterIn {
   0% { opacity: 0; transform: translateY(120%) skewY(10deg); }
   100% { opacity: 1; transform: translateY(0) skewY(0); }
 }
 
-/* ── Floating tech chip ── */
+/* â”€â”€ Floating tech chip â”€â”€ */
 @keyframes chipFloat {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(-12px) rotate(3deg); }
 }
 
-/* ── Availability dot pulse ── */
+/* â”€â”€ Availability dot pulse â”€â”€ */
 @keyframes statusDotPulse {
   0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 232, 232, 0.42); }
   70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(232, 232, 232, 0); }
   100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 232, 232, 0); }
 }
 
-/* ── Idle glow breathe ── */
+/* â”€â”€ Idle glow breathe â”€â”€ */
 @keyframes idleGlow {
   0%, 100% { opacity: 0.5; transform: scale(1); }
   50% { opacity: 0.8; transform: scale(1.05); }
 }
 
-/* ── Page transition circle reveal ── */
+/* â”€â”€ Page transition circle reveal â”€â”€ */
 @keyframes vtCircleReveal {
   from { clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%)); }
   to { clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%)); }
 }
 
-/* ── Divider line pulse ── */
+/* â”€â”€ Divider line pulse â”€â”€ */
 @keyframes dividerPulse {
   0%, 100% { opacity: 0.2; transform: scaleX(0.98); }
   50% { opacity: 0.6; transform: scaleX(1); }
 }
 
-/* ── Marquee scroll ── */
+/* â”€â”€ Marquee scroll â”€â”€ */
 @keyframes marquee {
   0% { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
 }
 
-/* ── Card shimmer sweep ── */
+/* â”€â”€ Card shimmer sweep â”€â”€ */
 @keyframes shimmerSweep {
   0% { transform: translateX(-120%) skewX(-20deg); }
   100% { transform: translateX(220%) skewX(-20deg); }
 }
 
-/* ── Glitch horizontal shake ── */
+/* â”€â”€ Glitch horizontal shake â”€â”€ */
 @keyframes glitchShake {
   0%, 100% { transform: translateX(0); }
   10% { transform: translateX(-3px) skewX(-2deg); }
@@ -59,41 +59,41 @@
   50% { transform: translateX(0); }
 }
 
-/* ── Floating orb drift ── */
+/* â”€â”€ Floating orb drift â”€â”€ */
 @keyframes orbDrift {
   0%, 100% { transform: translate(0, 0) scale(1); }
   33% { transform: translate(15px, -20px) scale(1.05); }
   66% { transform: translate(-10px, 10px) scale(0.97); }
 }
 
-/* ── Fade in upward ── */
+/* â”€â”€ Fade in upward â”€â”€ */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(16px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* ── Border rotate glow (for featured card) ── */
+/* â”€â”€ Border rotate glow (for featured card) â”€â”€ */
 @keyframes borderRotate {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* ── Cursor blink (typewriter) ── */
+/* â”€â”€ Cursor blink (typewriter) â”€â”€ */
 @keyframes cursorBlink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
-/* ── Scroll bounce arrow ── */
+/* â”€â”€ Scroll bounce arrow â”€â”€ */
 @keyframes scrollBounce {
   0%, 100% { transform: translateY(0); opacity: 0.5; }
   50% { transform: translateY(6px); opacity: 1; }
 }
 
-/* ══════════════════════════════
+/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
    Utility Animation Classes
-══════════════════════════════ */
+â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
 .animate-hero-letter {
   display: inline-block;
   animation: heroLetterIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -137,7 +137,7 @@
   animation: fadeIn 0.8s ease-out both;
 }
 
-/* ── Card shimmer sweep (triggered via group-hover) ── */
+/* â”€â”€ Card shimmer sweep (triggered via group-hover) â”€â”€ */
 .card-shimmer::after {
   content: '';
   position: absolute;
@@ -151,7 +151,7 @@
   animation: shimmerSweep 1.2s ease forwards;
 }
 
-/* ── Tilt card 3D reset transition ── */
+/* â”€â”€ Tilt card 3D reset transition â”€â”€ */
 .tilt-card {
   transform-style: preserve-3d;
   transition: transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -930,4 +930,69 @@ html.light .footer-panel::before {
 
 html.light .footer-social:hover {
   box-shadow: 0 14px 32px rgba(0,0,0,0.08);
+}
+@media (max-width: 767px) {
+  .animate-dot-pulse,
+  .animate-idle-glow,
+  .animate-divider-pulse,
+  .animate-scroll-bounce,
+  .animate-chip-float,
+  .animate-skin-breathe,
+  .project-role-stamp,
+  .hero-signal-pill,
+  .hero-signal-dot,
+  .testimonial-track,
+  .testimonial-track-reverse {
+    animation: none !important;
+  }
+
+  .testimonial-track,
+  .testimonial-track-reverse {
+    transform: translateX(0) !important;
+  }
+
+  .testimonial-marquee-wrap {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .testimonial-slide-card {
+    scroll-snap-align: start;
+  }
+
+  .card-shimmer,
+  .card-glow-spot,
+  .about-quality-card::before,
+  .about-info-card::before,
+  .skill-card::before,
+  .testimonial-card::before,
+  .contact-link-card::before,
+  .footer-panel::before {
+    display: none !important;
+  }
+
+  .tilt-card,
+  .skill-card,
+  .testimonial-card,
+  .contact-link-card,
+  .about-info-card,
+  .footer-social,
+  .navbar-action,
+  .navbar-brand,
+  .hero-cta-button,
+  .hero-signal-pill {
+    transform: none !important;
+    box-shadow: none !important;
+  }
+
+  .hero-cta-button::before,
+  .hero-cta-button::after,
+  .hero-signal-pill::before,
+  .skill-track::after,
+  .testimonial-card::after,
+  .contact-link-card::after,
+  .about-info-card::after {
+    display: none !important;
+  }
 }

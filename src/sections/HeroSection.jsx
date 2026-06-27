@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef } from 'react'
+﻿import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
 // â”€â”€ Chip icons as minimal SVG â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -36,14 +36,32 @@ const PaperIcon = () => (
 )
 
 const WORDS = ["OWNER", "DEVELOPER"]
+const MOBILE_QUERY = '(max-width: 767px)'
+
+function subscribeToMobile(callback) {
+  const query = window.matchMedia(MOBILE_QUERY)
+  query.addEventListener('change', callback)
+  return () => query.removeEventListener('change', callback)
+}
+
+function getMobileSnapshot() {
+  return window.matchMedia(MOBILE_QUERY).matches
+}
+
+function getServerSnapshot() {
+  return false
+}
 
 export function HeroSection({ t }) {
   const [wordIdx, setWordIdx] = useState(0)
   const [displayText, setDisplayText] = useState("S")
   const [phase, setPhase] = useState('typing')
   const timeoutRef = useRef(null)
+  const isMobile = useSyncExternalStore(subscribeToMobile, getMobileSnapshot, getServerSnapshot)
 
   useEffect(() => {
+    if (isMobile) return undefined
+
     const current = WORDS[wordIdx]
     clearTimeout(timeoutRef.current)
 
@@ -66,7 +84,7 @@ export function HeroSection({ t }) {
       }
     }
     return () => clearTimeout(timeoutRef.current)
-  }, [displayText, phase, wordIdx])
+  }, [displayText, phase, wordIdx, isMobile])
 
   // â”€â”€ Floating chips â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
   const chips = [
@@ -208,23 +226,25 @@ export function HeroSection({ t }) {
         {/* Giant typewriter word */}
         <div className="relative">
           <h1
-            className="font-display font-black tracking-[-0.025em] leading-none select-none text-text"
+            className="font-display font-black tracking-normal md:tracking-[-0.025em] leading-none select-none text-text"
             style={{
               fontSize: 'clamp(3.5rem, 12vw, 10.5rem)',
-              textShadow: '0 8px 38px var(--color-bg), 0 1px 0 rgba(255,255,255,0.12)',
+              textShadow: isMobile ? '0 5px 22px var(--color-bg)' : '0 8px 38px var(--color-bg), 0 1px 0 rgba(255,255,255,0.12)',
             }}
           >
-            <span>{displayText}</span>
-            <span
-              className="inline-block w-[3px] h-[0.85em] bg-text ml-1 align-middle"
-              style={{ animation: 'cursorBlink 1s step-end infinite' }}
-            />
+            <span>{isMobile ? 'DEVELOPER' : displayText}</span>
+            {!isMobile && (
+              <span
+                className="inline-block w-[3px] h-[0.85em] bg-text ml-1 align-middle"
+                style={{ animation: 'cursorBlink 1s step-end infinite' }}
+              />
+            )}
           </h1>
         </div>
 
         {/* Secondary line â€” static, slightly faded */}
         <div
-          className="mt-3 font-display font-black tracking-[-0.025em] leading-none text-text/36 select-none"
+          className="mt-3 font-display font-black tracking-normal md:tracking-[-0.025em] leading-none text-text/36 select-none"
           style={{ fontSize: 'clamp(2.8rem, 9vw, 7.8rem)', textShadow: '0 8px 32px var(--color-bg)' }}
           aria-hidden="true"
         >
@@ -304,4 +324,5 @@ export function HeroSection({ t }) {
     </section>
   )
 }
+
 

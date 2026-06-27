@@ -16,8 +16,8 @@
   --color-grid-fill: var(--color-grid-fill);
   
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --font-sans: "Plus Jakarta Sans", "Inter", system-ui, sans-serif;
-  --font-display: "Space Grotesk", sans-serif;
+  --font-sans: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", system-ui, sans-serif;
 }
 
 :root {
@@ -248,6 +248,14 @@ html.light .brand-logo {
 .rotate-card-1  { transform: rotate(1deg); }
 .-rotate-card-05 { transform: rotate(-0.5deg); }
 .rotate-card-05  { transform: rotate(0.5deg); }
-
-
-
+@media (max-width: 767px) {
+  .reveal-element,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    will-change: auto;
+    transition-duration: 0.55s;
+  }
+}

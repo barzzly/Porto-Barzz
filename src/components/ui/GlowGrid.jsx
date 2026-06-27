@@ -1,20 +1,34 @@
 ﻿import { useEffect, useState, useRef, useCallback } from 'react'
 
 const CELL = 96
+const MOBILE_QUERY = '(max-width: 767px)'
 
 export function GlowGrid({ contained = false }) {
   const [grid, setGrid] = useState({ cols: 16, rows: 10, total: 160 })
+  const [isMobile, setIsMobile] = useState(() => window.matchMedia(MOBILE_QUERY).matches)
 
   useEffect(() => {
+    const query = window.matchMedia(MOBILE_QUERY)
+    const sync = () => setIsMobile(query.matches)
+
+    sync()
+    query.addEventListener('change', sync)
+    return () => query.removeEventListener('change', sync)
+  }, [])
+
+  useEffect(() => {
+    if (isMobile) return
+
     const calc = () => {
       const cols = Math.ceil(window.innerWidth / CELL) + 1
       const rows = Math.ceil(window.innerHeight / CELL) + 1
       setGrid({ cols, rows, total: cols * rows })
     }
+
     calc()
     window.addEventListener('resize', calc)
     return () => window.removeEventListener('resize', calc)
-  }, [])
+  }, [isMobile])
 
   const getRandomCells = useCallback(() => {
     const set = new Set()
@@ -27,9 +41,11 @@ export function GlowGrid({ contained = false }) {
   const [isLight, setIsLight] = useState(() => document.documentElement.classList.contains('light'))
 
   useEffect(() => {
-    const id = setInterval(() => setActive(getRandomCells()), 2000)
+    if (isMobile) return
+
+    const id = setInterval(() => setActive(getRandomCells()), 2600)
     return () => clearInterval(id)
-  }, [getRandomCells])
+  }, [getRandomCells, isMobile])
 
   useEffect(() => {
     const obs = new MutationObserver(() =>
@@ -41,17 +57,36 @@ export function GlowGrid({ contained = false }) {
 
   const orbRef = useRef(null)
   useEffect(() => {
+    if (isMobile) return
+
     const fn = (e) => {
       if (orbRef.current)
         orbRef.current.style.transform = `translate(${e.clientX - 260}px,${e.clientY - 260}px)`
     }
     window.addEventListener('mousemove', fn, { passive: true })
     return () => window.removeEventListener('mousemove', fn)
-  }, [])
+  }, [isMobile])
 
-  const GAP    = isLight ? '#aaa9a3' : '#1e1e1e'
-  const BASE   = isLight ? '#f5f4f0' : '#0a0a0a'
+  const GAP = isLight ? '#aaa9a3' : '#1e1e1e'
+  const BASE = isLight ? '#f5f4f0' : '#0a0a0a'
   const ACTIVE = isLight ? '#c5c3bc' : '#252525'
+
+  if (isMobile) {
+    return (
+      <div
+        style={{
+          position: contained ? 'absolute' : 'fixed',
+          inset: 0,
+          zIndex: 0,
+          pointerEvents: 'none',
+          backgroundColor: BASE,
+          backgroundImage: `linear-gradient(${GAP} 1px, transparent 1px), linear-gradient(90deg, ${GAP} 1px, transparent 1px), radial-gradient(circle at 50% 10%, ${ACTIVE}, transparent 58%)`,
+          backgroundSize: '72px 72px, 72px 72px, 100% 100%',
+          opacity: isLight ? 0.78 : 0.92,
+        }}
+      />
+    )
+  }
 
   return (
     <>
@@ -76,16 +111,19 @@ export function GlowGrid({ contained = false }) {
 
       <div style={{
         position: contained ? 'absolute' : 'fixed',
-        inset:0,zIndex:0,pointerEvents:'none',
+        inset: 0,
+        zIndex: 0,
+        pointerEvents: 'none',
         backgroundColor: GAP,
-        display:'grid',
-        gridTemplateColumns:`repeat(${grid.cols},${CELL}px)`,
-        gridTemplateRows:`repeat(${grid.rows},${CELL}px)`,
-        gap:'1.5px',
+        display: 'grid',
+        gridTemplateColumns: `repeat(${grid.cols},${CELL}px)`,
+        gridTemplateRows: `repeat(${grid.rows},${CELL}px)`,
+        gap: '1.5px',
       }}>
-        {Array.from({length: grid.total}).map((_,i) => (
+        {Array.from({ length: grid.total }).map((_, i) => (
           <div key={i} style={{
-            width:CELL, height:CELL,
+            width: CELL,
+            height: CELL,
             backgroundColor: active.has(i) ? ACTIVE : BASE,
             transition: active.has(i) ? 'background-color 300ms ease' : 'background-color 1000ms ease',
           }}/>
@@ -94,4 +132,3 @@ export function GlowGrid({ contained = false }) {
     </>
   )
 }
-

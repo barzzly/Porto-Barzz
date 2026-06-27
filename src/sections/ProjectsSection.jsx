@@ -1,4 +1,4 @@
-﻿import { useEffect, useState } from 'react'
+﻿import { useEffect, useRef, useState } from 'react'
 import { projects } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
@@ -7,9 +7,26 @@ import { Server, Users } from 'lucide-react'
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
   const [copiedProjectId, setCopiedProjectId] = useState(null)
+  const [shouldLoadStatus, setShouldLoadStatus] = useState(false)
+  const sectionRef = useRef(null)
   const tiltAngles = ['-rotate-1', 'rotate-[0.5deg]', '-rotate-[0.8deg]', 'rotate-1', '-rotate-[0.4deg]', 'rotate-[1.2deg]']
 
   useEffect(() => {
+    const section = sectionRef.current
+    if (!section) return undefined
+
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      setShouldLoadStatus(true)
+      observer.disconnect()
+    }, { rootMargin: '420px 0px' })
+
+    observer.observe(section)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!shouldLoadStatus) return undefined
     let cancelled = false
 
     async function loadStatus(project) {
@@ -48,7 +65,7 @@ export function ProjectsSection({ t }) {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [shouldLoadStatus])
 
   const handleCopyIp = async (project) => {
     if (!project.joinIp) return
@@ -76,6 +93,7 @@ export function ProjectsSection({ t }) {
 
   return (
     <section 
+      ref={sectionRef}
       id="projects" 
       className="max-w-6xl mx-auto px-6 py-20 w-full"
     >
@@ -181,3 +199,6 @@ export function ProjectsSection({ t }) {
     </section>
   )
 }
+
+
+
