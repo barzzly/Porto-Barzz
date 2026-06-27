@@ -1,11 +1,11 @@
 export const translations = {
   en: {
     nav: {
-      home: "home",
-      about: "about",
-      projects: "projects",
-      skills: "tech-stack",
-      contact: "contact",
+      home: "Home",
+      about: "About",
+      projects: "Projects",
+      skills: "Tech-Stack",
+      contact: "Contact",
       hire: "Hire Me"
     },
     hero: {
@@ -89,11 +89,11 @@ export const translations = {
   },
   id: {
     nav: {
-      home: "beranda",
-      about: "tentang",
-      projects: "proyek",
-      skills: "keahlian",
-      contact: "kontak",
+      home: "Beranda",
+      about: "Tentang",
+      projects: "Proyek",
+      skills: "Keahlian",
+      contact: "Kontak",
       hire: "Hubungi Saya"
     },
     hero: {

@@ -54,7 +54,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
             <a 
               key={link.label}
               href={link.href} 
-              className="font-mono text-sm text-text/80 hover:text-primary transition-colors relative group py-1"
+              className="font-sans font-bold text-sm tracking-wide text-text/80 hover:text-primary transition-colors relative group py-1"
             >
               {link.label}
               <span className="absolute bottom-0 left-0 w-0 h-[1.5px] bg-primary transition-all duration-300 group-hover:w-full" />
@@ -130,7 +130,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
               key={link.label}
               href={link.href} 
               onClick={() => setIsMobileMenuOpen(false)}
-              className="font-mono text-base text-text/80 hover:text-primary transition-colors py-2 border-b border-border/20"
+              className="font-sans font-bold text-base tracking-wide text-text/80 hover:text-primary transition-colors py-2 border-b border-border/20"
             >
               {link.label}
             </a>

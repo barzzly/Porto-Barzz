@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 
 export function GlowGrid() {
-  const totalCells = 80
-  const staticFilledCells = [3, 12, 19, 28, 35, 47, 54, 62, 71, 78] // Aligned abstract boxes to fill 80 cells
+  const totalCells = 64
+  const staticFilledCells = [2, 9, 14, 21, 35, 42, 53, 58] // Aligned abstract boxes to fill 64 cells
 
   const getRandomCells = () => {
-    const count = Math.floor(Math.random() * 6) + 4 // 4 to 10 active cells
+    const count = Math.floor(Math.random() * 5) + 3 // 3 to 8 active cells
     const indices = []
     for (let i = 0; i < count; i++) {
       indices.push(Math.floor(Math.random() * totalCells))
@@ -25,10 +25,10 @@ export function GlowGrid() {
 
   return (
     <div 
-      className="absolute inset-x-0 top-0 h-[850px] -z-20 grid grid-cols-5 sm:grid-cols-7 md:grid-cols-10 gap-[1px] opacity-100 pointer-events-none"
+      className="absolute inset-x-0 top-0 h-[880px] -z-20 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-[1px] opacity-100 pointer-events-none"
       style={{
-        maskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, black 35%, transparent 100%)'
+        maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
+        WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
       }}
     >
       {Array.from({ length: totalCells }).map((_, i) => {
