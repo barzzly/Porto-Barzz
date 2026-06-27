@@ -1,4 +1,4 @@
-﻿import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 
 const CELL = 96
 const MOBILE_QUERY = '(max-width: 767px)'
@@ -57,15 +57,32 @@ export function GlowGrid({ contained = false }) {
 
   const orbRef = useRef(null)
   useEffect(() => {
-    if (isMobile) return
+    if (isMobile) return undefined
 
-    const fn = (e) => {
-      if (orbRef.current)
-        orbRef.current.style.transform = `translate(${e.clientX - 260}px,${e.clientY - 260}px)`
+    const moveOrb = (x, y) => {
+      if (!orbRef.current) return
+      orbRef.current.style.transform = `translate3d(${x - 260}px, ${y - 260}px, 0)`
+      orbRef.current.style.opacity = isLight ? '0.62' : '0.78'
     }
-    window.addEventListener('mousemove', fn, { passive: true })
-    return () => window.removeEventListener('mousemove', fn)
-  }, [isMobile])
+
+    moveOrb(window.innerWidth / 2, window.innerHeight / 2)
+
+    const handlePointerMove = (event) => moveOrb(event.clientX, event.clientY)
+    const handlePointerLeave = () => {
+      if (orbRef.current) orbRef.current.style.opacity = isLight ? '0.38' : '0.46'
+    }
+    const handlePointerEnter = (event) => moveOrb(event.clientX, event.clientY)
+
+    window.addEventListener('pointermove', handlePointerMove, { passive: true })
+    window.addEventListener('pointerenter', handlePointerEnter, { passive: true })
+    document.addEventListener('pointerleave', handlePointerLeave, { passive: true })
+
+    return () => {
+      window.removeEventListener('pointermove', handlePointerMove)
+      window.removeEventListener('pointerenter', handlePointerEnter)
+      document.removeEventListener('pointerleave', handlePointerLeave)
+    }
+  }, [isMobile, isLight])
 
   const GAP = isLight ? '#aaa9a3' : '#1e1e1e'
   const BASE = isLight ? '#f5f4f0' : '#0a0a0a'
@@ -105,7 +122,8 @@ export function GlowGrid({ contained = false }) {
         mixBlendMode: isLight ? 'multiply' : 'screen',
         pointerEvents: 'none',
         zIndex: 1,
-        transition: 'transform 0.18s ease-out, opacity 0.3s ease, background 0.3s ease',
+        transform: 'translate3d(calc(50vw - 260px), calc(50vh - 260px), 0)',
+        transition: 'transform 0.14s ease-out, opacity 0.3s ease, background 0.3s ease',
         willChange: 'transform',
       }}/>
 

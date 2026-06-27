@@ -1,4 +1,4 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 @import "./styles/animations.css";
 @theme {
   --color-primary: var(--color-primary);
@@ -21,8 +21,8 @@
 }
 
 :root {
-  /* â”€â”€ DARK MODE (default) â€” Minimalist Dark Monochrome â”€â”€ */
-  --color-primary: #e8e8e8;           /* Off-white â€” clean monochrome accent */
+  /* ── DARK MODE (default) — Minimalist Dark Monochrome ── */
+  --color-primary: #e8e8e8;           /* Off-white — clean monochrome accent */
   --color-primary-glow: rgba(232, 232, 232, 0.08);
   --color-secondary: #a0a0a0;         /* Mid-grey secondary */
   --color-secondary-glow: rgba(160, 160, 160, 0.08);
@@ -44,7 +44,7 @@
   color-scheme: dark;
 }
 
-/* â”€â”€ LIGHT MODE â€” Warm Off-White Premium â”€â”€ */
+/* ── LIGHT MODE — Warm Off-White Premium ── */
 html.light, :root[class~="light"] {
   --color-primary: #111111;           /* Near-black as primary in light */
   --color-primary-glow: rgba(17, 17, 17, 0.08);
@@ -151,7 +151,7 @@ body {
 .delay-450 { transition-delay: 450ms; }
 .delay-600 { transition-delay: 600ms; }
 
-/* cyber-bg removed â€” background now handled fully by GlowGrid */
+/* cyber-bg removed — background now handled fully by GlowGrid */
 .cyber-bg { display: none; }
 
 /* Utility to hide scrollbar in layout */
@@ -181,9 +181,9 @@ html.light .brand-logo {
   filter: none;
 }
 
-/* â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+/* ═══════════════════════════════════════════
    Axzy-style Unique UI Utilities
-â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */
+═══════════════════════════════════════════ */
 
 /* Neon text glow */
 .text-glow-primary {
@@ -255,7 +255,9 @@ html.light .brand-logo {
   .reveal-left,
   .reveal-right,
   .reveal-scale {
+    opacity: 1;
+    transform: none;
     will-change: auto;
-    transition-duration: 0.55s;
+    transition-duration: 0.28s;
   }
 }
