@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { useScrollReveal } from './hooks/useScrollReveal'
+import { useMobileTapHover } from './hooks/useMobileTapHover'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { HeroSection } from './sections/HeroSection'
@@ -35,6 +36,7 @@ function App() {
 
   // Register scroll reveal animation handler globally on layout mount
   useScrollReveal(lang) // re-trigger on language switch to update positions
+  useMobileTapHover()
 
   const t = translations[lang]
 

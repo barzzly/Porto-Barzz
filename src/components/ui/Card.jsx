@@ -1,4 +1,4 @@
-﻿import { useRef, useSyncExternalStore } from 'react'
+﻿import { useRef, useState, useSyncExternalStore } from 'react'
 
 const TOUCH_QUERY = '(hover: none), (pointer: coarse)'
 
@@ -25,6 +25,8 @@ export function Card({
   ...props
 }) {
   const cardRef = useRef(null)
+  const tapTimeoutRef = useRef(null)
+  const [isTapped, setIsTapped] = useState(false)
   const isTouch = useSyncExternalStore(subscribeToTouch, getTouchSnapshot, getServerSnapshot)
   const canTilt = hoverable && tilt && !isTouch
 
@@ -51,6 +53,13 @@ export function Card({
     }
   }
 
+  const handleTouchStart = () => {
+    if (!hoverable || !isTouch) return
+    window.clearTimeout(tapTimeoutRef.current)
+    setIsTapped(true)
+    tapTimeoutRef.current = window.setTimeout(() => setIsTapped(false), 1200)
+  }
+
   const handleMouseLeave = () => {
     if (!canTilt) return
     const card = cardRef.current
@@ -66,10 +75,12 @@ export function Card({
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
       className={`
         relative overflow-hidden rounded-2xl border border-card-border bg-surface
         backdrop-blur-xl p-6 shadow-lg
         ${hoverable ? 'cursor-pointer group mobile-card-press' : ''}
+        ${isTapped ? 'is-tapped' : ''}
         ${hoverable && !tilt ? 'transition-all duration-300 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl hover:border-primary/45' : ''}
         ${canTilt ? 'tilt-card' : ''}
         ${className}
@@ -106,5 +117,3 @@ export function Card({
     </div>
   )
 }
-
-
