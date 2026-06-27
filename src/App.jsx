@@ -29,13 +29,15 @@ function App() {
   const t = translations[lang]
 
   return (
-    <div className={`min-h-screen text-text bg-bg transition-colors duration-300 relative selection:bg-primary/20 selection:text-primary`}>
+    <div className="min-h-screen bg-bg text-text transition-colors duration-300 relative overflow-x-hidden">
 
-      {/* Interactive Neon-Green Matrix Cyber Background */}
-      <div className="cyber-bg" />
-      <GlowGrid />
+      {/* Grid background — z-index 0, behind everything */}
+      <div className="absolute inset-x-0 top-0 h-[112svh] overflow-hidden" style={{ zIndex: 0 }}>
+        <GlowGrid contained />
+        <div className="absolute inset-x-0 bottom-0 h-[38svh] bg-gradient-to-b from-transparent via-bg/85 to-bg" />
+      </div>
 
-      {/* Navigation Bar */}
+      {/* Navigation Bar — z-index 50 */}
       <Navbar 
         isDark={isDark} 
         toggleTheme={toggleTheme} 
@@ -44,8 +46,8 @@ function App() {
         t={t.nav} 
       />
 
-      {/* Main Sections */}
-      <main className="flex flex-col relative z-10">
+      {/* Main Sections — z-index 10, above grid */}
+      <main className="flex flex-col relative" style={{ zIndex: 10 }}>
         <HeroSection t={t.hero} />
         <AboutSection t={t.about} />
         <ProjectsSection t={t.projects} />
@@ -53,7 +55,7 @@ function App() {
         <ContactSection t={t.contact} />
       </main>
 
-      {/* Footer Details */}
+      {/* Footer */}
       <Footer t={t.footer} />
     </div>
   )

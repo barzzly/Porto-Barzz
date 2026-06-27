@@ -9,8 +9,8 @@ export const translations = {
       hire: "Hire Me"
     },
     hero: {
-      status: "AVAILABLE FOR FREELANCE & CONTRACTS",
-      desc: "I design and build premium web applications with clean code, elegant interface patterns, and fluid responsiveness.",
+      status: "AVAILABLE FOR FREELANCE",
+      desc: "I build and design Minecraft servers with clean, stable, and polished systems from plugin configuration and economy setup to a smooth, memorable player experience.",
       ctaProjects: "Explore Projects",
       ctaContact: "Start a Conversation"
     },
@@ -97,8 +97,8 @@ export const translations = {
       hire: "Hubungi Saya"
     },
     hero: {
-      status: "TERSEDIA UNTUK FREELANCE & KONTRAK",
-      desc: "Saya merancang dan membangun aplikasi web premium dengan kode yang bersih, pola antarmuka yang elegan, dan responsivitas yang lancar.",
+      status: "TERSEDIA UNTUK FREELANCE",
+      desc: "Saya membangun dan merancang server Minecraft secara rapi, stabil, dan maksimal mulai dari konfigurasi plugin, sistem ekonomi, hingga pengalaman bermain yang smooth dan berkesan.",
       ctaProjects: "Lihat Proyek",
       ctaContact: "Mulai Diskusi"
     },

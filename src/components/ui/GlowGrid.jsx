@@ -1,55 +1,88 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef, useCallback } from 'react'
 
-export function GlowGrid() {
-  const totalCells = 64
-  const staticFilledCells = [2, 9, 14, 21, 35, 42, 53, 58] // Aligned abstract boxes to fill 64 cells
+const CELL = 96
 
-  const getRandomCells = () => {
-    const count = Math.floor(Math.random() * 5) + 3 // 3 to 8 active cells
-    const indices = []
-    for (let i = 0; i < count; i++) {
-      indices.push(Math.floor(Math.random() * totalCells))
-    }
-    return indices
-  }
-
-  const [activeCells, setActiveCells] = useState(() => getRandomCells())
+export function GlowGrid({ contained = false }) {
+  const [grid, setGrid] = useState({ cols: 16, rows: 10, total: 160 })
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveCells(getRandomCells())
-    }, 6000) // change every 6 seconds
-
-    return () => clearInterval(interval)
+    const calc = () => {
+      const cols = Math.ceil(window.innerWidth / CELL) + 1
+      const rows = Math.ceil(window.innerHeight / CELL) + 1
+      setGrid({ cols, rows, total: cols * rows })
+    }
+    calc()
+    window.addEventListener('resize', calc)
+    return () => window.removeEventListener('resize', calc)
   }, [])
 
-  return (
-    <div 
-      className="absolute inset-x-0 top-0 h-[880px] -z-20 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-[1px] opacity-100 pointer-events-none"
-      style={{
-        maskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)',
-        WebkitMaskImage: 'linear-gradient(to bottom, black 60%, transparent 100%)'
-      }}
-    >
-      {Array.from({ length: totalCells }).map((_, i) => {
-        const isActive = activeCells.includes(i)
-        const isStaticFilled = staticFilledCells.includes(i)
+  const getRandomCells = useCallback(() => {
+    const set = new Set()
+    const count = Math.floor(Math.random() * 14) + 8
+    while (set.size < count) set.add(Math.floor(Math.random() * grid.total))
+    return set
+  }, [grid.total])
 
-        return (
-          <div 
-            key={i} 
-            className={`
-              aspect-square transition-all duration-[2000ms] border-[0.5px]
-              ${isActive 
-                ? 'bg-gradient-to-br from-primary/12 to-secondary/6 border-primary/45 shadow-[inset_0_0_20px_rgba(0,255,136,0.15)]' 
-                : isStaticFilled 
-                ? 'bg-grid-fill border-grid-line' 
-                : 'bg-transparent border-grid-line'
-              }
-            `}
-          />
-        )
-      })}
-    </div>
+  const [active, setActive] = useState(() => new Set())
+  const [isLight, setIsLight] = useState(() => document.documentElement.classList.contains('light'))
+
+  useEffect(() => { setActive(getRandomCells()) }, [getRandomCells])
+  useEffect(() => {
+    const id = setInterval(() => setActive(getRandomCells()), 2000)
+    return () => clearInterval(id)
+  }, [getRandomCells])
+
+  useEffect(() => {
+    const obs = new MutationObserver(() =>
+      setIsLight(document.documentElement.classList.contains('light'))
+    )
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+    return () => obs.disconnect()
+  }, [])
+
+  const orbRef = useRef(null)
+  useEffect(() => {
+    const fn = (e) => {
+      if (orbRef.current)
+        orbRef.current.style.transform = `translate(${e.clientX - 200}px,${e.clientY - 200}px)`
+    }
+    window.addEventListener('mousemove', fn, { passive: true })
+    return () => window.removeEventListener('mousemove', fn)
+  }, [])
+
+  const GAP    = isLight ? '#aaa9a3' : '#1e1e1e'
+  const BASE   = isLight ? '#f5f4f0' : '#0a0a0a'
+  const ACTIVE = isLight ? '#c5c3bc' : '#252525'
+
+  return (
+    <>
+      <div ref={orbRef} style={{
+        position: contained ? 'absolute' : 'fixed',
+        top:0,left:0,width:400,height:400,borderRadius:'50%',
+        background: isLight
+          ? 'radial-gradient(circle,rgba(0,0,0,0.05) 0%,transparent 65%)'
+          : 'radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 65%)',
+        pointerEvents:'none',zIndex:1,
+        transition:'transform 0.2s ease-out',willChange:'transform',
+      }}/>
+
+      <div style={{
+        position: contained ? 'absolute' : 'fixed',
+        inset:0,zIndex:0,pointerEvents:'none',
+        backgroundColor: GAP,
+        display:'grid',
+        gridTemplateColumns:`repeat(${grid.cols},${CELL}px)`,
+        gridTemplateRows:`repeat(${grid.rows},${CELL}px)`,
+        gap:'1.5px',
+      }}>
+        {Array.from({length: grid.total}).map((_,i) => (
+          <div key={i} style={{
+            width:CELL, height:CELL,
+            backgroundColor: active.has(i) ? ACTIVE : BASE,
+            transition: active.has(i) ? 'background-color 300ms ease' : 'background-color 1000ms ease',
+          }}/>
+        ))}
+      </div>
+    </>
   )
 }

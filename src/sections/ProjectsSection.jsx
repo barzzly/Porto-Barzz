@@ -9,12 +9,13 @@ import { ExternalLink, Filter } from 'lucide-react'
 export function ProjectsSection({ t }) {
   const [filter, setFilter] = useState('all')
 
-  // Get all unique tags from projects
   const allTags = ['all', ...new Set(projects.flatMap(p => p.tags))]
-
   const filteredProjects = filter === 'all' 
     ? projects 
     : projects.filter(p => p.tags.includes(filter))
+
+  // Tilt angles for visual variety – alternating pattern
+  const tiltAngles = ['-rotate-1', 'rotate-[0.5deg]', '-rotate-[0.8deg]', 'rotate-1', '-rotate-[0.4deg]', 'rotate-[1.2deg]']
 
   return (
     <section 
@@ -29,7 +30,7 @@ export function ProjectsSection({ t }) {
             <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
               {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
             </h2>
-            <div className="w-12 h-[2px] bg-primary mt-4" />
+            <div className="w-12 h-[2px] bg-primary mt-4 animate-divider-pulse" />
           </div>
 
           {/* Project Filters */}
@@ -40,9 +41,9 @@ export function ProjectsSection({ t }) {
                 key={tag}
                 onClick={() => setFilter(tag)}
                 className={`
-                  px-3 py-1.5 rounded-lg border transition-all cursor-pointer
+                  px-3 py-1.5 rounded-lg border transition-all duration-200 cursor-pointer
                   ${filter === tag 
-                    ? 'border-primary bg-primary/10 text-primary' 
+                    ? 'border-primary bg-primary/10 text-primary shadow-[0_0_12px_rgba(232,232,232,0.14)]' 
                     : 'border-border bg-surface/30 text-text/80 hover:border-primary/45 hover:text-primary'
                   }
                 `}
@@ -54,72 +55,78 @@ export function ProjectsSection({ t }) {
         </div>
       </div>
 
-      {/* Projects Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Projects Grid - Masonry feel with tilt */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
         {filteredProjects.map((project, index) => {
           const localItem = t.items.find(item => item.id === project.id)
           const title = localItem ? localItem.title : project.title
           const description = localItem ? localItem.description : project.description
+          const tiltClass = tiltAngles[index % tiltAngles.length]
 
           return (
-            <Card 
+            <div
               key={project.id}
-              className="reveal-scale flex flex-col h-full bg-surface/40 overflow-hidden"
+              className={`reveal-scale transition-transform duration-500 ${tiltClass} hover:rotate-0`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              {/* Project Image Wrapper */}
-              <div className="relative aspect-video overflow-hidden rounded-xl border border-border/30 bg-black/20 group mb-5">
-                <img 
-                  src={project.image} 
-                  alt={title}
-                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-105 group-hover:filter group-hover:brightness-95"
-                  loading="lazy"
-                />
-                {/* Visual Glass Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60 transition-opacity" />
-              </div>
+              <Card 
+                tilt={true}
+                hoverable={true}
+                className="flex flex-col h-full bg-surface/40 overflow-hidden"
+              >
+                {/* Corner accent badge */}
+                <div className="absolute top-3 right-3 z-20">
+                  <span className="font-mono text-[9px] text-primary/60 bg-primary/5 border border-primary/15 px-1.5 py-0.5 rounded-md">
+                    #{String(index + 1).padStart(2, '0')}
+                  </span>
+                </div>
 
-              {/* Title & Description */}
-              <h3 className="font-mono text-base font-bold text-text mb-2 group-hover:text-primary transition-colors">
-                {title}
-              </h3>
-              <p className="text-xs text-muted leading-relaxed mb-6 flex-grow">
-                {description}
-              </p>
+                {/* Project Image */}
+                <div className="relative aspect-video overflow-hidden rounded-xl border border-border/30 bg-black/20 group-inner mb-5">
+                  <img 
+                    src={project.image} 
+                    alt={title}
+                    className="w-full h-full object-cover grayscale brightness-75 contrast-125 transition-all duration-700 hover:scale-105 hover:brightness-90"
+                    loading="lazy"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-bg/90 via-transparent to-transparent opacity-60" />
+                  {/* Scan line effect */}
+                  <div className="absolute inset-0 pointer-events-none"
+                    style={{ background: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.012) 2px, rgba(255,255,255,0.012) 4px)' }} />
+                </div>
 
-              {/* Tech Badges */}
-              <div className="flex flex-wrap gap-1.5 mb-6">
-                {project.tags.map((tag) => (
-                  <Badge key={tag} variant="glass" className="text-[10px] py-0.5 px-2 bg-surface border-border/50">
-                    {tag}
-                  </Badge>
-                ))}
-              </div>
+                {/* Title & Description */}
+                <h3 className="font-mono text-base font-bold text-text mb-2 group-hover:text-primary transition-colors">
+                  {title}
+                </h3>
+                <p className="text-xs text-muted leading-relaxed mb-6 flex-grow">
+                  {description}
+                </p>
 
-              {/* Action Buttons */}
-              <div className="flex items-center gap-3 pt-3 border-t border-border/30">
-                <a 
-                  href={project.github} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1"
-                >
-                  <Button variant="ghost" className="w-full text-xs py-2 h-9 border border-border hover:border-primary/45">
-                    <Github className="w-4 h-4 mr-1.5" /> {t.source}
-                  </Button>
-                </a>
-                <a 
-                  href={project.demo} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="flex-1"
-                >
-                  <Button variant="secondary" className="w-full text-xs py-2 h-9">
-                    {t.demo} <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
-                  </Button>
-                </a>
-              </div>
-            </Card>
+                {/* Tech Badges */}
+                <div className="flex flex-wrap gap-1.5 mb-6">
+                  {project.tags.map((tag) => (
+                    <Badge key={tag} variant="glass" className="text-[10px] py-0.5 px-2 bg-surface border-border/50 hover:border-primary/30 hover:text-primary transition-colors">
+                      {tag}
+                    </Badge>
+                  ))}
+                </div>
+
+                {/* Action Buttons */}
+                <div className="flex items-center gap-3 pt-3 border-t border-border/30">
+                  <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button variant="ghost" className="w-full text-xs py-2 h-9 border border-border hover:border-primary/45">
+                      <Github className="w-4 h-4 mr-1.5" /> {t.source}
+                    </Button>
+                  </a>
+                  <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex-1">
+                    <Button variant="secondary" className="w-full text-xs py-2 h-9">
+                      {t.demo} <ExternalLink className="w-3.5 h-3.5 ml-1.5" />
+                    </Button>
+                  </a>
+                </div>
+              </Card>
+            </div>
           )
         })}
       </div>

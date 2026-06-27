@@ -124,7 +124,7 @@ export function AboutSection({ t }) {
                   )
                 } else {
                   return (
-                    <pre key={i} className="pl-4 text-[#00ff88] text-[11px] bg-primary/5 p-2 rounded-lg border border-primary/10 mt-1 mb-2.5 overflow-x-auto">
+                    <pre key={i} className="pl-4 text-[#e8e8e8] text-[11px] bg-primary/5 p-2 rounded-lg border border-primary/10 mt-1 mb-2.5 overflow-x-auto">
                       {JSON.stringify(line.val, null, 2)}
                     </pre>
                   )

@@ -21,61 +21,72 @@
 }
 
 :root {
-  /* Default: Dark theme style since Opsi A is Cyber Dark, but we allow toggle */
-  --color-primary: #00ff88;
-  --color-primary-glow: rgba(0, 255, 136, 0.15);
-  --color-secondary: #ff4d6d;
-  --color-secondary-glow: rgba(255, 77, 109, 0.15);
-  --color-bg: #000000;
-  --color-text: #e2e8f0;
-  --color-muted: #8ba3c7;
-  --color-surface: rgba(12, 12, 12, 0.75);
-  --color-border: rgba(255, 255, 255, 0.08);
-  --color-card-border: rgba(255, 255, 255, 0.12);
-  --color-shadow: rgba(0, 0, 0, 0.8);
-  --color-grid-line: rgba(255, 255, 255, 0.06);
-  --color-grid-fill: rgba(255, 255, 255, 0.03);
-  
+  /* ── DARK MODE (default) — Minimalist Dark Monochrome ── */
+  --color-primary: #e8e8e8;           /* Off-white — clean monochrome accent */
+  --color-primary-glow: rgba(232, 232, 232, 0.08);
+  --color-secondary: #a0a0a0;         /* Mid-grey secondary */
+  --color-secondary-glow: rgba(160, 160, 160, 0.08);
+  --color-accent: #ffffff;            /* Pure white for highlights */
+  --color-accent-dim: rgba(255,255,255,0.06);
+  --color-bg: #0a0a0a;               /* Near-black, not pure black */
+  --color-bg-raised: #111111;        /* Slightly lifted surface */
+  --color-text: #f0f0f0;
+  --color-text-dim: rgba(240,240,240,0.5);
+  --color-muted: #6b6b6b;
+  --color-surface: rgba(18, 18, 18, 0.85);
+  --color-surface-hover: rgba(28, 28, 28, 0.9);
+  --color-border: rgba(255, 255, 255, 0.07);
+  --color-card-border: rgba(255, 255, 255, 0.10);
+  --color-shadow: rgba(0, 0, 0, 0.9);
+  --color-grid-line: rgba(255, 255, 255, 0.04);
+  --color-grid-fill: rgba(255, 255, 255, 0.02);
+
   color-scheme: dark;
 }
 
-/* Light mode overrides if toggled */
+/* ── LIGHT MODE — Warm Off-White Premium ── */
 html.light, :root[class~="light"] {
-  --color-primary: #059669; /* emerald-600 */
-  --color-primary-glow: rgba(5, 150, 105, 0.1);
-  --color-secondary: #db2777; /* pink-600 */
-  --color-secondary-glow: rgba(219, 39, 119, 0.1);
-  --color-bg: #f8fafc; /* slate-50 */
-  --color-text: #0f172a; /* slate-900 */
-  --color-muted: #475569; /* slate-600 */
-  --color-surface: rgba(255, 255, 255, 0.75);
-  --color-border: rgba(15, 23, 42, 0.08);
-  --color-card-border: rgba(15, 23, 42, 0.12);
-  --color-shadow: rgba(0, 0, 0, 0.05);
-  --color-grid-line: rgba(0, 0, 0, 0.055);
-  --color-grid-fill: rgba(123, 44, 191, 0.04);
-  
+  --color-primary: #111111;           /* Near-black as primary in light */
+  --color-primary-glow: rgba(17, 17, 17, 0.08);
+  --color-secondary: #555555;
+  --color-secondary-glow: rgba(85, 85, 85, 0.08);
+  --color-accent: #000000;
+  --color-accent-dim: rgba(0,0,0,0.04);
+  --color-bg: #f5f4f0;               /* Warm off-white, not cold slate */
+  --color-bg-raised: #ffffff;
+  --color-text: #111111;
+  --color-text-dim: rgba(17,17,17,0.45);
+  --color-muted: #888888;
+  --color-surface: rgba(255, 255, 255, 0.80);
+  --color-surface-hover: rgba(245, 244, 240, 0.95);
+  --color-border: rgba(0, 0, 0, 0.07);
+  --color-card-border: rgba(0, 0, 0, 0.10);
+  --color-shadow: rgba(0, 0, 0, 0.06);
+  --color-grid-line: rgba(0, 0, 0, 0.05);
+  --color-grid-fill: rgba(0, 0, 0, 0.02);
+
   color-scheme: light;
 }
 
 html {
   scroll-behavior: smooth;
   font-family: var(--font-sans);
+  background-color: var(--color-bg); /* bg on html so GlowGrid gap color shows correctly */
 }
 
-/* Custom Text Selection Styling */
+/* selection color fix for monochrome */
 ::selection {
-  background-color: var(--color-primary);
-  color: #050a0e;
+  background-color: var(--color-text);
+  color: var(--color-bg);
 }
 
 body {
-  background-color: var(--color-bg);
+  background-color: transparent;
   color: var(--color-text);
   margin: 0;
   overflow-x: hidden;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: color 0.3s ease;
 }
 
 
@@ -140,24 +151,8 @@ body {
 .delay-450 { transition-delay: 450ms; }
 .delay-600 { transition-delay: 600ms; }
 
-/* Radial Cyber Grid Background for Opsi A */
-.cyber-bg {
-  position: fixed;
-  inset: 0;
-  z-index: -30;
-  background-color: var(--color-bg);
-  pointer-events: none;
-}
-
-.cyber-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: 
-    radial-gradient(circle at 20% 80%, var(--color-primary-glow), transparent 45%),
-    radial-gradient(circle at 80% 20%, var(--color-secondary-glow), transparent 45%);
-  pointer-events: none;
-}
+/* cyber-bg removed — background now handled fully by GlowGrid */
+.cyber-bg { display: none; }
 
 /* Utility to hide scrollbar in layout */
 .no-scrollbar::-webkit-scrollbar {
@@ -187,3 +182,72 @@ html.light .brand-logo {
 }
 
 @import "./styles/animations.css";
+
+/* ═══════════════════════════════════════════
+   Axzy-style Unique UI Utilities
+═══════════════════════════════════════════ */
+
+/* Neon text glow */
+.text-glow-primary {
+  text-shadow: 0 0 20px rgba(232, 232, 232, 0.28), 0 0 40px rgba(232, 232, 232, 0.14);
+}
+.text-glow-secondary {
+  text-shadow: 0 0 20px rgba(255, 77, 109, 0.5), 0 0 40px rgba(255, 77, 109, 0.2);
+}
+
+/* Rotating gradient border (featured project card) */
+.border-animated {
+  position: relative;
+  border: none !important;
+}
+.border-animated::before {
+  content: '';
+  position: absolute;
+  inset: -1.5px;
+  border-radius: inherit;
+  background: linear-gradient(
+    270deg,
+    var(--color-primary),
+    var(--color-secondary),
+    var(--color-primary)
+  );
+  background-size: 300% 300%;
+  animation: borderRotate 4s ease infinite;
+  z-index: 0;
+}
+.border-animated > * {
+  position: relative;
+  z-index: 1;
+}
+.border-animated::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background: var(--color-surface);
+  z-index: 0;
+}
+
+/* Scan line overlay for cyber feel */
+.scan-lines {
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255,255,255,0.012) 2px,
+    rgba(255,255,255,0.012) 4px
+  );
+}
+
+/* Glass pill badge */
+.pill-glow {
+  box-shadow: 0 0 12px rgba(232, 232, 232, 0.14), inset 0 0 8px rgba(232, 232, 232, 0.05);
+}
+
+/* Tilt helper static classes */
+.-rotate-card-1 { transform: rotate(-1deg); }
+.rotate-card-1  { transform: rotate(1deg); }
+.-rotate-card-05 { transform: rotate(-0.5deg); }
+.rotate-card-05  { transform: rotate(0.5deg); }
+

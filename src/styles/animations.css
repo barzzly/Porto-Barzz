@@ -1,78 +1,99 @@
 /* Custom Keyframe Animations for Porto Barzz */
 
-/* Stagger hero letters slide up and scale */
+/* ── Hero letter slide up ── */
 @keyframes heroLetterIn {
-  0% {
-    opacity: 0;
-    transform: translateY(120%) skewY(10deg);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) skewY(0);
-  }
+  0% { opacity: 0; transform: translateY(120%) skewY(10deg); }
+  100% { opacity: 1; transform: translateY(0) skewY(0); }
 }
 
-/* Floating animation for tech shapes */
+/* ── Floating tech chip ── */
 @keyframes chipFloat {
-  0%, 100% {
-    transform: translateY(0) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-12px) rotate(3deg);
-  }
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-12px) rotate(3deg); }
 }
 
-/* Availability dot pulse */
+/* ── Availability dot pulse ── */
 @keyframes statusDotPulse {
-  0% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
-  }
-  70% {
-    transform: scale(1);
-    box-shadow: 0 0 0 8px rgba(0, 255, 136, 0);
-  }
-  100% {
-    transform: scale(0.95);
-    box-shadow: 0 0 0 0 rgba(0, 255, 136, 0);
-  }
+  0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 232, 232, 0.42); }
+  70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(232, 232, 232, 0); }
+  100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(232, 232, 232, 0); }
 }
 
-/* Glow loop */
+/* ── Idle glow breathe ── */
 @keyframes idleGlow {
-  0%, 100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.8;
-    transform: scale(1.05);
-  }
+  0%, 100% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 0.8; transform: scale(1.05); }
 }
 
-/* Page Transition animation (View Transition API) */
+/* ── Page transition circle reveal ── */
 @keyframes vtCircleReveal {
-  from {
-    clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%));
-  }
-  to {
-    clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%));
-  }
+  from { clip-path: circle(0% at var(--vt-x, 50%) var(--vt-y, 50%)); }
+  to { clip-path: circle(150% at var(--vt-x, 50%) var(--vt-y, 50%)); }
 }
 
-/* Divider line pulse */
+/* ── Divider line pulse ── */
 @keyframes dividerPulse {
-  0%, 100% {
-    opacity: 0.2;
-    transform: scaleX(0.98);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scaleX(1);
-  }
+  0%, 100% { opacity: 0.2; transform: scaleX(0.98); }
+  50% { opacity: 0.6; transform: scaleX(1); }
 }
 
-/* Animation utilities */
+/* ── Marquee scroll ── */
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Card shimmer sweep ── */
+@keyframes shimmerSweep {
+  0% { transform: translateX(-120%) skewX(-20deg); }
+  100% { transform: translateX(220%) skewX(-20deg); }
+}
+
+/* ── Glitch horizontal shake ── */
+@keyframes glitchShake {
+  0%, 100% { transform: translateX(0); }
+  10% { transform: translateX(-3px) skewX(-2deg); }
+  20% { transform: translateX(3px) skewX(2deg); }
+  30% { transform: translateX(-2px); }
+  40% { transform: translateX(2px); }
+  50% { transform: translateX(0); }
+}
+
+/* ── Floating orb drift ── */
+@keyframes orbDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(15px, -20px) scale(1.05); }
+  66% { transform: translate(-10px, 10px) scale(0.97); }
+}
+
+/* ── Fade in upward ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Border rotate glow (for featured card) ── */
+@keyframes borderRotate {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ── Cursor blink (typewriter) ── */
+@keyframes cursorBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* ── Scroll bounce arrow ── */
+@keyframes scrollBounce {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(6px); opacity: 1; }
+}
+
+/* ══════════════════════════════
+   Utility Animation Classes
+══════════════════════════════ */
 .animate-hero-letter {
   display: inline-block;
   animation: heroLetterIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
@@ -94,18 +115,48 @@
   animation: dividerPulse 3s ease-in-out infinite;
 }
 
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 .animate-marquee {
   display: flex;
   width: max-content;
   animation: marquee 30s linear infinite;
 }
 
+.animate-glitch {
+  animation: glitchShake 0.4s ease;
+}
+
+.animate-orb-drift {
+  animation: orbDrift 12s ease-in-out infinite;
+}
+
+.animate-scroll-bounce {
+  animation: scrollBounce 1.8s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out both;
+}
+
+/* ── Card shimmer sweep (triggered via group-hover) ── */
+.card-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 35%,
+    rgba(255,255,255,0.06) 50%,
+    transparent 65%
+  );
+  animation: shimmerSweep 1.2s ease forwards;
+}
+
+/* ── Tilt card 3D reset transition ── */
+.tilt-card {
+  transform-style: preserve-3d;
+  transition: transform 0.12s ease-out, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+.tilt-card:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(232, 232, 232, 0.08);
+  border-color: rgba(232, 232, 232, 0.18);
+}
