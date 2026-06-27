@@ -69,7 +69,7 @@ export function Card({
       className={`
         relative overflow-hidden rounded-2xl border border-card-border bg-surface
         backdrop-blur-xl p-6 shadow-lg
-        ${hoverable ? 'cursor-pointer group' : ''}
+        ${hoverable ? 'cursor-pointer group mobile-card-press' : ''}
         ${hoverable && !tilt ? 'transition-all duration-300 hover:-translate-y-2 hover:scale-[1.01] hover:shadow-2xl hover:border-primary/45' : ''}
         ${canTilt ? 'tilt-card' : ''}
         ${className}
@@ -106,3 +106,5 @@ export function Card({
     </div>
   )
 }
+
+

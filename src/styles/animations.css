@@ -996,3 +996,46 @@ html.light .footer-social:hover {
     display: none !important;
   }
 }
+@media (max-width: 767px) {
+  .mobile-card-press,
+  .about-info-card,
+  .testimonial-card,
+  .contact-link-card,
+  .skill-card,
+  .about-quality-card {
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+    transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background-color 0.18s ease !important;
+  }
+
+  .mobile-card-press:active,
+  .mobile-card-press:focus-within,
+  .about-info-card:active,
+  .testimonial-card:active,
+  .contact-link-card:active,
+  .skill-card:active,
+  .about-quality-card:active {
+    transform: translateY(-4px) scale(1.012) !important;
+    border-color: color-mix(in srgb, var(--color-text) 24%, transparent) !important;
+    background-color: color-mix(in srgb, var(--color-surface) 88%, var(--color-text) 7%) !important;
+    box-shadow: 0 16px 38px rgba(0,0,0,0.24), 0 0 22px rgba(255,255,255,0.035) !important;
+  }
+
+  html.light .mobile-card-press:active,
+  html.light .mobile-card-press:focus-within,
+  html.light .about-info-card:active,
+  html.light .testimonial-card:active,
+  html.light .contact-link-card:active,
+  html.light .skill-card:active,
+  html.light .about-quality-card:active {
+    box-shadow: 0 16px 38px rgba(0,0,0,0.11), 0 0 18px rgba(0,0,0,0.035) !important;
+  }
+
+  .mobile-card-press:active .about-quality-icon,
+  .about-info-card:active .about-info-icon,
+  .contact-link-card:active .contact-link-icon,
+  .testimonial-card:active .testimonial-avatar,
+  .skill-card:active .skill-card-icon {
+    transform: translateY(-1px) scale(1.06) !important;
+  }
+}
