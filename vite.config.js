@@ -24,17 +24,27 @@ try {
     fs.writeFileSync(path.join(assetsDir, 'Logo_No_Backround.png'), logoBuffer)
   }
   
-  // 2. Generate static favicon (BarzzLy.png -> public/favicon.png)
+  // 2. Generate static favicon as SVG (BarzzLy.png -> public/favicon.svg)
   const faviconPath = path.join(rootDir, 'BarzzLy.png')
   if (fs.existsSync(faviconPath)) {
     const faviconBuffer = fs.readFileSync(faviconPath)
-    fs.writeFileSync(path.join(rootDir, 'public', 'favicon.png'), faviconBuffer)
+    const base64Favicon = faviconBuffer.toString('base64')
+    const faviconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <title>BarzzLy</title>
+  <image href="data:image/png;base64,${base64Favicon}" width="256" height="256"/>
+</svg>`
+    fs.writeFileSync(path.join(rootDir, 'public', 'favicon.svg'), faviconSvg)
   }
 
-  // 3. Clean up old SVG favicons to keep it clean
-  const cleanFiles = ['favicon.svg', 'favicon-light.svg', 'favicon-dark.svg']
-  cleanFiles.forEach(file => {
-    const filePath = path.join(rootDir, 'public', file)
+  // 3. Clean up unused and helper files
+  const cleanPaths = [
+    path.join(rootDir, 'public', 'favicon.png'),
+    path.join(rootDir, 'public', 'favicon-light.svg'),
+    path.join(rootDir, 'public', 'favicon-dark.svg'),
+    path.join(rootDir, 'src', 'assets', 'images', 'Logo_No_Backround.webp'),
+    path.join(rootDir, 'convert.html')
+  ]
+  cleanPaths.forEach(filePath => {
     if (fs.existsSync(filePath)) {
       fs.unlinkSync(filePath)
     }
@@ -47,3 +57,4 @@ try {
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 })
+// Reload trigger: 1
