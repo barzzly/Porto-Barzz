@@ -1,6 +1,6 @@
 import { Github, Discord } from './ui/BrandIcons'
 import { ArrowUp } from 'lucide-react'
-import logoNoBg from '../assets/images/Logo_No_Backround.webp'
+import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
 export function Footer({ t }) {
   const footerLinks = [

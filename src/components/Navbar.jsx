@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
-import logoNoBg from '../assets/images/Logo_No_Backround.webp'
+import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
 export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
   const [isScrolled, setIsScrolled] = useState(false)
