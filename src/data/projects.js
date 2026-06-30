@@ -32,7 +32,7 @@ export const projects = [
     image: rebelImage,
     tags: ["Roleplay", "City", "Eco", "Race"],
     statusAddress: "216.163.186.39:19022",
-    statusType: "bedrock",
-    joinIp: "noesantara.id"
+    statusType: "java",
+    joinIp: "rebel.noesantara.id"
   }
 ]
