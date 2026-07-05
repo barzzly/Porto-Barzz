@@ -2,20 +2,44 @@ import { useState, useEffect } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
 import logoNoBg from '../assets/images/Logo_No_Backround.png'
 
+const NAV_SECTIONS = ['home', 'about', 'projects', 'tech-stack', 'testimonials', 'contact']
+
 export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeSection, setActiveSection] = useState('home')
+  const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 60) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
+      setIsScrolled(window.scrollY > 60)
+
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollProgress(docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0)
     }
-    window.addEventListener('scroll', handleScroll)
+    handleScroll()
+    window.addEventListener('scroll', handleScroll, { passive: true })
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const sections = NAV_SECTIONS
+      .map((id) => document.getElementById(id))
+      .filter(Boolean)
+    if (!sections.length) return undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
+        if (visible[0]) setActiveSection(visible[0].target.id)
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+    return () => observer.disconnect()
   }, [])
 
   const navLinks = [
@@ -58,16 +82,20 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
 
         {/* Desktop Navigation Links */}
         <div className="hidden md:flex items-center gap-2 lg:gap-3">
-          {navLinks.map((link) => (
-            <a 
-              key={link.label}
-              href={link.href} 
-              onClick={(event) => handleNavClick(event, link.href)}
-              className="navbar-link rounded-full px-2.5 py-2 font-mono text-[10px] lg:text-[11px] tracking-[0.08em] lg:tracking-[0.1em] uppercase font-medium text-muted transition-colors duration-200"
-            >
-              {link.label}
-            </a>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = activeSection === link.href.slice(1)
+            return (
+              <a
+                key={link.label}
+                href={link.href}
+                onClick={(event) => handleNavClick(event, link.href)}
+                aria-current={isActive ? 'true' : undefined}
+                className={`navbar-link rounded-full px-2.5 py-2 font-mono text-[10px] lg:text-[11px] tracking-[0.08em] lg:tracking-[0.1em] uppercase font-medium transition-colors duration-200 ${isActive ? 'is-active text-text' : 'text-muted'}`}
+              >
+                {link.label}
+              </a>
+            )
+          })}
         </div>
 
         {/* Right Action Area */}
@@ -119,6 +147,16 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
           >
             {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
+        </div>
+        {/* Scroll progress bar — hairline under the pill when scrolled */}
+        <div
+          className={`pointer-events-none absolute inset-x-8 -bottom-px h-[2px] overflow-hidden rounded-full transition-opacity duration-500 ${isScrolled ? 'opacity-100' : 'opacity-0'}`}
+          aria-hidden="true"
+        >
+          <div
+            className="h-full origin-left rounded-full bg-gradient-to-r from-text/40 via-text to-text/40"
+            style={{ transform: `scaleX(${scrollProgress})`, transition: 'transform 0.1s linear' }}
+          />
         </div>
       </nav>
 

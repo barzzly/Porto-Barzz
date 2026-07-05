@@ -145,6 +145,10 @@ export function ProjectsSection({ t }) {
                       <span>{role}</span>
                     </div>
                   )}
+                  <div className="absolute right-2.5 top-2.5 z-30 rounded-lg border border-card-border bg-bg/55 px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-text/80 backdrop-blur-md">
+                    {String(index + 1).padStart(2, '0')}
+                    <span className="text-text/35"> / {String(projects.length).padStart(2, '0')}</span>
+                  </div>
                 </div>
 
                 <h3 className="font-mono text-base font-bold text-text mb-3 group-hover:text-primary transition-colors">

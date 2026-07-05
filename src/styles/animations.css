@@ -808,6 +808,15 @@ html.light .contact-link-card:hover .contact-link-icon {
   transform: scaleX(1);
 }
 
+.navbar-link.is-active {
+  background: color-mix(in srgb, var(--color-text) 6%, transparent);
+}
+
+.navbar-link.is-active::after {
+  opacity: 0.9;
+  transform: scaleX(1);
+}
+
 .navbar-action:hover {
   color: var(--color-text);
   border-color: color-mix(in srgb, var(--color-text) 18%, transparent);
@@ -1054,6 +1063,30 @@ html.light .footer-social:hover {
   .skill-card.is-tapped .skill-card-icon,
   .skill-card:active .skill-card-icon {
     transform: translateY(-1px) scale(1.06) !important;
+  }
+}
+
+/* ══════════════════════════════
+   Reduced motion — respect OS preference
+══════════════════════════════ */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-element,
+  .reveal-up,
+  .reveal-down,
+  .reveal-left,
+  .reveal-right,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
   }
 }
 

@@ -1,4 +1,4 @@
-import { Quote } from 'lucide-react'
+import { Quote, Star } from 'lucide-react'
 
 function initialsFromName(name) {
   return name
@@ -26,7 +26,14 @@ function TestimonialCard({ item }) {
         <Quote className="testimonial-quote-icon h-5 w-5 shrink-0 text-text/35" />
       </div>
 
-      <p className="mt-5 min-h-[8.5rem] text-sm leading-7 text-text/78">
+      <div className="testimonial-rating mt-4 inline-flex items-center gap-1 rounded-full border border-border/60 bg-text/[0.03] px-2.5 py-1">
+        {Array.from({ length: 5 }).map((_, i) => (
+          <Star key={i} className="h-3 w-3 fill-current text-text/70" strokeWidth={0} aria-hidden="true" />
+        ))}
+        <span className="sr-only">5 out of 5 stars</span>
+      </div>
+
+      <p className="mt-4 min-h-[7.5rem] text-sm leading-7 text-text/78">
         {item.text}
       </p>
     </article>
