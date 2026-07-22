@@ -43,9 +43,14 @@
       ]
     },
     projects: {
-      badge: "SERVER SHOWCASE",
-      heading: "Big",
+      badge: "SHOWCASE PROJECT",
+      heading: "Server",
       headingAccent: "Project",
+      tabServer: "Server",
+      tabTools: "Tools",
+      toolsHeading: "Tools",
+      emptyTools: "Tools coming soon.",
+      openLabel: "Open Editor",
       onlineLabel: "Online Players",
       loadingPlayers: "Checking",
       offlineLabel: "Offline",
@@ -239,9 +244,14 @@
       ]
     },
     projects: {
-      badge: "SHOWCASE SERVER",
-      heading: "Big",
+      badge: "SHOWCASE PROJECT",
+      heading: "Server",
       headingAccent: "Project",
+      tabServer: "Server",
+      tabTools: "Tools",
+      toolsHeading: "Tools",
+      emptyTools: "Tools segera hadir.",
+      openLabel: "Buka Editor",
       onlineLabel: "Player Online",
       loadingPlayers: "Mengecek",
       offlineLabel: "Offline",

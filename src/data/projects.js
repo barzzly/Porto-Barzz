@@ -1,6 +1,8 @@
 import aetheriumImage from '../assets/images/aetherium.webp'
 import noesantaraImage from '../assets/images/noesantara.webp'
 import rebelImage from '../assets/images/rebel.webp'
+import deluxeMenuImage from '../assets/images/deluxemenu.webp'
+import shopGuiImage from '../assets/images/shopgui.webp'
 
 export const projects = [
   {
@@ -34,5 +36,26 @@ export const projects = [
     statusAddress: "216.163.186.39:19022",
     statusType: "java",
     joinIp: "rebel.noesantara.id"
+  }
+]
+
+export const tools = [
+  {
+    id: 1,
+    title: "DeluxeMenu Editor",
+    role: "Developer",
+    description: "Editor visual untuk DeluxeMenus. Susun layout menu, slot, item, dan aksi tanpa menulis YAML manual, lalu export config siap pakai.",
+    image: deluxeMenuImage,
+    tags: ["DeluxeMenus", "Editor", "YAML", "GUI"],
+    url: "https://dmenu.barzzly.com/"
+  },
+  {
+    id: 2,
+    title: "ShopGUI+ Editor",
+    role: "Developer",
+    description: "Editor visual untuk ShopGUI+. Atur kategori, item, harga, dan tampilan shop dengan mudah lalu export config yang rapi.",
+    image: shopGuiImage,
+    tags: ["ShopGUI+", "Editor", "Shop", "Config"],
+    url: "https://shop-editor.barzzly.com/"
   }
 ]

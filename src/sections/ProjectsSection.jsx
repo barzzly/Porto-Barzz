@@ -1,13 +1,14 @@
 ﻿import { useEffect, useRef, useState } from 'react'
-import { projects } from '../data/projects'
+import { projects, tools } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Server, Users } from 'lucide-react'
+import { Server, Users, ExternalLink } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
   const [copiedProjectId, setCopiedProjectId] = useState(null)
   const [shouldLoadStatus, setShouldLoadStatus] = useState(false)
+  const [activeTab, setActiveTab] = useState('server')
   const sectionRef = useRef(null)
   const tiltAngles = ['-rotate-1', 'rotate-[0.5deg]', '-rotate-[0.8deg]', 'rotate-1', '-rotate-[0.4deg]', 'rotate-[1.2deg]']
 
@@ -67,6 +68,19 @@ export function ProjectsSection({ t }) {
     }
   }, [shouldLoadStatus])
 
+  const didMountTab = useRef(false)
+  useEffect(() => {
+    if (!didMountTab.current) {
+      didMountTab.current = true
+      return
+    }
+    const section = sectionRef.current
+    if (!section) return
+    section
+      .querySelectorAll('.reveal-scale, .reveal-up')
+      .forEach((el) => el.classList.add('is-visible'))
+  }, [activeTab])
+
   const handleCopyIp = async (project) => {
     if (!project.joinIp) return
 
@@ -101,15 +115,41 @@ export function ProjectsSection({ t }) {
         <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <div>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-            {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
+            {activeTab === 'tools' ? t.toolsHeading : t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
           </h2>
           <div className="w-12 h-[2px] bg-primary mt-4 animate-divider-pulse" />
         </div>
+
+        <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-card-border bg-surface/50 p-1 font-mono text-xs backdrop-blur-md">
+          {[
+            { key: 'server', label: t.tabServer },
+            { key: 'tools', label: t.tabTools },
+          ].map((tab) => (
+            <button
+              key={tab.key}
+              type="button"
+              onClick={() => setActiveTab(tab.key)}
+              className={`rounded-full px-4 py-2 font-semibold uppercase tracking-widest transition-all duration-200 ${
+                activeTab === tab.key
+                  ? 'bg-gradient-to-r from-primary to-secondary text-bg shadow'
+                  : 'text-muted hover:text-text'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-start">
-        {projects.map((project, index) => {
-          const localItem = t.items.find(item => item.id === project.id)
+      {activeTab === 'tools' && tools.length === 0 ? (
+        <div className="reveal-up flex min-h-40 items-center justify-center rounded-2xl border border-dashed border-border/50 bg-surface/20 font-mono text-sm text-muted">
+          {t.emptyTools}
+        </div>
+      ) : (
+      <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-start ${activeTab === 'tools' ? 'lg:max-w-4xl lg:mx-auto' : 'lg:grid-cols-3'}`}>
+        {(activeTab === 'server' ? projects : tools).map((project, index, activeList) => {
+          const isTools = activeTab === 'tools'
+          const localItem = isTools ? null : t.items.find(item => item.id === project.id)
           const title = localItem ? localItem.title : project.title
           const description = localItem ? localItem.description : project.description
           const role = localItem?.role || project.role
@@ -118,11 +158,15 @@ export function ProjectsSection({ t }) {
 
           return (
             <div
-              key={project.id}
+              key={`${activeTab}-${project.id}`}
               className={`reveal-scale transition-transform duration-500 ${tiltClass} hover:rotate-0`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <Card 
+              <div
+                className="animate-tab-card h-full"
+                style={{ animationDelay: `${index * 90}ms` }}
+              >
+              <Card
                 tilt={true}
                 hoverable={true}
                 className="flex h-full flex-col bg-surface/40 overflow-hidden"
@@ -147,7 +191,7 @@ export function ProjectsSection({ t }) {
                   )}
                   <div className="absolute right-2.5 top-2.5 z-30 rounded-lg border border-card-border bg-bg/55 px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-text/80 backdrop-blur-md">
                     {String(index + 1).padStart(2, '0')}
-                    <span className="text-text/35"> / {String(projects.length).padStart(2, '0')}</span>
+                    <span className="text-text/35"> / {String(activeList.length).padStart(2, '0')}</span>
                   </div>
                 </div>
 
@@ -167,7 +211,17 @@ export function ProjectsSection({ t }) {
                 </div>
 
                 <div className="mt-auto border-t border-border/30 pt-3">
-                  {project.status === 'eol' ? (
+                  {isTools ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text transition-all duration-200 hover:border-primary/40 hover:text-primary"
+                    >
+                      <ExternalLink className="h-4 w-4 text-text/70" />
+                      {t.openLabel}
+                    </a>
+                  ) : project.status === 'eol' ? (
                     <div className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text">
                       <Server className="h-4 w-4 text-text/70" />
                       {t.eolLabel}
@@ -196,10 +250,12 @@ export function ProjectsSection({ t }) {
                   )}
                 </div>
               </Card>
+              </div>
             </div>
           )
         })}
       </div>
+      )}
     </section>
   )
 }
