@@ -14,17 +14,17 @@
     content="BarzzLy, developer server Minecraft, jasa setup server Minecraft, konfigurasi plugin Minecraft, optimasi server Minecraft, PaperMC, Spigot, Velocity, LuckPerms, DeluxeMenus, Noesantara" />
   <meta name="author" content="BarzzLy" />
   <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://barzz.noesantara.id/" />
+  <link rel="canonical" href="https://barzzly.com/" />
 
-  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://barzz.noesantara.id/" />
+  <meta property="og:url" content="https://barzzly.com/" />
   <meta property="og:title" content="BarzzLy | Developer Server Minecraft" />
   <meta property="og:description"
     content="Portfolio BarzzLy, developer server Minecraft yang fokus pada setup server, plugin, gameplay systems, optimasi, dan maintenance." />
-  <meta property="og:image" content="https://barzz.noesantara.id/og-image.jpg" />
+  <meta property="og:image" content="https://barzzly.com/og-image.jpg" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
   <meta property="og:site_name" content="BarzzLy" />
@@ -34,7 +34,7 @@
   <meta name="twitter:title" content="BarzzLy | Developer Server Minecraft" />
   <meta name="twitter:description"
     content="Developer server Minecraft untuk setup, plugin, optimasi, dan maintenance server." />
-  <meta name="twitter:image" content="https://barzz.noesantara.id/og-image.jpg" />
+  <meta name="twitter:image" content="https://barzzly.com/og-image.jpg" />
 
   <script type="application/ld+json">
       {
@@ -57,19 +57,25 @@
       }
     </script>
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style"
-    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-    onload="this.onload=null;this.rel='stylesheet'">
-  <noscript>
-    <link rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap">
-  </noscript>
+  <!-- Self-hosted fonts — preload the two used above the fold -->
+  <link rel="preload" href="/fonts/plus-jakarta-sans-700.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/jetbrains-mono-400.woff2" as="font" type="font/woff2" crossorigin>
 </head>
 
 <body>
-  <div id="root"></div>
+  <div id="root">
+    <!-- Static fallback for crawlers / agentic browsers before JS boots; React replaces it on mount -->
+    <div style="max-width:640px;margin:0 auto;padding:48px 24px;font-family:system-ui,sans-serif;color:#f0f0f0">
+      <h1>BarzzLy — Minecraft Server Developer</h1>
+      <p>Developer server Minecraft: setup Paper, Spigot, Velocity, konfigurasi plugin, ekonomi, permission, GUI menu, optimasi performa, dan maintenance server.</p>
+      <nav aria-label="Sections">
+        <a href="#about">About</a> · <a href="#projects">Projects</a> ·
+        <a href="#tech-stack">Tech Stack</a> · <a href="#testimonials">Testimonials</a> ·
+        <a href="#contact">Contact</a>
+      </nav>
+      <p><a href="https://github.com/barzzly/">GitHub</a></p>
+    </div>
+  </div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
 

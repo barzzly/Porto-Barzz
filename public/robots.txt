@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://barzz.noesantara.id/sitemap.xml
+Sitemap: https://barzzly.com/sitemap.xml

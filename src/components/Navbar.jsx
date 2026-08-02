@@ -11,15 +11,32 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
   const [scrollProgress, setScrollProgress] = useState(0)
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 60)
+    // Cache doc height; reading it inside scroll forces a synchronous reflow every frame
+    let docHeight = document.documentElement.scrollHeight - window.innerHeight
+    let ticking = false
 
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight
+    const update = () => {
+      ticking = false
+      setIsScrolled(window.scrollY > 60)
       setScrollProgress(docHeight > 0 ? Math.min(window.scrollY / docHeight, 1) : 0)
     }
-    handleScroll()
+    const handleScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update) }
+    }
+    const recalc = () => { docHeight = document.documentElement.scrollHeight - window.innerHeight }
+
+    update()
     window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('resize', recalc, { passive: true })
+    // Doc height grows as lazy sections mount
+    const ro = new ResizeObserver(recalc)
+    ro.observe(document.documentElement)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', recalc)
+      ro.disconnect()
+    }
   }, [])
 
   useEffect(() => {
