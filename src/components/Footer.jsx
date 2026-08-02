@@ -37,7 +37,7 @@ export function Footer({ t }) {
               onClick={handleScrollTop}
               className="footer-brand mx-auto flex items-center justify-center gap-2 font-mono text-base font-bold tracking-tight text-text transition-all duration-300 md:mx-0"
             >
-              <img src={logoNoBg} alt="Barzz Logo" className="h-5.5 w-5.5 object-contain brand-logo" />
+              <img src={logoNoBg} alt="Barzz Logo" width="22" height="22" decoding="async" className="h-5.5 w-5.5 object-contain brand-logo" />
               <span>BARZZ<span className="text-muted">.LY</span></span>
             </button>
             <p className="mt-2 max-w-sm text-sm leading-6 text-muted">

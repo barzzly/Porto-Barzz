@@ -76,7 +76,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
       >
         {/* Logo */}
         <a href="#home" onClick={(event) => handleNavClick(event, '#home')} className="navbar-brand flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text transition-all duration-300 group">
-          <img src={logoNoBg} alt="Barzz Logo" className="w-6 h-6 object-contain brand-logo" />
+          <img src={logoNoBg} alt="Barzz Logo" width="24" height="24" decoding="async" className="w-6 h-6 object-contain brand-logo" />
           <span>BARZZ<span className="text-muted">.LY</span></span>
         </a>
 

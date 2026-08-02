@@ -40,6 +40,9 @@ function MinecraftSkinRender() {
           src={renderSkin}
           alt="Minecraft skin render of BarzzLy"
           loading="lazy"
+          decoding="async"
+          width="871"
+          height="490"
           className="h-[490px] w-auto max-w-none object-contain animate-skin-breathe drop-shadow-[0_38px_54px_rgba(0,0,0,0.58)] transition-transform duration-500 hover:scale-[1.03]"
         />
       </div>

@@ -173,11 +173,14 @@ export function ProjectsSection({ t }) {
               >
                 <div className="relative aspect-video overflow-visible rounded-xl border border-border/30 bg-black/20 group-inner mb-6">
                   <div className="relative h-full overflow-hidden rounded-xl">
-                    <img 
-                      src={project.image} 
+                    <img
+                      src={project.image}
                       alt={title}
+                      width="1280"
+                      height="720"
                       className="w-full h-full object-cover brightness-95 saturate-110 contrast-105 transition-all duration-700 group-hover:scale-105 group-hover:brightness-105 group-hover:saturate-125"
                       loading="lazy"
+                      decoding="async"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-bg/70 via-transparent to-transparent opacity-55" />
                     <div className="absolute inset-0 pointer-events-none"

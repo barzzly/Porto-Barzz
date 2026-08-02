@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from 'react'
+import { useEffect, useState, useRef } from 'react'
 
 const CELL = 96
 const MOBILE_QUERY = '(max-width: 767px)'
@@ -30,22 +30,17 @@ export function GlowGrid({ contained = false }) {
     return () => window.removeEventListener('resize', calc)
   }, [isMobile])
 
-  const getRandomCells = useCallback(() => {
-    const set = new Set()
-    const count = Math.floor(Math.random() * 14) + 8
-    while (set.size < count) set.add(Math.floor(Math.random() * grid.total))
-    return set
-  }, [grid.total])
-
-  const [active, setActive] = useState(() => getRandomCells(160))
   const [isLight, setIsLight] = useState(() => document.documentElement.classList.contains('light'))
 
-  useEffect(() => {
-    if (isMobile) return
+  // Cell DOM nodes tracked by ref so the pulse never re-renders React
+  const cellRefs = useRef([])
+  const activeRef = useRef(new Set())
 
-    const id = setInterval(() => setActive(getRandomCells()), 2600)
-    return () => clearInterval(id)
-  }, [getRandomCells, isMobile])
+  // Drop stale refs/active indices when the grid count changes
+  useEffect(() => {
+    cellRefs.current.length = grid.total
+    activeRef.current = new Set()
+  }, [grid.total])
 
   useEffect(() => {
     const obs = new MutationObserver(() =>
@@ -67,19 +62,32 @@ export function GlowGrid({ contained = false }) {
 
     moveOrb(window.innerWidth / 2, window.innerHeight / 2)
 
-    const handlePointerMove = (event) => moveOrb(event.clientX, event.clientY)
+    // Coalesce pointer events to one style write per frame (rAF)
+    let rafId = 0
+    let pendingX = 0
+    let pendingY = 0
+    const flush = () => {
+      rafId = 0
+      moveOrb(pendingX, pendingY)
+    }
+    const schedule = (event) => {
+      pendingX = event.clientX
+      pendingY = event.clientY
+      if (!rafId) rafId = requestAnimationFrame(flush)
+    }
+
     const handlePointerLeave = () => {
       if (orbRef.current) orbRef.current.style.opacity = isLight ? '0.38' : '0.46'
     }
-    const handlePointerEnter = (event) => moveOrb(event.clientX, event.clientY)
 
-    window.addEventListener('pointermove', handlePointerMove, { passive: true })
-    window.addEventListener('pointerenter', handlePointerEnter, { passive: true })
+    window.addEventListener('pointermove', schedule, { passive: true })
+    window.addEventListener('pointerenter', schedule, { passive: true })
     document.addEventListener('pointerleave', handlePointerLeave, { passive: true })
 
     return () => {
-      window.removeEventListener('pointermove', handlePointerMove)
-      window.removeEventListener('pointerenter', handlePointerEnter)
+      if (rafId) cancelAnimationFrame(rafId)
+      window.removeEventListener('pointermove', schedule)
+      window.removeEventListener('pointerenter', schedule)
       document.removeEventListener('pointerleave', handlePointerLeave)
     }
   }, [isMobile, isLight])
@@ -87,6 +95,39 @@ export function GlowGrid({ contained = false }) {
   const GAP = isLight ? '#aaa9a3' : '#1e1e1e'
   const BASE = isLight ? '#f5f4f0' : '#0a0a0a'
   const ACTIVE = isLight ? '#c5c3bc' : '#252525'
+
+  // Pulse random cells via direct DOM writes — no React reconcile of 200 nodes
+  useEffect(() => {
+    if (isMobile) return undefined
+
+    const paint = () => {
+      const nodes = cellRefs.current
+      if (!nodes.length) return
+      const next = new Set()
+      const count = Math.floor(Math.random() * 14) + 8
+      while (next.size < count) next.add(Math.floor(Math.random() * nodes.length))
+
+      activeRef.current.forEach((i) => {
+        const el = nodes[i]
+        if (el && !next.has(i)) {
+          el.style.backgroundColor = BASE
+          el.style.transition = 'background-color 1000ms ease'
+        }
+      })
+      next.forEach((i) => {
+        const el = nodes[i]
+        if (el) {
+          el.style.backgroundColor = ACTIVE
+          el.style.transition = 'background-color 300ms ease'
+        }
+      })
+      activeRef.current = next
+    }
+
+    paint()
+    const id = setInterval(paint, 2600)
+    return () => clearInterval(id)
+  }, [isMobile, BASE, ACTIVE])
 
   if (isMobile) {
     return (
@@ -139,12 +180,16 @@ export function GlowGrid({ contained = false }) {
         gap: '1.5px',
       }}>
         {Array.from({ length: grid.total }).map((_, i) => (
-          <div key={i} style={{
-            width: CELL,
-            height: CELL,
-            backgroundColor: active.has(i) ? ACTIVE : BASE,
-            transition: active.has(i) ? 'background-color 300ms ease' : 'background-color 1000ms ease',
-          }}/>
+          <div
+            key={i}
+            ref={(el) => { cellRefs.current[i] = el }}
+            style={{
+              width: CELL,
+              height: CELL,
+              backgroundColor: BASE,
+              transition: 'background-color 1000ms ease',
+            }}
+          />
         ))}
       </div>
     </>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, lazy, Suspense } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useMobileTapHover } from './hooks/useMobileTapHover'
@@ -6,12 +6,18 @@ import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { HeroSection } from './sections/HeroSection'
 import { AboutSection } from './sections/AboutSection'
-import { ProjectsSection } from './sections/ProjectsSection'
-import { SkillsSection } from './sections/SkillsSection'
-import { TestimonialsSection } from './sections/TestimonialsSection'
-import { ContactSection } from './sections/ContactSection'
 import { GlowGrid } from './components/ui/GlowGrid'
 import { translations } from './data/translations'
+
+// Below-the-fold sections split into async chunks — loaded as user scrolls
+const ProjectsSection = lazy(() =>
+  import('./sections/ProjectsSection').then((m) => ({ default: m.ProjectsSection })))
+const SkillsSection = lazy(() =>
+  import('./sections/SkillsSection').then((m) => ({ default: m.SkillsSection })))
+const TestimonialsSection = lazy(() =>
+  import('./sections/TestimonialsSection').then((m) => ({ default: m.TestimonialsSection })))
+const ContactSection = lazy(() =>
+  import('./sections/ContactSection').then((m) => ({ default: m.ContactSection })))
 
 function App() {
   const { toggleTheme, isDark } = useTheme()
@@ -62,10 +68,12 @@ function App() {
       <main className="flex flex-col relative" style={{ zIndex: 10 }}>
         <HeroSection t={t.hero} />
         <AboutSection t={t.about} />
-        <ProjectsSection t={t.projects} />
-        <SkillsSection t={t.skills} />
-        <TestimonialsSection t={t.testimonials} />
-        <ContactSection t={t.contact} />
+        <Suspense fallback={<div className="min-h-[60vh]" />}>
+          <ProjectsSection t={t.projects} />
+          <SkillsSection t={t.skills} />
+          <TestimonialsSection t={t.testimonials} />
+          <ContactSection t={t.contact} />
+        </Suspense>
       </main>
 
       {/* Footer */}
