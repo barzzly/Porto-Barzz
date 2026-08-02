@@ -52,5 +52,19 @@ if (fs.existsSync(logo)) {
   console.log(`${'Logo_No_Backround.png'.padEnd(20)} ${kb(orig).padStart(9)} -> ${kb(buf.length).padStart(9)}  (-${(100 - (buf.length / orig) * 100).toFixed(0)}%)`)
 }
 
+// Social share image (public/) — recompress jpeg
+const og = path.join(__dirname, '..', 'public', 'og-image.jpg')
+if (fs.existsSync(og)) {
+  const input = fs.readFileSync(og)
+  const orig = input.length
+  const buf = await sharp(input).jpeg({ quality: 80, mozjpeg: true }).toBuffer()
+  if (buf.length < orig) {
+    fs.writeFileSync(og, buf)
+    before += orig
+    after += buf.length
+    console.log(`${'og-image.jpg'.padEnd(20)} ${kb(orig).padStart(9)} -> ${kb(buf.length).padStart(9)}  (-${(100 - (buf.length / orig) * 100).toFixed(0)}%)`)
+  }
+}
+
 console.log('─'.repeat(52))
 console.log(`TOTAL ${kb(before)} -> ${kb(after)}  saved ${kb(before - after)}`)

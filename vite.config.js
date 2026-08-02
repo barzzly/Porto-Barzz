@@ -12,8 +12,9 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('react')) return 'react-vendor'
+            // Check lucide first — it also matches "react"
             if (id.includes('lucide-react')) return 'icons'
+            if (id.includes('react')) return 'react-vendor'
             return 'vendor'
           }
         },
@@ -21,4 +22,3 @@ export default defineConfig({
     },
   },
 })
-// Reload trigger: 1
