@@ -12,6 +12,7 @@ const PLAN = {
   'deluxemenu.webp': { width: 760, quality: 74 },
   'noesantara.webp': { width: 760, quality: 74 },
   'rebel.webp':      { width: 760, quality: 74 },
+  'legacy.webp':     { width: 760, quality: 74 },
   'shopgui.webp':    { width: 760, quality: 74 },
   'renderskin.webp': { width: 960, quality: 72 },
 }

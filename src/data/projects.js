@@ -1,6 +1,7 @@
 import aetheriumImage from '../assets/images/aetherium.webp'
 import noesantaraImage from '../assets/images/noesantara.webp'
 import rebelImage from '../assets/images/rebel.webp'
+import legacyImage from '../assets/images/legacy.webp'
 import deluxeMenuImage from '../assets/images/deluxemenu.webp'
 import shopGuiImage from '../assets/images/shopgui.webp'
 
@@ -8,7 +9,7 @@ export const projects = [
   {
     id: 1,
     title: "Aetherium Network",
-    role: "Developer, Owner",
+    role: "Founder",
     description: "Server network yang saya bangun pada tahun 2023 sebagai project kedua setelah BarzzSMP pada 2021. Aetherium pernah mencapai 150 pemain aktif dengan mode RPG, faction, ekonomi, Slimefun, dan vanilla survival.",
     image: aetheriumImage,
     tags: ["RPG", "Faction", "Eco", "Slimefun"],
@@ -18,7 +19,7 @@ export const projects = [
   {
     id: 2,
     title: "Noesantara Network",
-    role: "Developer, Owner",
+    role: "Founder",
     description: "Server network hasil rebranding dari Aetherium Network pada awal tahun 2025. Noesantara berkembang dengan identitas yang lebih matang dan pernah mencapai 250 pemain aktif melalui sistem RPG, faction, dan ekonomi.",
     image: noesantaraImage,
     tags: ["RPG", "Faction", "Eco"],
@@ -36,6 +37,17 @@ export const projects = [
     statusAddress: "216.163.186.39:19022",
     statusType: "java",
     joinIp: "rebel.noesantara.id"
+  },
+  {
+    id: 4,
+    title: "Legacy School",
+    role: "Developer",
+    description: "Server roleplay bertema sekolahan tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengalaman roleplay agar tetap rapi dan nyaman dimainkan.",
+    image: legacyImage,
+    tags: ["Roleplay", "School", "Eco"],
+    statusAddress: "legacyschool.my.id:25040",
+    statusType: "java",
+    joinIp: "legacyschool.my.id:25040"
   }
 ]
 

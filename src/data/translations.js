@@ -62,13 +62,13 @@
         {
           id: 1,
           title: "Aetherium Network",
-          role: "Developer, Owner",
+          role: "Founder",
           description: "A server network I built in 2023 as my second major project after BarzzSMP in 2021. Aetherium reached 150 active players with RPG, faction, economy, Slimefun, and vanilla survival systems."
         },
         {
           id: 2,
           title: "Noesantara Network",
-          role: "Developer, Owner",
+          role: "Founder",
           description: "A server network rebranded from Aetherium Network in early 2025. Noesantara grew with a stronger identity and reached 250 active players through RPG, faction, and economy systems."
         },
         {
@@ -76,6 +76,12 @@
           title: "Rebel Roleplay",
           role: "Owner",
           description: "A roleplay server with Rebel that I recently joined as an owner. This project focuses on a polished city roleplay experience with an active economy, race systems, and a comfortable community."
+        },
+        {
+          id: 4,
+          title: "Legacy School",
+          role: "Developer",
+          description: "A school themed roleplay server I joined as a developer in July 2026. I handle the systems, plugins, and roleplay experience to keep everything neat and comfortable to play."
         }
       ]
     },
@@ -263,13 +269,13 @@
         {
           id: 1,
           title: "Aetherium Network",
-          role: "Developer, Owner",
+          role: "Founder",
           description: "Server network yang saya bangun pada tahun 2023 sebagai project kedua setelah BarzzSMP pada 2021. Aetherium pernah mencapai 150 pemain aktif dengan mode RPG, faction, ekonomi, Slimefun, dan vanilla survival."
         },
         {
           id: 2,
           title: "Noesantara Network",
-          role: "Developer, Owner",
+          role: "Founder",
           description: "Server network hasil rebranding dari Aetherium Network pada awal tahun 2025. Noesantara berkembang dengan identitas yang lebih matang dan pernah mencapai 250 pemain aktif melalui sistem RPG, faction, dan ekonomi."
         },
         {
@@ -277,6 +283,12 @@
           title: "Rebel Roleplay",
           role: "Owner",
           description: "Server roleplay bersama Rebel yang baru baru ini saya join sebagai owner. Project ini berfokus pada pengalaman city roleplay yang rapi, ekonomi aktif, sistem race, dan komunitas yang nyaman dimainkan."
+        },
+        {
+          id: 4,
+          title: "Legacy School",
+          role: "Developer",
+          description: "Server roleplay bertema sekolahan tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengalaman roleplay agar tetap rapi dan nyaman dimainkan."
         }
       ]
     },

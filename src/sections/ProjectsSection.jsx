@@ -146,7 +146,7 @@ export function ProjectsSection({ t }) {
           {t.emptyTools}
         </div>
       ) : (
-      <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 items-start ${activeTab === 'tools' ? 'lg:max-w-4xl lg:mx-auto' : 'lg:grid-cols-3'}`}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start lg:max-w-4xl lg:mx-auto">
         {(activeTab === 'server' ? projects : tools).map((project, index, activeList) => {
           const isTools = activeTab === 'tools'
           const localItem = isTools ? null : t.items.find(item => item.id === project.id)
@@ -155,6 +155,7 @@ export function ProjectsSection({ t }) {
           const role = localItem?.role || project.role
           const tiltClass = tiltAngles[index % tiltAngles.length]
           const isCopied = copiedProjectId === project.id
+          const displayIp = project.joinIp ? project.joinIp.replace(/:\d+$/, '') : project.joinIp
 
           return (
             <div
@@ -247,7 +248,7 @@ export function ProjectsSection({ t }) {
                         aria-label={`${t.copyLabel} ${project.joinIp}`}
                       >
                         <Server className="h-3.5 w-3.5 shrink-0 text-text/70" />
-                        <span className="block min-w-0 text-xs font-semibold text-text">{project.joinIp}</span>
+                        <span className="block min-w-0 text-xs font-semibold text-text">{displayIp}</span>
                       </button>
                     </div>
                   )}
