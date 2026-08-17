@@ -83,6 +83,26 @@
           role: "Developer",
           description: "A school themed roleplay server I joined as a developer in July 2026. I handle the systems, plugins, and roleplay experience to keep everything neat and comfortable to play."
         }
+      ],
+      toolItems: [
+        {
+          id: 1,
+          title: "DeluxeMenu Editor",
+          role: "Developer",
+          description: "A visual editor for DeluxeMenus. Build menu layouts, slots, items, and actions without writing YAML by hand, then export a ready-to-use config."
+        },
+        {
+          id: 2,
+          title: "ShopGUI+ Editor",
+          role: "Developer",
+          description: "A visual editor for ShopGUI+. Set up categories, items, prices, and shop appearance with ease, then export a clean config."
+        },
+        {
+          id: 3,
+          title: "Prefix Rank Editor",
+          role: "Developer",
+          description: "A visual editor for prefixes and ranks. Adjust rank names, prefixes, colors, and icons with ease, then export a ready-to-use config."
+        }
       ]
     },
     skills: {
@@ -289,6 +309,26 @@
           title: "Legacy School",
           role: "Developer",
           description: "Server roleplay bertema sekolahan tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengalaman roleplay agar tetap rapi dan nyaman dimainkan."
+        }
+      ],
+      toolItems: [
+        {
+          id: 1,
+          title: "DeluxeMenu Editor",
+          role: "Developer",
+          description: "Editor visual untuk DeluxeMenus. Susun layout menu, slot, item, dan aksi tanpa menulis YAML manual, lalu export config siap pakai."
+        },
+        {
+          id: 2,
+          title: "ShopGUI+ Editor",
+          role: "Developer",
+          description: "Editor visual untuk ShopGUI+. Atur kategori, item, harga, dan tampilan shop dengan mudah lalu export config yang rapi."
+        },
+        {
+          id: 3,
+          title: "Prefix Rank Editor",
+          role: "Developer",
+          description: "Editor visual untuk prefix dan rank. Atur nama rank, prefix, warna, dan ikon dengan mudah lalu export config siap pakai."
         }
       ]
     },

@@ -4,6 +4,7 @@ import rebelImage from '../assets/images/rebel.webp'
 import legacyImage from '../assets/images/legacy.webp'
 import deluxeMenuImage from '../assets/images/deluxemenu.webp'
 import shopGuiImage from '../assets/images/shopgui.webp'
+import prefixRankImage from '../assets/images/prefixrank.webp'
 
 export const projects = [
   {
@@ -69,5 +70,14 @@ export const tools = [
     image: shopGuiImage,
     tags: ["ShopGUI+", "Editor", "Shop", "Config"],
     url: "https://shop-editor.barzzly.com/"
+  },
+  {
+    id: 3,
+    title: "Prefix Rank Editor",
+    role: "Developer",
+    description: "Editor visual untuk prefix dan rank. Atur nama rank, prefix, warna, dan ikon dengan mudah lalu export config siap pakai.",
+    image: prefixRankImage,
+    tags: ["Prefix", "Rank", "Editor", "Config"],
+    url: "https://prefixrank.barzzly.com/"
   }
 ]

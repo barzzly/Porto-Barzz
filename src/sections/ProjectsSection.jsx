@@ -100,9 +100,7 @@ export function ProjectsSection({ t }) {
     if (!status) return t.loadingPlayers
     if (status.state !== 'online') return t.offlineLabel
 
-    return typeof status.max === 'number'
-      ? `${status.online}/${status.max}`
-      : `${status.online}`
+    return `${status.online}`
   }
 
   return (
@@ -146,10 +144,16 @@ export function ProjectsSection({ t }) {
           {t.emptyTools}
         </div>
       ) : (
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start lg:max-w-4xl lg:mx-auto">
+      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 items-start mx-auto ${
+        activeTab === 'server'
+          ? 'lg:grid-cols-4 lg:max-w-none'
+          : 'lg:grid-cols-3 lg:max-w-5xl'
+      }`}>
         {(activeTab === 'server' ? projects : tools).map((project, index, activeList) => {
           const isTools = activeTab === 'tools'
-          const localItem = isTools ? null : t.items.find(item => item.id === project.id)
+          const localItem = isTools
+            ? t.toolItems?.find(item => item.id === project.id)
+            : t.items.find(item => item.id === project.id)
           const title = localItem ? localItem.title : project.title
           const description = localItem ? localItem.description : project.description
           const role = localItem?.role || project.role
@@ -248,7 +252,7 @@ export function ProjectsSection({ t }) {
                         aria-label={`${t.copyLabel} ${project.joinIp}`}
                       >
                         <Server className="h-3.5 w-3.5 shrink-0 text-text/70" />
-                        <span className="block min-w-0 text-xs font-semibold text-text">{displayIp}</span>
+                        <span className="block min-w-0 truncate text-xs font-semibold text-text">{displayIp}</span>
                       </button>
                     </div>
                   )}
