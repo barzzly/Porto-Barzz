@@ -2,7 +2,7 @@
 import { projects, tools } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Server, Users, ExternalLink } from 'lucide-react'
+import { Server, Users, ExternalLink, Copy } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
@@ -102,6 +102,8 @@ export function ProjectsSection({ t }) {
 
     return `${status.online}`
   }
+
+  const isOnline = (project) => serverStatus[project.id]?.state === 'online'
 
   return (
     <section 
@@ -235,24 +237,38 @@ export function ProjectsSection({ t }) {
                       {t.eolLabel}
                     </div>
                   ) : (
-                    <div className="relative flex min-h-11 items-center gap-2 rounded-xl border border-card-border bg-surface/35 p-1.5 font-mono">
+                    <div className="relative flex flex-col gap-2 font-mono">
                       {isCopied && (
-                        <div className="copy-toast absolute -top-9 left-1/2 z-30 -translate-x-1/2 whitespace-nowrap rounded-full border border-card-border bg-surface/95 px-3 py-1.5 font-mono text-[10px] font-semibold text-text shadow-xl backdrop-blur-xl">
+                        <div className="copy-toast absolute -top-9 right-2 z-30 whitespace-nowrap rounded-full border border-card-border bg-surface/95 px-3 py-1.5 font-mono text-[10px] font-semibold text-text shadow-xl backdrop-blur-xl">
                           {t.copiedLabel}
                         </div>
                       )}
-                      <div className="flex h-9 shrink-0 items-center justify-center gap-1.5 rounded-lg border border-border/70 bg-bg/25 px-2.5 text-xs font-semibold text-text">
-                        <Users className="h-3.5 w-3.5 shrink-0 text-text/70" />
-                        <span>{getStatusText(project)}</span>
+                      <div className="flex items-center justify-between gap-2 text-[11px] text-muted">
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="relative flex h-2 w-2">
+                            {isOnline(project) && (
+                              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400/60" />
+                            )}
+                            <span className={`relative inline-flex h-2 w-2 rounded-full ${isOnline(project) ? 'bg-emerald-400' : 'bg-text/30'}`} />
+                          </span>
+                          <span className="uppercase tracking-widest">{isOnline(project) ? t.onlineLabel : t.offlineLabel}</span>
+                        </span>
+                        {isOnline(project) && (
+                          <span className="inline-flex items-center gap-1.5 font-semibold text-text">
+                            <Users className="h-3.5 w-3.5 text-text/70" />
+                            {getStatusText(project)}
+                          </span>
+                        )}
                       </div>
                       <button
                         type="button"
                         onClick={() => handleCopyIp(project)}
-                        className="flex h-9 min-w-0 flex-1 items-center justify-center gap-2 rounded-lg px-2 text-center transition-all duration-200 hover:bg-surface"
+                        className="group/ip flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-left transition-all duration-200 hover:border-primary/40 hover:bg-surface"
                         aria-label={`${t.copyLabel} ${project.joinIp}`}
                       >
-                        <Server className="h-3.5 w-3.5 shrink-0 text-text/70" />
-                        <span className="block min-w-0 truncate text-xs font-semibold text-text">{displayIp}</span>
+                        <Server className="h-4 w-4 shrink-0 text-text/60 transition-colors group-hover/ip:text-primary" />
+                        <span className="block min-w-0 flex-1 truncate text-xs font-semibold text-text">{displayIp}</span>
+                        <Copy className="h-3.5 w-3.5 shrink-0 text-text/40 transition-colors group-hover/ip:text-primary" />
                       </button>
                     </div>
                   )}
