@@ -45,18 +45,33 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
       .filter(Boolean)
     if (!sections.length) return undefined
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)
-        if (visible[0]) setActiveSection(visible[0].target.id)
-      },
-      { rootMargin: '-45% 0px -45% 0px', threshold: [0, 0.25, 0.5, 1] }
-    )
+    let ticking = false
 
-    sections.forEach((section) => observer.observe(section))
-    return () => observer.disconnect()
+    const update = () => {
+      ticking = false
+      const line = window.innerHeight * 0.35 // detection line near upper third
+      let current = sections[0].id
+      for (const section of sections) {
+        if (section.getBoundingClientRect().top <= line) current = section.id
+      }
+      // Snap last section active when scrolled to bottom
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections[sections.length - 1].id
+      }
+      setActiveSection(current)
+    }
+
+    const onScroll = () => {
+      if (!ticking) { ticking = true; requestAnimationFrame(update) }
+    }
+
+    update()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
+    }
   }, [])
 
   const navLinks = [
