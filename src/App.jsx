@@ -2,11 +2,13 @@ import { useState, lazy, Suspense } from 'react'
 import { useTheme } from './hooks/useTheme'
 import { useScrollReveal } from './hooks/useScrollReveal'
 import { useMobileTapHover } from './hooks/useMobileTapHover'
+import { useMagneticHover } from './hooks/useMagneticHover'
 import { Navbar } from './components/Navbar'
 import { Footer } from './components/Footer'
 import { HeroSection } from './sections/HeroSection'
 import { AboutSection } from './sections/AboutSection'
 import { GlowGrid } from './components/ui/GlowGrid'
+import { ThemeTransitionOverlay } from './components/ui/ThemeTransitionOverlay'
 import { translations } from './data/translations'
 
 // Below-the-fold sections split into async chunks — loaded as user scrolls
@@ -20,7 +22,7 @@ const ContactSection = lazy(() =>
   import('./sections/ContactSection').then((m) => ({ default: m.ContactSection })))
 
 function App() {
-  const { toggleTheme, isDark } = useTheme()
+  const { toggleTheme, isDark, isTransitioning, clickPos, handleTransitionComplete } = useTheme()
   const [lang, setLang] = useState(() => {
     return localStorage.getItem('porto-lang') || 'en'
   })
@@ -43,11 +45,19 @@ function App() {
   // Register scroll reveal animation handler globally on layout mount
   useScrollReveal(lang) // re-trigger on language switch to update positions
   useMobileTapHover()
+  useMagneticHover()
 
   const t = translations[lang]
 
   return (
     <div className="min-h-screen bg-bg text-text transition-colors duration-300 relative overflow-x-hidden">
+      {/* Theme Liquid Ink & Split Wipe Overlay */}
+      <ThemeTransitionOverlay
+        isTransitioning={isTransitioning}
+        targetTheme={isDark ? 'dark' : 'light'}
+        clickPos={clickPos}
+        onComplete={handleTransitionComplete}
+      />
 
       {/* Grid background — z-index 0, behind everything */}
       <div className="absolute inset-x-0 top-0 h-[112svh] overflow-hidden" style={{ zIndex: 0 }}>
@@ -83,3 +93,4 @@ function App() {
 }
 
 export default App
+

@@ -51,11 +51,11 @@ export function TestimonialsSection({ t }) {
   return (
     <section id="testimonials" className="max-w-6xl mx-auto px-6 py-20 w-full overflow-hidden">
       <div className="reveal-up mb-12 flex flex-col items-center md:items-start">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <span className="section-eyebrow font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
+          {t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
         </h2>
-        <div className="w-12 h-[2px] bg-primary mt-4" />
+        <div className="section-divider w-12 h-[2px] bg-primary mt-4" />
       </div>
 
       <div className="testimonial-marquee-wrap reveal-scale relative -mx-6 space-y-5 overflow-hidden py-2">

@@ -1,4 +1,4 @@
-﻿import { useEffect, useRef, useState } from 'react'
+﻿import { useCallback, useEffect, useRef, useState } from 'react'
 import { projects, tools } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
@@ -10,6 +10,8 @@ export function ProjectsSection({ t }) {
   const [shouldLoadStatus, setShouldLoadStatus] = useState(false)
   const [activeTab, setActiveTab] = useState('server')
   const sectionRef = useRef(null)
+  const tabRefs = useRef({})
+  const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0, ready: false })
   const tiltAngles = ['-rotate-1', 'rotate-[0.5deg]', '-rotate-[0.8deg]', 'rotate-1', '-rotate-[0.4deg]', 'rotate-[1.2deg]']
 
   useEffect(() => {
@@ -81,6 +83,21 @@ export function ProjectsSection({ t }) {
       .forEach((el) => el.classList.add('is-visible'))
   }, [activeTab])
 
+  // Sliding pill behind the active tab
+  const syncTabIndicator = useCallback(() => {
+    const el = tabRefs.current[activeTab]
+    if (!el) return
+    setTabIndicator({ left: el.offsetLeft, width: el.offsetWidth, ready: true })
+  }, [activeTab])
+
+  useEffect(() => {
+    syncTabIndicator()
+    const onResize = () => syncTabIndicator()
+    window.addEventListener('resize', onResize, { passive: true })
+    if (document.fonts?.ready) document.fonts.ready.then(onResize).catch(() => {})
+    return () => window.removeEventListener('resize', onResize)
+  }, [syncTabIndicator, t.tabServer, t.tabTools])
+
   const handleCopyIp = async (project) => {
     if (!project.joinIp) return
 
@@ -112,27 +129,36 @@ export function ProjectsSection({ t }) {
       className="max-w-6xl mx-auto px-6 py-20 w-full"
     >
       <div className="reveal-up flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <span className="section-eyebrow font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <div>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-            {activeTab === 'tools' ? t.toolsHeading : t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
+            {activeTab === 'tools' ? t.toolsHeading : t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
           </h2>
-          <div className="w-12 h-[2px] bg-primary mt-4 animate-divider-pulse" />
+          <div className="section-divider w-12 h-[2px] bg-primary mt-4" />
         </div>
 
-        <div className="mt-8 inline-flex items-center gap-1 rounded-full border border-card-border bg-surface/50 p-1 font-mono text-xs backdrop-blur-md">
+        <div className="tab-switch mt-8 inline-flex items-center gap-1 rounded-full border border-card-border bg-surface/50 p-1 font-mono text-xs backdrop-blur-md">
+          <span
+            aria-hidden="true"
+            className="tab-indicator"
+            style={{
+              transform: `translate3d(${tabIndicator.left}px, 0, 0)`,
+              width: `${tabIndicator.width}px`,
+              opacity: tabIndicator.ready ? 1 : 0,
+            }}
+          />
           {[
             { key: 'server', label: t.tabServer },
             { key: 'tools', label: t.tabTools },
           ].map((tab) => (
             <button
               key={tab.key}
+              ref={(node) => { tabRefs.current[tab.key] = node }}
               type="button"
               onClick={() => setActiveTab(tab.key)}
-              className={`rounded-full px-4 py-2 font-semibold uppercase tracking-widest transition-all duration-200 ${
-                activeTab === tab.key
-                  ? 'bg-gradient-to-r from-primary to-secondary text-bg shadow'
-                  : 'text-muted hover:text-text'
+              aria-pressed={activeTab === tab.key}
+              className={`tab-button rounded-full px-4 py-2 font-semibold uppercase tracking-widest ${
+                activeTab === tab.key ? 'is-active text-bg' : 'text-muted hover:text-text'
               }`}
             >
               {tab.label}
@@ -178,8 +204,8 @@ export function ProjectsSection({ t }) {
                 hoverable={true}
                 className="flex h-full flex-col bg-surface/40 overflow-hidden"
               >
-                <div className="relative aspect-video overflow-visible rounded-xl border border-border/30 bg-black/20 group-inner mb-6">
-                  <div className="relative h-full overflow-hidden rounded-xl">
+                <div className="relative aspect-video overflow-visible rounded-xl border border-border/30 bg-black/20 mb-6">
+                  <div className="project-media relative h-full overflow-hidden rounded-xl">
                     <img
                       src={project.image}
                       alt={title}
@@ -199,22 +225,27 @@ export function ProjectsSection({ t }) {
                       <span>{role}</span>
                     </div>
                   )}
-                  <div className="absolute right-2.5 top-2.5 z-30 rounded-lg border border-card-border bg-bg/55 px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-text/80 backdrop-blur-md">
+                  <div className="project-counter absolute right-2.5 top-2.5 z-30 rounded-lg border border-card-border bg-bg/55 px-2 py-1 font-mono text-[10px] font-semibold tracking-[0.14em] text-text/80 backdrop-blur-md">
                     {String(index + 1).padStart(2, '0')}
                     <span className="text-text/35"> / {String(activeList.length).padStart(2, '0')}</span>
                   </div>
                 </div>
 
-                <h3 className="font-mono text-base font-bold text-text mb-3 group-hover:text-primary transition-colors">
-                  {title}
+                <h3 className="mb-3 font-mono text-base font-bold text-text">
+                  <span className="project-title transition-colors duration-300 group-hover:text-primary">{title}</span>
                 </h3>
                 <p className="project-description mb-4 min-h-[4.5rem] text-xs leading-relaxed text-muted">
                   {description}
                 </p>
 
                 <div className="mb-4 flex min-h-[2rem] flex-wrap content-start gap-1.5">
-                  {project.tags.map((tag) => (
-                    <Badge key={tag} variant="glass" className="text-[10px] py-0.5 px-2 bg-surface border-border/50 hover:border-primary/30 hover:text-primary transition-colors">
+                  {project.tags.map((tag, tagIndex) => (
+                    <Badge
+                      key={tag}
+                      variant="glass"
+                      className="project-tag text-[10px] py-0.5 px-2 bg-surface border-border/50 hover:border-primary/30 hover:text-primary"
+                      style={{ '--tag-delay': `${tagIndex * 45}ms` }}
+                    >
                       {tag}
                     </Badge>
                   ))}
@@ -226,9 +257,9 @@ export function ProjectsSection({ t }) {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text transition-all duration-200 hover:border-primary/40 hover:text-primary"
+                      className="open-row flex min-h-11 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text hover:border-primary/40 hover:text-primary"
                     >
-                      <ExternalLink className="h-4 w-4 text-text/70" />
+                      <ExternalLink className="open-icon h-4 w-4 text-text/70" />
                       {t.openLabel}
                     </a>
                   ) : project.status === 'eol' ? (
@@ -263,12 +294,12 @@ export function ProjectsSection({ t }) {
                       <button
                         type="button"
                         onClick={() => handleCopyIp(project)}
-                        className="group/ip flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-left transition-all duration-200 hover:border-primary/40 hover:bg-surface"
+                        className={`copy-row group/ip flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-left hover:border-primary/40 hover:bg-surface ${isCopied ? 'is-copied' : ''}`}
                         aria-label={`${t.copyLabel} ${project.joinIp}`}
                       >
                         <Server className="h-4 w-4 shrink-0 text-text/60 transition-colors group-hover/ip:text-primary" />
                         <span className="block min-w-0 flex-1 truncate text-xs font-semibold text-text">{displayIp}</span>
-                        <Copy className="h-3.5 w-3.5 shrink-0 text-text/40 transition-colors group-hover/ip:text-primary" />
+                        <Copy className="copy-icon h-3.5 w-3.5 shrink-0 text-text/40 group-hover/ip:text-primary" />
                       </button>
                     </div>
                   )}

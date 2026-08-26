@@ -19,15 +19,15 @@ export function SkillsSection({ t }) {
     >
       {/* Section Header */}
       <div className="reveal-up flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <span className="section-eyebrow font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
+          {t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
         </h2>
-        <div className="w-12 h-[2px] bg-primary mt-4" />
+        <div className="section-divider w-12 h-[2px] bg-primary mt-4" />
       </div>
 
       {/* Infinite Horizontal Marquee */}
-      <div className="reveal-scale relative w-full mb-16 py-4 border-y border-border/20 bg-surface/20 backdrop-blur-sm overflow-hidden rounded-xl">
+      <div className="marquee-wrap reveal-scale relative w-full mb-16 py-4 border-y border-border/20 bg-surface/20 backdrop-blur-sm overflow-hidden rounded-xl">
         <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-bg to-transparent z-10 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-20 bg-gradient-to-l from-bg to-transparent z-10 pointer-events-none" />
         
@@ -35,7 +35,7 @@ export function SkillsSection({ t }) {
           {marqueeList.map((tech, index) => (
             <span 
               key={`${tech}-${index}`} 
-              className="font-mono font-semibold text-sm md:text-base text-text/70 hover:text-primary transition-colors select-none tracking-wider px-4 flex items-center gap-2"
+              className="marquee-chip font-mono font-semibold text-sm md:text-base text-text/70 select-none tracking-wider px-4 flex items-center gap-2"
             >
               <span className="text-primary font-bold">&lt;</span>
               {tech}
@@ -71,12 +71,12 @@ export function SkillsSection({ t }) {
                 >
                   <div className="flex justify-between items-center gap-3 text-xs font-mono">
                     <span className="text-text/90 font-medium leading-snug">{t.items[skill.key]}</span>
-                    <span className="text-muted shrink-0">{skill.level}</span>
+                    <span className="skill-value text-muted shrink-0">{skill.level}</span>
                   </div>
                   {/* Progress Bar Container */}
                   <div className="skill-track w-full h-1.5 bg-border/20 rounded-full overflow-hidden">
-                    <div 
-                      className="skill-progress h-full bg-gradient-to-r from-primary to-secondary transition-all duration-1000 ease-out"
+                    <div
+                      className="skill-progress h-full bg-gradient-to-r from-primary to-secondary"
                       style={{ width: skill.level }}
                     />
                   </div>

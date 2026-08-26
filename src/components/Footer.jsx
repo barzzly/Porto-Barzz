@@ -51,7 +51,7 @@ export function Footer({ t }) {
                 key={link.href}
                 href={link.href}
                 onClick={(event) => scrollTo(event, link.href)}
-                className="footer-link rounded-full px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted transition-colors"
+                className="footer-link rounded-full px-3 py-2 font-mono text-[10px] uppercase tracking-[0.12em] text-muted"
               >
                 {link.label}
               </a>
@@ -71,7 +71,7 @@ export function Footer({ t }) {
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="footer-social flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-bg/20 text-text/80 transition-all duration-300"
+                className="footer-social magnetic flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-bg/20 text-text/80"
                 aria-label={social.label}
               >
                 {social.icon}
@@ -80,7 +80,7 @@ export function Footer({ t }) {
             <button
               type="button"
               onClick={handleScrollTop}
-              className="footer-social group flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-bg/20 text-text/80 transition-all duration-300"
+              className="footer-social magnetic group flex h-10 w-10 items-center justify-center rounded-xl border border-border bg-bg/20 text-text/80"
               aria-label={t.backToTop}
             >
               <ArrowUp className="h-4.5 w-4.5 transition-transform duration-300 group-hover:-translate-y-0.5" />

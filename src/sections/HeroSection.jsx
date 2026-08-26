@@ -1,4 +1,4 @@
-﻿import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
+import { useState, useEffect, useRef, useSyncExternalStore } from 'react'
 import { ArrowRight, Sparkles } from 'lucide-react'
 
 // -- Chip icons as minimal SVG --
@@ -35,7 +35,7 @@ const PaperIcon = () => (
   </svg>
 )
 
-const WORDS = ["OWNER", "DEVELOPER"]
+const WORDS = ["OWNER", "FOUNDER", "DEVELOPER"]
 const MOBILE_QUERY = '(max-width: 767px)'
 
 function subscribeToMobile(callback) {
@@ -190,10 +190,10 @@ export function HeroSection({ t }) {
             flex items-center gap-2.5 px-3.5 py-2.5 rounded-2xl
             bg-surface border border-card-border backdrop-blur-xl
             shadow-[0_4px_24px_rgba(0,0,0,0.35)]
-            group
+            group pointer-events-auto cursor-pointer
           ">
             {/* icon container */}
-            <div className="w-8 h-8 rounded-xl bg-text/6 border border-border flex items-center justify-center text-text/70 shrink-0">
+            <div className="hero-chip-icon w-8 h-8 rounded-xl bg-text/6 border border-border flex items-center justify-center text-text/70 shrink-0 transition-transform duration-300">
               {chip.icon}
             </div>
             <div className="flex flex-col items-start">
@@ -232,7 +232,7 @@ export function HeroSection({ t }) {
               textShadow: isMobile ? '0 5px 22px var(--color-bg)' : '0 8px 38px var(--color-bg), 0 1px 0 rgba(255,255,255,0.12)',
             }}
           >
-            <span>{isMobile ? 'DEVELOPER' : displayText}</span>
+            <span>{isMobile ? WORDS[wordIdx] : displayText}</span>
             {!isMobile && (
               <span
                 className="inline-block w-[3px] h-[0.85em] bg-text ml-1 align-middle"
@@ -298,7 +298,7 @@ export function HeroSection({ t }) {
       >
         <button
           onClick={() => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })}
-          className="hero-cta-button hero-cta-primary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
+          className="hero-cta-button hero-cta-primary magnetic inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
             bg-text text-bg hover:bg-text/90 transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]
             shadow-[0_4px_20px_rgba(255,255,255,0.08)]"
         >
@@ -307,7 +307,7 @@ export function HeroSection({ t }) {
         </button>
         <button
           onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-          className="hero-cta-button hero-cta-secondary inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
+          className="hero-cta-button hero-cta-secondary magnetic inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl text-sm font-mono font-semibold
             bg-transparent text-text border border-card-border hover:bg-surface hover:border-text/20
             transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
         >
@@ -317,10 +317,17 @@ export function HeroSection({ t }) {
       </div>
 
       {/* -- Scroll indicator -- */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 animate-scroll-bounce pointer-events-none">
-        <span className="font-mono text-[8px] text-muted/40 tracking-[0.25em] uppercase">scroll</span>
-        <div className="w-px h-7 bg-gradient-to-b from-text/25 to-transparent" />
-      </div>
+      <button
+        type="button"
+        onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+        aria-label={t.status}
+        className="scroll-cue absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer opacity-80"
+      >
+        <span className="animate-scroll-bounce flex flex-col items-center gap-1.5">
+          <span className="font-mono text-[8px] text-muted/40 tracking-[0.25em] uppercase">scroll</span>
+          <span className="block w-px h-7 bg-gradient-to-b from-text/25 to-transparent" />
+        </span>
+      </button>
     </section>
   )
 }

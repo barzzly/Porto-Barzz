@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 
 export function useTheme() {
   const [theme, setTheme] = useState(() => {
@@ -10,6 +10,9 @@ export function useTheme() {
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
     return prefersDark ? 'dark' : 'light'
   })
+
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const [clickPos, setClickPos] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     const root = window.document.documentElement
@@ -26,9 +29,33 @@ export function useTheme() {
     localStorage.setItem('porto-theme', theme)
   }, [theme])
 
-  const toggleTheme = () => {
-    setTheme(prev => (prev === 'dark' ? 'light' : 'dark'))
-  }
+  const toggleTheme = useCallback((event) => {
+    if (event && event.clientX !== undefined) {
+      setClickPos({ x: event.clientX, y: event.clientY })
+    } else {
+      setClickPos({ x: window.innerWidth / 2, y: window.innerHeight / 2 })
+    }
 
-  return { theme, toggleTheme, isDark: theme === 'dark' }
+    const nextTheme = theme === 'dark' ? 'light' : 'dark'
+    setIsTransitioning(true)
+
+    // Switch theme DOM halfway through liquid overlay animation (400ms)
+    setTimeout(() => {
+      setTheme(nextTheme)
+    }, 380)
+  }, [theme])
+
+  const handleTransitionComplete = useCallback(() => {
+    setIsTransitioning(false)
+  }, [])
+
+  return {
+    theme,
+    toggleTheme,
+    isDark: theme === 'dark',
+    isTransitioning,
+    clickPos,
+    handleTransitionComplete,
+  }
 }
+

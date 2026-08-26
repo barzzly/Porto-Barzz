@@ -4,28 +4,28 @@ import { User, MapPin, Coffee, Code2, Globe, Server, Users } from 'lucide-react'
 
 function MinecraftSkinRender() {
   return (
-    <div className="reveal-right delay-200 relative min-h-[520px] overflow-hidden rounded-2xl border border-card-border/70 bg-surface/25 backdrop-blur-xl shadow-2xl">
+    <div className="skin-panel reveal-right delay-200 relative min-h-[520px] overflow-hidden rounded-2xl border border-card-border/70 bg-surface/25 backdrop-blur-xl shadow-2xl">
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_20%,rgba(255,255,255,0.10),transparent_32%),linear-gradient(180deg,transparent,rgba(0,0,0,0.34))]" />
       <div className="absolute inset-0 opacity-[0.07]" style={{ backgroundImage: 'linear-gradient(var(--color-text) 1px, transparent 1px), linear-gradient(90deg, var(--color-text) 1px, transparent 1px)', backgroundSize: '42px 42px' }} />
 
-      <div className="absolute right-6 top-24 z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float">
-        <Users className="h-4 w-4 text-text/70" />
+      <div className="skin-chip skin-chip-2 absolute right-6 top-24 z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float">
+        <Users className="skin-chip-icon h-4 w-4 text-text/70 transition-transform duration-300" />
         <div className="text-left font-mono leading-tight">
           <span className="block text-[9px] uppercase tracking-[0.14em] text-muted">Focus</span>
           <span className="text-xs font-bold text-text">Players</span>
         </div>
       </div>
 
-      <div className="absolute left-7 top-[58%] z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float" style={{ animationDelay: '1.1s' }}>
-        <Code2 className="h-4 w-4 text-text/70" />
+      <div className="skin-chip skin-chip-1 absolute left-7 top-[58%] z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float" style={{ animationDelay: '1.1s' }}>
+        <Code2 className="skin-chip-icon h-4 w-4 text-text/70 transition-transform duration-300" />
         <div className="text-left font-mono leading-tight">
           <span className="block text-[9px] uppercase tracking-[0.14em] text-muted">Hobby</span>
           <span className="text-xs font-bold text-text">Coding</span>
         </div>
       </div>
 
-      <div className="absolute bottom-12 right-7 z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float" style={{ animationDelay: '1.8s' }}>
-        <Server className="h-4 w-4 text-text/70" />
+      <div className="skin-chip skin-chip-3 absolute bottom-12 right-7 z-20 flex items-center gap-2 rounded-2xl border border-card-border bg-surface/85 px-4 py-3 backdrop-blur-xl shadow-xl animate-chip-float" style={{ animationDelay: '1.8s' }}>
+        <Server className="skin-chip-icon h-4 w-4 text-text/70 transition-transform duration-300" />
         <div className="text-left font-mono leading-tight">
           <span className="block text-[9px] uppercase tracking-[0.14em] text-muted">Builder</span>
           <span className="text-xs font-bold text-text">Servers</span>
@@ -57,11 +57,11 @@ export function AboutSection({ t }) {
     >
       {/* Section Header */}
       <div className="reveal-up flex flex-col items-center md:items-start mb-12">
-        <span className="font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
+        <span className="section-eyebrow font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-          {t.heading} <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">{t.headingAccent}</span>
+          {t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
         </h2>
-        <div className="w-12 h-[2px] bg-primary mt-4" />
+        <div className="section-divider w-12 h-[2px] bg-primary mt-4" />
       </div>
 
       {/* Main Grid: Asymmetrical Layout */}
@@ -77,32 +77,32 @@ export function AboutSection({ t }) {
 
           {/* Personal Info Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 font-mono text-xs md:text-sm text-left">
-            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
+            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
               <User className="about-info-icon w-4 h-4 text-primary" />
               <div>
                 <span className="text-muted block text-[10px]">{t.labelName}</span>
-                <span className="text-text font-medium">BarzzLy</span>
+                <span className="about-info-value text-text font-medium">BarzzLy</span>
               </div>
             </div>
-            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
+            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
               <MapPin className="about-info-icon w-4 h-4 text-secondary" />
               <div>
                 <span className="text-muted block text-[10px]">{t.labelLocation}</span>
-                <span className="text-text font-medium">Indonesia (Remote)</span>
+                <span className="about-info-value text-text font-medium">Indonesia (Remote)</span>
               </div>
             </div>
-            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
+            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
               <Coffee className="about-info-icon w-4 h-4 text-primary" />
               <div>
                 <span className="text-muted block text-[10px]">{t.labelFuel}</span>
-                <span className="text-text font-medium">Americano & Latte</span>
+                <span className="about-info-value text-text font-medium">Americano & Latte</span>
               </div>
             </div>
-            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
+            <div className="about-info-card group flex items-center gap-3 p-3.5 rounded-xl border border-border bg-surface/30 hover:-translate-y-1 hover:border-primary/30 hover:bg-surface/50 hover:shadow-lg">
               <Globe className="about-info-icon w-4 h-4 text-secondary" />
               <div>
                 <span className="text-muted block text-[10px]">{t.labelPortfolio}</span>
-                <span className="text-text font-medium">barzz.ly</span>
+                <span className="about-info-value text-text font-medium">barzz.ly</span>
               </div>
             </div>
           </div>
