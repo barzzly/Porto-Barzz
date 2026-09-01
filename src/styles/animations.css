@@ -1737,110 +1737,42 @@ html.light .footer-brand:hover .brand-logo {
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* ── 1. HERO SECTION (#home) ICONS ──
-   Subtle Spring Lift & Theme Glow */
+/* ═══════════════════════════════════════════════════════════════════
+   ICON MAGNETIC PULL — every icon leans toward the cursor, exactly like
+   the navbar language / theme toggles. Fires ONLY when the cursor is on
+   the icon itself; card hover keeps its own animation and the icon stays
+   put until pointed at directly. --mx/--my come from JS (useMagneticHover)
+   and reset to 0 on leave, so the base transition eases the icon home.
+   !important is deliberate: it must outrank the card-hover icon transforms
+   that would otherwise pin the icon while its card is hovered.
+   ═══════════════════════════════════════════════════════════════════ */
+.hero-chip-icon,
+.about-info-icon,
+.about-quality-icon,
+.skin-chip-icon,
+.open-icon,
+.copy-icon,
+.skill-card-icon,
+.testimonial-quote-icon,
+.contact-link-icon,
+.footer-social {
+  --mx: 0px;
+  --my: 0px;
+}
+
 .hero-chip-icon:hover,
-.group:hover .hero-chip-icon,
-.hero-cta-button:hover .hero-cta-icon {
-  animation: heroIconOrbital 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes heroIconOrbital {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 45%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 35%, transparent)); }
-}
-
-/* ── 2. ABOUT SECTION (#about) ICONS ──
-   Spring Lift & Theme Glow */
-.about-info-card:hover .about-info-icon,
 .about-info-icon:hover,
-.about-quality-card:hover .about-quality-icon,
 .about-quality-icon:hover,
-.skin-chip:hover .skin-chip-icon,
-.skin-chip-icon:hover {
-  animation: aboutIcon3DFlip 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes aboutIcon3DFlip {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 45%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 35%, transparent)); }
-}
-
-/* ── 3. PROJECTS SECTION (#projects) ICONS ──
-   Sleek Spring Lift & Theme Glow (Role stamp does NOT spin) */
-.open-row:hover .open-icon,
+.skin-chip-icon:hover,
 .open-icon:hover,
-.copy-row:hover .copy-icon,
 .copy-icon:hover,
-.copy-row:hover svg,
-.project-tag:hover svg {
-  animation: projectIconGlitchSpin 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes projectIconGlitchSpin {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 45%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 35%, transparent)); }
-}
-
-/* ── 4. SKILLS SECTION (#tech-stack) ICONS ──
-   Elastic Spring Lift & Theme Glow */
-.skill-card:hover .skill-card-icon,
 .skill-card-icon:hover,
-.marquee-chip:hover svg,
-.marquee-chip:hover {
-  animation: skillsIconElasticWave 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes skillsIconElasticWave {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 45%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 35%, transparent)); }
-}
-
-/* ── 5. TESTIMONIALS SECTION (#testimonials) ICONS ──
-   Sleek Heartbeat Pulse & Monochrome Theme Glow (Dark mode: white glow | Light mode: dark glow) */
-.testimonial-card:hover .testimonial-avatar,
-.testimonial-avatar:hover,
-.testimonial-card:hover .testimonial-quote-icon,
 .testimonial-quote-icon:hover,
-.testimonial-card:hover .testimonial-rating svg {
-  animation: testimonialIconSparkle 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes testimonialIconSparkle {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 50%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 40%, transparent)); }
-}
-
-/* ── 6. CONTACT SECTION (#contact) ICONS ──
-   Beacon Pulse & Theme Glow */
-.contact-link-card:hover .contact-link-icon,
 .contact-link-icon:hover,
-.contact-link-card:hover .contact-card-watermark {
-  animation: contactIconRadarPulse 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes contactIconRadarPulse {
-  0% { transform: scale(1) translateY(0); }
-  50% { transform: scale(1.2) translateY(-3px); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 50%, transparent)); }
-  100% { transform: scale(1.15) translateY(-2px); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 40%, transparent)); }
-}
-
-/* ── 7. FOOTER ICONS ──
-   Rocket Spring Lift & Theme Glow */
-.footer-social:hover svg,
-.footer-social:hover {
-  animation: footerIconRocketSpin 0.6s cubic-bezier(0.22, 1.2, 0.36, 1) forwards;
-}
-
-@keyframes footerIconRocketSpin {
-  0% { transform: translateY(0) scale(1); }
-  50% { transform: translateY(-3px) scale(1.2); filter: drop-shadow(0 0 10px color-mix(in srgb, var(--color-text) 45%, transparent)); }
-  100% { transform: translateY(-2px) scale(1.15); filter: drop-shadow(0 0 12px color-mix(in srgb, var(--color-text) 35%, transparent)); }
+.footer-social:hover svg {
+  transform: translate(var(--mx), var(--my)) scale(1.15) !important;
+  filter: drop-shadow(0 0 9px color-mix(in srgb, var(--color-text) 34%, transparent));
+  transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), filter 0.25s ease;
 }
 
 /* ═════════════════════════════════════════════════════════════════════════════

@@ -2,7 +2,10 @@ import { useEffect } from 'react'
 
 // Elements opted in with .magnetic get a cursor-follow pull.
 // One delegated pointermove for the whole page instead of a listener per node.
-const MAGNET_SELECTOR = '.magnetic'
+// Card icons opt in too, so the icon pulls toward the cursor — like the navbar
+// toggles — but ONLY while the cursor is on the icon itself, never on the card.
+const MAGNET_SELECTOR =
+  '.magnetic, .hero-chip-icon, .about-info-icon, .about-quality-icon, .skin-chip-icon, .open-icon, .copy-icon, .skill-card-icon, .testimonial-quote-icon, .contact-link-icon, .footer-social'
 const HOVER_QUERY = '(hover: hover) and (pointer: fine)'
 const STRENGTH = 6 // max px of travel
 
