@@ -30,6 +30,14 @@ export function Card({
   const isTouch = useSyncExternalStore(subscribeToTouch, getTouchSnapshot, getServerSnapshot)
   const canTilt = hoverable && tilt && !isTouch
 
+  const handleMouseEnter = () => {
+    if (!canTilt) return
+    const card = cardRef.current
+    if (!card) return
+
+    card.style.transition = 'transform 0.14s ease-out, box-shadow 0.42s ease, border-color 0.42s ease'
+  }
+
   const handleMouseMove = (e) => {
     if (!canTilt) return
     const card = cardRef.current
@@ -40,10 +48,10 @@ export function Card({
     const y = e.clientY - rect.top
     const centerX = rect.width / 2
     const centerY = rect.height / 2
-    const rotateX = ((y - centerY) / centerY) * -10
-    const rotateY = ((x - centerX) / centerX) * 10
+    const rotateX = ((y - centerY) / centerY) * -7
+    const rotateY = ((x - centerX) / centerX) * 7
 
-    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(6px)`
+    card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(4px)`
 
     const glowEl = card.querySelector('.card-glow-spot')
     if (glowEl) {
@@ -65,6 +73,7 @@ export function Card({
     const card = cardRef.current
     if (!card) return
 
+    card.style.transition = 'transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.42s ease, border-color 0.42s ease'
     card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)'
     const glowEl = card.querySelector('.card-glow-spot')
     if (glowEl) glowEl.style.opacity = '0'
@@ -73,6 +82,7 @@ export function Card({
   return (
     <div
       ref={cardRef}
+      onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onTouchStart={handleTouchStart}
@@ -85,7 +95,7 @@ export function Card({
         ${canTilt ? 'tilt-card' : ''}
         ${className}
       `}
-      style={{ willChange: canTilt ? 'transform' : undefined, transition: canTilt ? 'box-shadow 0.3s ease, border-color 0.3s ease' : undefined }}
+      style={{ willChange: canTilt ? 'transform' : undefined, transition: canTilt ? 'transform 0.42s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.42s ease, border-color 0.42s ease' : undefined }}
       {...props}
     >
       <div className="absolute inset-x-0 top-0 h-[1px] bg-gradient-to-r from-transparent via-primary/30 to-transparent z-10" />
