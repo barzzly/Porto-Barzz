@@ -136,7 +136,7 @@
         serverAnalysis: "Server Analysis",
         maintenance: "Maintenance",
         optimizeSpigotConfig: "Optimize Spigot Config",
-        optimizePluginConfig: "Optimize Plugin Config",
+        optimizePluginConfig: "Optimize Server Config",
         errorDebugging: "Error Debugging"
       }
     },
@@ -363,7 +363,7 @@
         serverAnalysis: "Analisis Server",
         maintenance: "Maintenance",
         optimizeSpigotConfig: "Optimasi Config Spigot",
-        optimizePluginConfig: "Optimasi Config Plugin",
+        optimizePluginConfig: "Optimize Server Config",
         errorDebugging: "Debug Error"
       }
     },

@@ -8,7 +8,7 @@ export const skillCategories = [
       { key: "pluginConfiguration", level: "100%" },
       { key: "permissionsRanks", level: "95%" },
       { key: "guiMenus", level: "100%" },
-      { key: "developPlugin", level: "30%" }
+      { key: "developPlugin", level: "85%" }
     ]
   },
   {
@@ -29,7 +29,7 @@ export const skillCategories = [
     skills: [
       { key: "serverTesting", level: "90%" },
       { key: "serverAnalysis", level: "100%" },
-      { key: "maintenance", level: "75%" },
+      { key: "maintenance", level: "55%" },
       { key: "optimizeSpigotConfig", level: "95%" },
       { key: "optimizePluginConfig", level: "95%" },
       { key: "errorDebugging", level: "100%" }
