@@ -194,6 +194,11 @@
           name: "Valtherion",
           project: "Owner Valtherion",
           text: "Very good work. You built me an RPG fantasy themed server, fast and polished. The lobby is neat, premium plugins were added, and the result is really cool. Big W for Dev Barzz."
+        },
+        {
+          name: "DarkIgnite",
+          project: "Owner LeftyCraft",
+          text: "The optimization was so good that members of my server started calling you the Lefty shaman because you worked miracles with the TPS."
         }
       ]
     },
@@ -421,6 +426,11 @@
           name: "Valtherion",
           project: "Owner Valtherion",
           text: "Wah bagus banget, kau buatin gw server tema RPG fantasy. Sudah cepat, bagus lagi. Lobbynya rapi, ditambahin plugin premium juga. Keren banget, auto kasih bintang 5. W buat Dev Barzz."
+        },
+        {
+          name: "DarkIgnite",
+          project: "Owner LeftyCraft",
+          text: "Optimize-nya sangat bagus sampai member-member server gue manggil lu sebagai Dukun Lefty karena sudah membuat keajaiban TPS."
         }
       ]
     },
