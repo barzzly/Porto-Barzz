@@ -430,7 +430,7 @@
         {
           name: "DarkIgnite",
           project: "Owner LeftyCraft",
-          text: "Optimize-nya sangat bagus sampai member-member server gue manggil lu sebagai Dukun Lefty karena sudah membuat keajaiban TPS."
+          text: "Optimize nya sangat bagus sampai member member server gw manggil lu sebagai dukun Lefty karena sudah membuat keajaiban TPS."
         }
       ]
     },
