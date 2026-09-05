@@ -207,6 +207,11 @@
           name: "DarkIgnite",
           project: "Owner LeftyCraft",
           text: "The optimization was so good that members of my server started calling you the Lefty shaman because you worked miracles with the TPS."
+        },
+        {
+          name: "Nano",
+          project: "Owner Veryx RPG",
+          text: "The textures are amazing, nothing has errors, and there are a crazy number of items. The SL is the best, with so many effects. The armor might need some work, but I do not know whether the issue is with my server or the pack because the textures are not visible. Still, the SL is absolutely the best."
         }
       ]
     },
@@ -447,6 +452,11 @@
           name: "DarkIgnite",
           project: "Owner LeftyCraft",
           text: "Optimize nya sangat bagus sampai member member server gw manggil lu sebagai dukun Lefty karena sudah membuat keajaiban TPS."
+        },
+        {
+          name: "Nano",
+          project: "Owner Veryx RPG",
+          text: "texture nya keren keren , trus gak ada yg error , item nya gila bnyak bnget , SL nya sih the best effect nya rame parah cok , mungkin kurang di armor , aku gak tau emng kesalah di server ku atau pack nya soalnya texture nya gak keliatan tapi SL nya gila the best parah sih"
         }
       ]
     },
