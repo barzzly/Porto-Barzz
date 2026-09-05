@@ -5,6 +5,7 @@ import legacyImage from '../assets/images/legacy.webp'
 import deluxeMenuImage from '../assets/images/deluxemenu.webp'
 import shopGuiImage from '../assets/images/shopgui.webp'
 import prefixRankImage from '../assets/images/prefixrank.webp'
+import megConverterImage from '../assets/images/megconverter.webp'
 
 export const projects = [
   {
@@ -79,5 +80,14 @@ export const tools = [
     image: prefixRankImage,
     tags: ["Prefix", "Rank", "Editor", "Config"],
     url: "https://prefixrank.barzzly.com/"
+  },
+  {
+    id: 4,
+    title: "MEGConverter",
+    role: "Contributor",
+    description: "Converter model engine Java agar kompatibel dengan Minecraft Bedrock. Konversi model dan aset untuk dipakai lintas platform.",
+    image: megConverterImage,
+    tags: ["Model Engine", "Java", "Bedrock", "Converter"],
+    url: "https://megconverter.barzzly.com/"
   }
 ]

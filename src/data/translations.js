@@ -51,6 +51,8 @@
       toolsHeading: "Tools",
       emptyTools: "Tools coming soon.",
       openLabel: "Open Editor",
+      previewLabel: "View details for",
+      closePreviewLabel: "Close preview",
       onlineLabel: "Online Players",
       loadingPlayers: "Checking",
       offlineLabel: "Offline",
@@ -102,6 +104,12 @@
           title: "Prefix Rank Editor",
           role: "Developer",
           description: "A visual editor for prefixes and ranks. Adjust rank names, prefixes, colors, and icons with ease, then export a ready-to-use config."
+        },
+        {
+          id: 4,
+          title: "MEGConverter",
+          role: "Contributor",
+          description: "A converter that makes Java Model Engine models compatible with Minecraft Bedrock. Convert models and assets for cross-platform use."
         }
       ]
     },
@@ -283,6 +291,8 @@
       toolsHeading: "Tools",
       emptyTools: "Tools segera hadir.",
       openLabel: "Buka Editor",
+      previewLabel: "Lihat detail",
+      closePreviewLabel: "Tutup preview",
       onlineLabel: "Player Online",
       loadingPlayers: "Mengecek",
       offlineLabel: "Offline",
@@ -334,6 +344,12 @@
           title: "Prefix Rank Editor",
           role: "Developer",
           description: "Editor visual untuk prefix dan rank. Atur nama rank, prefix, warna, dan ikon dengan mudah lalu export config siap pakai."
+        },
+        {
+          id: 4,
+          title: "MEGConverter",
+          role: "Contributor",
+          description: "Converter model engine Java agar kompatibel dengan Minecraft Bedrock. Konversi model dan aset untuk dipakai lintas platform."
         }
       ]
     },

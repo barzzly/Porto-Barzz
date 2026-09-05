@@ -1,15 +1,19 @@
 ﻿import { useCallback, useEffect, useRef, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { projects, tools } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Server, Users, ExternalLink, Copy } from 'lucide-react'
+import { Server, Users, ExternalLink, Copy, X } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
   const [copiedProjectId, setCopiedProjectId] = useState(null)
   const [shouldLoadStatus, setShouldLoadStatus] = useState(false)
   const [activeTab, setActiveTab] = useState('server')
+  const [preview, setPreview] = useState(null)
   const sectionRef = useRef(null)
+  const dialogRef = useRef(null)
+  const closeButtonRef = useRef(null)
   const tabRefs = useRef({})
   const [tabIndicator, setTabIndicator] = useState({ left: 0, width: 0, ready: false })
   const tiltAngles = ['-rotate-1', 'rotate-[0.5deg]', '-rotate-[0.8deg]', 'rotate-1', '-rotate-[0.4deg]', 'rotate-[1.2deg]']
@@ -122,6 +126,49 @@ export function ProjectsSection({ t }) {
 
   const isOnline = (project) => serverStatus[project.id]?.state === 'online'
 
+  useEffect(() => {
+    if (!preview) return undefined
+
+    const previousOverflow = document.body.style.overflow
+    const previousFocus = document.activeElement
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
+
+    const handleKeyDown = (event) => {
+      if (event.key === 'Escape') setPreview(null)
+      if (event.key !== 'Tab') return
+
+      const focusable = dialogRef.current?.querySelectorAll('button, a[href], [tabindex]:not([tabindex="-1"])')
+      if (!focusable?.length) return
+      const first = focusable[0]
+      const last = focusable[focusable.length - 1]
+
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault()
+        last.focus()
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault()
+        first.focus()
+      }
+    }
+    window.addEventListener('keydown', handleKeyDown)
+
+    return () => {
+      document.body.style.overflow = previousOverflow
+      window.removeEventListener('keydown', handleKeyDown)
+      previousFocus?.focus()
+    }
+  }, [preview])
+
+  const openPreview = (project, isTools) => setPreview({ project, isTools })
+
+  const previewTranslation = preview && (preview.isTools
+    ? t.toolItems?.find(item => item.id === preview.project.id)
+    : t.items.find(item => item.id === preview.project.id))
+  const previewTitle = previewTranslation?.title || preview?.project.title
+  const previewDescription = previewTranslation?.description || preview?.project.description
+  const previewRole = previewTranslation?.role || preview?.project.role
+
   return (
     <section 
       ref={sectionRef}
@@ -172,11 +219,7 @@ export function ProjectsSection({ t }) {
           {t.emptyTools}
         </div>
       ) : (
-      <div className={`grid grid-cols-1 sm:grid-cols-2 gap-8 items-start mx-auto ${
-        activeTab === 'server'
-          ? 'lg:grid-cols-4 lg:max-w-none'
-          : 'lg:grid-cols-3 lg:max-w-5xl'
-      }`}>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start mx-auto">
         {(activeTab === 'server' ? projects : tools).map((project, index, activeList) => {
           const isTools = activeTab === 'tools'
           const localItem = isTools
@@ -203,6 +246,17 @@ export function ProjectsSection({ t }) {
                 tilt={true}
                 hoverable={true}
                 className="flex h-full flex-col bg-surface/40 overflow-hidden"
+                role="button"
+                tabIndex={0}
+                aria-haspopup="dialog"
+                aria-label={`${t.previewLabel} ${title}`}
+                onClick={() => openPreview(project, isTools)}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    openPreview(project, isTools)
+                  }
+                }}
               >
                 <div className="relative aspect-video overflow-visible rounded-xl border border-border/30 bg-black/20 mb-6">
                   <div className="project-media relative h-full overflow-hidden rounded-xl">
@@ -257,6 +311,7 @@ export function ProjectsSection({ t }) {
                       href={project.url}
                       target="_blank"
                       rel="noopener noreferrer"
+                      onClick={(event) => event.stopPropagation()}
                       className="open-row flex min-h-11 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text hover:border-primary/40 hover:text-primary"
                     >
                       <ExternalLink className="open-icon h-4 w-4 text-text/70" />
@@ -293,7 +348,10 @@ export function ProjectsSection({ t }) {
                       </div>
                       <button
                         type="button"
-                        onClick={() => handleCopyIp(project)}
+                        onClick={(event) => {
+                          event.stopPropagation()
+                          handleCopyIp(project)
+                        }}
                         className={`copy-row group/ip flex min-h-11 w-full items-center gap-2.5 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-left hover:border-primary/40 hover:bg-surface ${isCopied ? 'is-copied' : ''}`}
                         aria-label={`${t.copyLabel} ${project.joinIp}`}
                       >
@@ -310,6 +368,96 @@ export function ProjectsSection({ t }) {
           )
         })}
       </div>
+      )}
+
+      {preview && createPortal(
+        <div
+          className="project-preview-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md sm:p-6"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) setPreview(null)
+          }}
+        >
+          <div
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-preview-title"
+            aria-describedby="project-preview-description"
+            className="project-preview-dialog relative grid max-h-[90svh] w-full max-w-5xl overflow-y-auto rounded-2xl border border-card-border bg-surface shadow-2xl lg:grid-cols-[1.35fr_1fr]"
+          >
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={() => setPreview(null)}
+              aria-label={t.closePreviewLabel}
+              className="absolute right-3 top-3 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-card-border bg-bg/80 text-text shadow-lg backdrop-blur-md transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            <div className="relative aspect-video overflow-hidden bg-black/40 lg:aspect-auto lg:min-h-[520px]">
+              <img
+                src={preview.project.image}
+                alt={previewTitle}
+                width="1280"
+                height="720"
+                className="absolute inset-0 h-full w-full object-contain"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+            </div>
+
+            <div className="flex flex-col p-6 sm:p-8 lg:p-10">
+              <div className="mb-5 flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">
+                <span className="h-2 w-2 rounded-full bg-primary" />
+                {previewRole}
+              </div>
+              <h3 id="project-preview-title" className="font-display text-3xl font-bold tracking-tight text-text sm:text-4xl">
+                {previewTitle}
+              </h3>
+              <p id="project-preview-description" className="mt-5 text-sm leading-7 text-muted sm:text-base">
+                {previewDescription}
+              </p>
+
+              <div className="mt-6 flex flex-wrap gap-2">
+                {preview.project.tags.map((tag) => (
+                  <Badge key={tag} variant="glass" className="px-3 py-1 text-[11px]">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+
+              <div className="mt-auto pt-8">
+                {preview.isTools ? (
+                  <a
+                    href={preview.project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {t.openLabel}
+                  </a>
+                ) : preview.project.status === 'eol' ? (
+                  <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-card-border bg-bg/30 px-5 py-3 font-mono text-sm font-semibold text-muted">
+                    <Server className="h-4 w-4" />
+                    {t.eolLabel}
+                  </div>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => handleCopyIp(preview.project)}
+                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    <Copy className="h-4 w-4" />
+                    {copiedProjectId === preview.project.id ? t.copiedLabel : `${t.copyLabel} ${preview.project.joinIp}`}
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
       )}
     </section>
   )

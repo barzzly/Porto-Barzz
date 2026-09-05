@@ -1444,6 +1444,38 @@ html.light .footer-social:hover {
   transform: translate(2px, -2px) scale(1.1);
 }
 
+/* Project preview enters quickly without hiding image edges. */
+.project-preview-backdrop {
+  animation: projectPreviewBackdropIn 0.22s ease-out both;
+}
+
+.project-preview-dialog {
+  animation: projectPreviewDialogIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes projectPreviewBackdropIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes projectPreviewDialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-preview-backdrop,
+  .project-preview-dialog {
+    animation: none;
+  }
+}
+
 /* ══════════════════════════════
    About — info cards and floating chips
 ══════════════════════════════ */
