@@ -48,9 +48,13 @@
       headingAccent: "Project",
       tabServer: "Server",
       tabTools: "Tools",
+      tabWebsite: "Website",
       toolsHeading: "Tools",
+      websiteHeading: "Website",
       emptyTools: "Tools coming soon.",
+      emptyWebsite: "Website coming soon.",
       openLabel: "Open Editor",
+      openWebsiteLabel: "Open Website",
       previewLabel: "View details for",
       closePreviewLabel: "Close preview",
       onlineLabel: "Online Players",
@@ -110,6 +114,20 @@
           title: "MEGConverter",
           role: "Contributor",
           description: "A converter that makes Java Model Engine models compatible with Minecraft Bedrock. Convert models and assets for cross-platform use."
+        }
+      ],
+      websiteItems: [
+        {
+          id: 1,
+          title: "Web Store Noesantara",
+          role: "Developer",
+          description: "Official website and web store for Noesantara Network. Features server details, leaderboards, gallery, and an online store for in-game items and ranks."
+        },
+        {
+          id: 2,
+          title: "BarzzLy Portfolio",
+          role: "Developer",
+          description: "BarzzLy portfolio website dedicated specifically to the Minecraft server ecosystem, showcasing projects, visual configuration tools, and technical skills without personal IRL data."
         }
       ]
     },
@@ -293,9 +311,13 @@
       headingAccent: "Project",
       tabServer: "Server",
       tabTools: "Tools",
+      tabWebsite: "Website",
       toolsHeading: "Tools",
+      websiteHeading: "Website",
       emptyTools: "Tools segera hadir.",
+      emptyWebsite: "Website segera hadir.",
       openLabel: "Buka Editor",
+      openWebsiteLabel: "Buka Website",
       previewLabel: "Lihat detail",
       closePreviewLabel: "Tutup preview",
       onlineLabel: "Player Online",
@@ -355,6 +377,20 @@
           title: "MEGConverter",
           role: "Contributor",
           description: "Converter model engine Java agar kompatibel dengan Minecraft Bedrock. Konversi model dan aset untuk dipakai lintas platform."
+        }
+      ],
+      websiteItems: [
+        {
+          id: 1,
+          title: "Web Store Noesantara",
+          role: "Developer",
+          description: "Website resmi dan web store server Noesantara Network. Menampilkan informasi server, leaderboard, galeri, serta sistem pembelian item dan rank online."
+        },
+        {
+          id: 2,
+          title: "Portfolio BarzzLy",
+          role: "Developer",
+          description: "Website portfolio BarzzLy khusus ekosistem server Minecraft, menampilkan showcase project, tools konfigurasi, dan keahlian teknis tanpa menyangkut data pribadi IRL."
         }
       ]
     },

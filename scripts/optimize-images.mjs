@@ -16,6 +16,8 @@ const PLAN = {
   'shopgui.webp':    { width: 760, quality: 74 },
   'prefixrank.webp': { width: 760, quality: 74 },
   'megconverter.webp': { width: 760, quality: 74 },
+  'webstore.webp':     { width: 760, quality: 74 },
+  'webporto.webp':     { width: 760, quality: 74 },
   'renderskin.webp': { width: 960, quality: 72 },
 }
 

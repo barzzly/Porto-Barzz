@@ -1,6 +1,6 @@
 ﻿import { useCallback, useEffect, useRef, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { projects, tools } from '../data/projects'
+import { projects, tools, websites } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
 import { Server, Users, ExternalLink, Copy, X } from 'lucide-react'
@@ -100,7 +100,7 @@ export function ProjectsSection({ t }) {
     window.addEventListener('resize', onResize, { passive: true })
     if (document.fonts?.ready) document.fonts.ready.then(onResize).catch(() => {})
     return () => window.removeEventListener('resize', onResize)
-  }, [syncTabIndicator, t.tabServer, t.tabTools])
+  }, [syncTabIndicator, t.tabServer, t.tabTools, t.tabWebsite])
 
   const handleCopyIp = async (project) => {
     if (!project.joinIp) return
@@ -160,11 +160,15 @@ export function ProjectsSection({ t }) {
     }
   }, [preview])
 
-  const openPreview = (project, isTools) => setPreview({ project, isTools })
+  const openPreview = (project, tabType) => setPreview({ project, tabType })
 
-  const previewTranslation = preview && (preview.isTools
-    ? t.toolItems?.find(item => item.id === preview.project.id)
-    : t.items.find(item => item.id === preview.project.id))
+  const previewTranslation = preview && (
+    preview.tabType === 'tools'
+      ? t.toolItems?.find(item => item.id === preview.project.id)
+      : preview.tabType === 'website'
+      ? t.websiteItems?.find(item => item.id === preview.project.id)
+      : t.items?.find(item => item.id === preview.project.id)
+  )
   const previewTitle = previewTranslation?.title || preview?.project.title
   const previewDescription = previewTranslation?.description || preview?.project.description
   const previewRole = previewTranslation?.role || preview?.project.role
@@ -179,7 +183,7 @@ export function ProjectsSection({ t }) {
         <span className="section-eyebrow font-mono text-xs text-primary uppercase tracking-widest mb-2">{t.badge}</span>
         <div>
           <h2 className="font-display font-bold text-3xl md:text-4xl text-text tracking-tighter">
-            {activeTab === 'tools' ? t.toolsHeading : t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
+            {activeTab === 'tools' ? t.toolsHeading : activeTab === 'website' ? t.websiteHeading : t.heading} <span className="title-accent text-transparent bg-clip-text bg-gradient-to-r from-primary via-secondary to-primary">{t.headingAccent}</span>
           </h2>
           <div className="section-divider w-12 h-[2px] bg-primary mt-4" />
         </div>
@@ -197,6 +201,7 @@ export function ProjectsSection({ t }) {
           {[
             { key: 'server', label: t.tabServer },
             { key: 'tools', label: t.tabTools },
+            { key: 'website', label: t.tabWebsite },
           ].map((tab) => (
             <button
               key={tab.key}
@@ -214,16 +219,21 @@ export function ProjectsSection({ t }) {
         </div>
       </div>
 
-      {activeTab === 'tools' && tools.length === 0 ? (
+      {((activeTab === 'tools' && tools.length === 0) || (activeTab === 'website' && websites.length === 0)) ? (
         <div className="reveal-up flex min-h-40 items-center justify-center rounded-2xl border border-dashed border-border/50 bg-surface/20 font-mono text-sm text-muted">
-          {t.emptyTools}
+          {activeTab === 'tools' ? t.emptyTools : t.emptyWebsite}
         </div>
       ) : (
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 items-start mx-auto">
-        {(activeTab === 'server' ? projects : tools).map((project, index, activeList) => {
-          const isTools = activeTab === 'tools'
-          const localItem = isTools
+      <div className={`grid grid-cols-1 sm:grid-cols-2 ${
+        activeTab === 'website' && websites.length <= 2
+          ? 'lg:grid-cols-2 max-w-3xl'
+          : 'lg:grid-cols-4'
+      } gap-8 items-start mx-auto`}>
+        {(activeTab === 'tools' ? tools : activeTab === 'website' ? websites : projects).map((project, index, activeList) => {
+          const localItem = activeTab === 'tools'
             ? t.toolItems?.find(item => item.id === project.id)
+            : activeTab === 'website'
+            ? t.websiteItems?.find(item => item.id === project.id)
             : t.items.find(item => item.id === project.id)
           const title = localItem ? localItem.title : project.title
           const description = localItem ? localItem.description : project.description
@@ -250,11 +260,11 @@ export function ProjectsSection({ t }) {
                 tabIndex={0}
                 aria-haspopup="dialog"
                 aria-label={`${t.previewLabel} ${title}`}
-                onClick={() => openPreview(project, isTools)}
+                onClick={() => openPreview(project, activeTab)}
                 onKeyDown={(event) => {
                   if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
-                    openPreview(project, isTools)
+                    openPreview(project, activeTab)
                   }
                 }}
               >
@@ -306,7 +316,18 @@ export function ProjectsSection({ t }) {
                 </div>
 
                 <div className="mt-auto border-t border-border/30 pt-3">
-                  {isTools ? (
+                  {activeTab === 'website' ? (
+                    <a
+                      href={project.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={(event) => event.stopPropagation()}
+                      className="open-row flex min-h-11 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text hover:border-primary/40 hover:text-primary"
+                    >
+                      <ExternalLink className="open-icon h-4 w-4 text-text/70" />
+                      {t.openWebsiteLabel}
+                    </a>
+                  ) : activeTab === 'tools' ? (
                     <a
                       href={project.url}
                       target="_blank"
@@ -428,7 +449,17 @@ export function ProjectsSection({ t }) {
               </div>
 
               <div className="mt-auto pt-8">
-                {preview.isTools ? (
+                {preview.tabType === 'website' ? (
+                  <a
+                    href={preview.project.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                  >
+                    <ExternalLink className="h-4 w-4" />
+                    {t.openWebsiteLabel}
+                  </a>
+                ) : preview.tabType === 'tools' ? (
                   <a
                     href={preview.project.url}
                     target="_blank"

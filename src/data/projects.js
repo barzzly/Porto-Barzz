@@ -6,6 +6,8 @@ import deluxeMenuImage from '../assets/images/deluxemenu.webp'
 import shopGuiImage from '../assets/images/shopgui.webp'
 import prefixRankImage from '../assets/images/prefixrank.webp'
 import megConverterImage from '../assets/images/megconverter.webp'
+import webStoreImage from '../assets/images/webstore.webp'
+import webPortoImage from '../assets/images/webporto.webp'
 
 export const projects = [
   {
@@ -89,5 +91,26 @@ export const tools = [
     image: megConverterImage,
     tags: ["Model Engine", "Java", "Bedrock", "Converter"],
     url: "https://megconverter.barzzly.com/"
+  }
+]
+
+export const websites = [
+  {
+    id: 1,
+    title: "Web Store Noesantara",
+    role: "Developer",
+    description: "Website resmi dan web store server Noesantara Network. Menampilkan informasi server, leaderboard, galeri, serta sistem pembelian item dan rank online.",
+    image: webStoreImage,
+    tags: ["Website", "Store", "Noesantara", "E-Commerce"],
+    url: "https://store.noesantara.id/"
+  },
+  {
+    id: 2,
+    title: "Portfolio BarzzLy",
+    role: "Developer",
+    description: "Website portfolio BarzzLy khusus ekosistem server Minecraft, menampilkan showcase project, tools konfigurasi, dan keahlian teknis tanpa menyangkut data pribadi IRL.",
+    image: webPortoImage,
+    tags: ["Portfolio", "React", "Tailwind CSS", "Vite"],
+    url: "https://barzzly.com/"
   }
 ]
