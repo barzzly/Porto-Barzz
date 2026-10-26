@@ -121,7 +121,7 @@ export function Card({
         />
       )}
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex h-full flex-col flex-1">
         {children}
       </div>
     </div>

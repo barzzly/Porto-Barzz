@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { projects, tools, websites } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Server, Users, ExternalLink, Copy, X, Clock } from 'lucide-react'
+import { Server, Users, ExternalLink, Copy, X } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
@@ -232,7 +232,7 @@ export function ProjectsSection({ t }) {
         activeTab === 'website' && websites.length <= 2
           ? 'lg:grid-cols-2 max-w-3xl'
           : 'lg:grid-cols-4'
-      } gap-8 items-start mx-auto`}>
+      } gap-8 items-stretch mx-auto`}>
         {(activeTab === 'tools' ? tools : activeTab === 'website' ? websites : projects).map((project, index, activeList) => {
           const localItem = activeTab === 'tools'
             ? t.toolItems?.find(item => item.id === project.id)
@@ -249,17 +249,17 @@ export function ProjectsSection({ t }) {
           return (
             <div
               key={`${activeTab}-${project.id}`}
-              className={`reveal-scale transition-transform duration-500 ${tiltClass} hover:rotate-0`}
+              className={`reveal-scale flex h-full flex-col transition-transform duration-500 ${tiltClass} hover:rotate-0`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
               <div
-                className="animate-tab-card h-full"
+                className="animate-tab-card flex h-full flex-col flex-1"
                 style={{ animationDelay: `${index * 90}ms` }}
               >
               <Card
                 tilt={true}
                 hoverable={true}
-                className="flex h-full flex-col bg-surface/40 overflow-hidden"
+                className="flex h-full flex-col bg-surface/40 overflow-hidden flex-1"
                 role="button"
                 tabIndex={0}
                 aria-haspopup="dialog"
@@ -306,7 +306,7 @@ export function ProjectsSection({ t }) {
                   {description}
                 </p>
 
-                <div className="mb-4 flex min-h-[2rem] flex-wrap content-start gap-1.5">
+                <div className="mb-4 flex min-h-[3.25rem] flex-wrap content-start gap-1.5">
                   {project.tags.map((tag, tagIndex) => (
                     <Badge
                       key={tag}
@@ -342,15 +342,18 @@ export function ProjectsSection({ t }) {
                       <ExternalLink className="open-icon h-4 w-4 text-text/70" />
                       {t.openLabel}
                     </a>
-                  ) : project.status === 'eol' ? (
-                    <div className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text">
-                      <Server className="h-4 w-4 text-text/70" />
-                      {t.eolLabel}
-                    </div>
-                  ) : project.status === 'hiatus' ? (
-                    <div className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-center font-mono text-xs font-semibold text-amber-400">
-                      <Clock className="h-4 w-4 text-amber-400" />
-                      {t.hiatusLabel}
+                  ) : project.status === 'eol' || project.status === 'hiatus' ? (
+                    <div className="relative flex flex-col gap-2 font-mono">
+                      <div className="flex items-center justify-between gap-2 text-[11px] text-muted invisible select-none" aria-hidden="true">
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="h-2 w-2" />
+                          <span className="uppercase tracking-widest">-</span>
+                        </span>
+                      </div>
+                      <div className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-border bg-surface/35 px-3 py-2 text-center font-mono text-xs font-semibold text-text">
+                        <Server className="h-4 w-4 text-text/70" />
+                        {project.status === 'eol' ? t.eolLabel : t.hiatusLabel}
+                      </div>
                     </div>
                   ) : (
                     <div className="relative flex flex-col gap-2 font-mono">
@@ -478,15 +481,10 @@ export function ProjectsSection({ t }) {
                     <ExternalLink className="h-4 w-4" />
                     {t.openLabel}
                   </a>
-                ) : preview.project.status === 'eol' ? (
+                ) : preview.project.status === 'eol' || preview.project.status === 'hiatus' ? (
                   <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-card-border bg-bg/30 px-5 py-3 font-mono text-sm font-semibold text-muted">
                     <Server className="h-4 w-4" />
-                    {t.eolLabel}
-                  </div>
-                ) : preview.project.status === 'hiatus' ? (
-                  <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-3 font-mono text-sm font-semibold text-amber-400">
-                    <Clock className="h-4 w-4 text-amber-400" />
-                    {t.hiatusLabel}
+                    {preview.project.status === 'eol' ? t.eolLabel : t.hiatusLabel}
                   </div>
                 ) : (
                   <button
