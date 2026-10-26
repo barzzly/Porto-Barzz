@@ -49,6 +49,7 @@ export const projects = [
     description: "Server roleplay bertema sekolahan tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengalaman roleplay agar tetap rapi dan nyaman dimainkan.",
     image: legacyImage,
     tags: ["Roleplay", "School", "Eco"],
+    status: "hiatus",
     statusAddress: "legacyschool.my.id:25040",
     statusType: "java",
     joinIp: "legacyschool.my.id:25040"

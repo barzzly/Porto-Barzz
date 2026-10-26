@@ -3,7 +3,7 @@ import { createPortal } from 'react-dom'
 import { projects, tools, websites } from '../data/projects'
 import { Card } from '../components/ui/Card'
 import { Badge } from '../components/ui/Badge'
-import { Server, Users, ExternalLink, Copy, X } from 'lucide-react'
+import { Server, Users, ExternalLink, Copy, X, Clock } from 'lucide-react'
 
 export function ProjectsSection({ t }) {
   const [serverStatus, setServerStatus] = useState({})
@@ -39,6 +39,9 @@ export function ProjectsSection({ t }) {
     async function loadStatus(project) {
       if (project.status === 'eol') {
         return { id: project.id, state: 'eol' }
+      }
+      if (project.status === 'hiatus') {
+        return { id: project.id, state: 'hiatus' }
       }
 
       if (!project.statusAddress) {
@@ -118,6 +121,7 @@ export function ProjectsSection({ t }) {
     const status = serverStatus[project.id]
 
     if (project.status === 'eol' || status?.state === 'eol') return t.eolLabel
+    if (project.status === 'hiatus' || status?.state === 'hiatus') return t.hiatusLabel
     if (!status) return t.loadingPlayers
     if (status.state !== 'online') return t.offlineLabel
 
@@ -343,6 +347,11 @@ export function ProjectsSection({ t }) {
                       <Server className="h-4 w-4 text-text/70" />
                       {t.eolLabel}
                     </div>
+                  ) : project.status === 'hiatus' ? (
+                    <div className="flex min-h-11 items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-center font-mono text-xs font-semibold text-amber-400">
+                      <Clock className="h-4 w-4 text-amber-400" />
+                      {t.hiatusLabel}
+                    </div>
                   ) : (
                     <div className="relative flex flex-col gap-2 font-mono">
                       {isCopied && (
@@ -473,6 +482,11 @@ export function ProjectsSection({ t }) {
                   <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-card-border bg-bg/30 px-5 py-3 font-mono text-sm font-semibold text-muted">
                     <Server className="h-4 w-4" />
                     {t.eolLabel}
+                  </div>
+                ) : preview.project.status === 'hiatus' ? (
+                  <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-amber-500/30 bg-amber-500/10 px-5 py-3 font-mono text-sm font-semibold text-amber-400">
+                    <Clock className="h-4 w-4 text-amber-400" />
+                    {t.hiatusLabel}
                   </div>
                 ) : (
                   <button
