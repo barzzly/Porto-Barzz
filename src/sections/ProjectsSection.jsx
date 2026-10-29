@@ -176,6 +176,8 @@ export function ProjectsSection({ t }) {
   const previewTitle = previewTranslation?.title || preview?.project.title
   const previewDescription = previewTranslation?.description || preview?.project.description
   const previewRole = previewTranslation?.role || preview?.project.role
+  const previewItems = preview?.tabType === 'tools' ? tools : preview?.tabType === 'website' ? websites : projects
+  const previewIndex = preview ? previewItems.findIndex((item) => item.id === preview.project.id) + 1 : 0
 
   return (
     <section 
@@ -405,7 +407,7 @@ export function ProjectsSection({ t }) {
 
       {preview && createPortal(
         <div
-          className="project-preview-backdrop fixed inset-0 z-[100] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md sm:p-6"
+          className="project-preview-backdrop fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-black/75 p-3 sm:items-center sm:p-6"
           role="presentation"
           onMouseDown={(event) => {
             if (event.target === event.currentTarget) setPreview(null)
@@ -417,37 +419,42 @@ export function ProjectsSection({ t }) {
             aria-modal="true"
             aria-labelledby="project-preview-title"
             aria-describedby="project-preview-description"
-            className="project-preview-dialog relative grid max-h-[90svh] w-full max-w-5xl overflow-y-auto rounded-2xl border border-card-border bg-surface shadow-2xl lg:grid-cols-[1.35fr_1fr]"
+            className="project-preview-dialog relative grid max-h-[calc(100dvh-1.5rem)] w-full min-w-0 max-w-5xl grid-cols-1 gap-4 overflow-x-hidden overflow-y-auto overscroll-contain rounded-2xl sm:max-h-[calc(100dvh-3rem)]"
           >
             <button
               ref={closeButtonRef}
               type="button"
               onClick={() => setPreview(null)}
               aria-label={t.closePreviewLabel}
-              className="absolute right-3 top-3 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-card-border bg-bg/80 text-text shadow-lg backdrop-blur-md transition-colors hover:border-primary/50 hover:text-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+              className="absolute right-4 top-4 z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/20 bg-black/55 text-white shadow-lg transition-colors hover:border-white/50 hover:bg-black/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
             >
               <X className="h-5 w-5" />
             </button>
 
-            <div className="relative aspect-video overflow-hidden bg-black/40 lg:aspect-auto lg:min-h-[520px]">
+            <div className="project-preview-visual relative flex aspect-video min-h-48 min-w-0 items-center justify-center overflow-hidden rounded-2xl border border-card-border bg-surface shadow-xl sm:min-h-64">
               <img
                 src={preview.project.image}
                 alt={previewTitle}
                 width="1280"
                 height="720"
-                className="absolute inset-0 h-full w-full object-contain"
+                className="absolute inset-0 h-full w-full object-cover object-center"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/10" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-black/10 to-black/15" />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-x-0 bottom-0 h-24 backdrop-blur-sm [mask-image:linear-gradient(to_bottom,transparent,black)]" />
             </div>
 
-            <div className="flex flex-col p-6 sm:p-8 lg:p-10">
-              <div className="mb-5 flex items-center gap-2 font-mono text-xs font-semibold uppercase tracking-[0.16em] text-primary">
-                <span className="h-2 w-2 rounded-full bg-primary" />
+            <div className="project-preview-content relative flex min-w-0 flex-col rounded-2xl border border-card-border bg-surface p-5 shadow-xl sm:p-8 lg:p-10">
+              <div className="project-preview-kicker mb-5 flex items-center gap-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
+                <span className="h-1.5 w-1.5 rounded-full bg-primary" />
                 {previewRole}
+                <span className="ml-auto font-mono text-[11px] tracking-[0.16em] text-muted/80">
+                  {String(previewIndex).padStart(2, '0')} / {String(previewItems.length).padStart(2, '0')}
+                </span>
               </div>
-              <h3 id="project-preview-title" className="font-display text-3xl font-bold tracking-tight text-text sm:text-4xl">
+              <h3 id="project-preview-title" className="project-preview-title font-display text-3xl font-bold tracking-tight text-text sm:text-4xl">
                 {previewTitle}
               </h3>
+              <div className="project-preview-rule mt-5 h-px w-full bg-gradient-to-r from-primary/50 via-border to-transparent" />
               <p id="project-preview-description" className="mt-5 text-sm leading-7 text-muted sm:text-base">
                 {previewDescription}
               </p>
@@ -466,7 +473,7 @@ export function ProjectsSection({ t }) {
                     href={preview.project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    className="project-preview-action flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     <ExternalLink className="h-4 w-4" />
                     {t.openWebsiteLabel}
@@ -476,13 +483,13 @@ export function ProjectsSection({ t }) {
                     href={preview.project.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    className="project-preview-action flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     <ExternalLink className="h-4 w-4" />
                     {t.openLabel}
                   </a>
                 ) : preview.project.status === 'eol' || preview.project.status === 'hiatus' ? (
-                  <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-card-border bg-bg/30 px-5 py-3 font-mono text-sm font-semibold text-muted">
+                  <div className="flex min-h-12 items-center justify-center gap-2 rounded-xl border border-card-border bg-surface/60 px-5 py-3 font-mono text-sm font-semibold text-muted">
                     <Server className="h-4 w-4" />
                     {preview.project.status === 'eol' ? t.eolLabel : t.hiatusLabel}
                   </div>
@@ -490,7 +497,7 @@ export function ProjectsSection({ t }) {
                   <button
                     type="button"
                     onClick={() => handleCopyIp(preview.project)}
-                    className="flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg transition-opacity hover:opacity-85 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    className="project-preview-action flex min-h-12 w-full items-center justify-center gap-2 rounded-xl bg-primary px-5 py-3 font-mono text-sm font-bold text-bg focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
                   >
                     <Copy className="h-4 w-4" />
                     {copiedProjectId === preview.project.id ? t.copiedLabel : `${t.copyLabel} ${preview.project.joinIp}`}

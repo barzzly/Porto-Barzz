@@ -1444,13 +1444,39 @@ html.light .footer-social:hover {
   transform: translate(2px, -2px) scale(1.1);
 }
 
-/* Project preview enters quickly without hiding image edges. */
+/* Project details use the site's restrained, layered motion and monochrome surfaces. */
 .project-preview-backdrop {
-  animation: projectPreviewBackdropIn 0.22s ease-out both;
+  animation: projectPreviewBackdropIn 0.28s ease-out both;
 }
 
 .project-preview-dialog {
-  animation: projectPreviewDialogIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+  animation: projectPreviewDialogIn 0.46s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.project-preview-visual img {
+  animation: projectPreviewImageIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.project-preview-kicker,
+.project-preview-title,
+.project-preview-rule,
+.project-preview-content > p,
+.project-preview-content > div:not(.project-preview-kicker) {
+  animation: projectPreviewContentIn 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.project-preview-title { animation-delay: 70ms; }
+.project-preview-rule { animation-delay: 120ms; }
+.project-preview-content > p { animation-delay: 170ms; }
+.project-preview-content > div:not(.project-preview-kicker) { animation-delay: 220ms; }
+
+.project-preview-action {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+}
+
+.project-preview-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px color-mix(in srgb, var(--color-text) 14%, transparent);
 }
 
 @keyframes projectPreviewBackdropIn {
@@ -1461,18 +1487,40 @@ html.light .footer-social:hover {
 @keyframes projectPreviewDialogIn {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.96);
+    transform: translateY(24px) scale(0.975);
+    filter: blur(8px);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+    filter: blur(0);
   }
+}
+
+@keyframes projectPreviewImageIn {
+  from { opacity: 0.55; transform: scale(1.045); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes projectPreviewContentIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .project-preview-backdrop,
-  .project-preview-dialog {
+  .project-preview-dialog,
+  .project-preview-visual img,
+  .project-preview-kicker,
+  .project-preview-title,
+  .project-preview-rule,
+  .project-preview-content > p,
+  .project-preview-content > div:not(.project-preview-kicker) {
     animation: none;
+  }
+
+  .project-preview-action {
+    transition: none;
   }
 }
 
