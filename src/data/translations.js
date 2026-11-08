@@ -231,6 +231,16 @@
           name: "Nano",
           project: "Owner Veryx RPG",
           text: "The textures are amazing, nothing has errors, and there are a crazy number of items. The SL is the best, with so many effects. The armor might need some work, but I do not know whether the issue is with my server or the pack because the textures are not visible. Still, the SL is absolutely the best."
+        },
+        {
+          name: "YurooSlavia",
+          project: "Owner Rukh Ascendant",
+          text: "The MythicMobs weapon fix was very fast, and the price was reasonable. Recommended."
+        },
+        {
+          name: "Leotra",
+          project: "Owner Jawa Camp",
+          text: "Very safe and trustworthy. If you need optimization, bug fixes, or a server setup to make your server more interesting, contact Barzz."
         }
       ]
     },
@@ -495,6 +505,16 @@
           name: "Nano",
           project: "Owner Veryx RPG",
           text: "texture nya keren keren , trus gak ada yg error , item nya gila bnyak bnget , SL nya sih the best effect nya rame parah cok , mungkin kurang di armor , aku gak tau emng kesalah di server ku atau pack nya soalnya texture nya gak keliatan tapi SL nya gila the best parah sih"
+        },
+        {
+          name: "YurooSlavia",
+          project: "Owner Rukh Ascendant",
+          text: "Kinerja fix senjata mythicmobs  sangat cepat dan harga fix nya tergolong standart rekomen si"
+        },
+        {
+          name: "Leotra",
+          project: "Owner Jawa Camp",
+          text: "aman banget ges dan terpercaya kalau mau order jasa optimisasi entah bug dan setup server biar server tambah menarik bisa hubungan ke barzz ajah"
         }
       ]
     },
