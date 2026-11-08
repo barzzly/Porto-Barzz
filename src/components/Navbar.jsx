@@ -194,9 +194,7 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
         <a
           href="#home"
           onClick={(event) => handleNavClick(event, '#home')}
-          onMouseMove={handleMagnetMove}
-          onMouseLeave={handleMagnetLeave}
-          className="navbar-brand magnetic group flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text cursor-pointer"
+          className="navbar-brand group flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text cursor-pointer"
         >
           <img src={logoNoBg} alt="Barzz Logo" width="24" height="24" decoding="async" className="w-6 h-6 object-contain brand-logo" />
           <span className="navbar-brand-text">BARZZ<span className="text-muted transition-colors duration-300 group-hover:text-text">.LY</span></span>

@@ -12,11 +12,10 @@
     hero: {
       status: "AVAILABLE FOR MINECRAFT SERVER WORK",
       eyebrow: "Minecraft Server",
-      desc: "I design and build Minecraft servers with clean systems, stable performance, and polished player experiences. I handle plugins, economy, proxy setup, and launch ready operations.",
+      desc: "Minecraft server developer with experience since 2022. Actively building servers at scale, not rushed setups.",
       descLines: [
-        "I design and build Minecraft servers with clean systems,",
-        "stable performance, and polished player experiences.",
-        "I handle plugins, economy, proxy setup, and launch ready operations."
+        "Minecraft server developer with experience since 2022.",
+        "Actively building servers at scale, not rushed setups."
       ],
       stats: [
         { label: "FAST", value: "RESPONSE" },
@@ -86,9 +85,9 @@
         },
         {
           id: 4,
-          title: "Legacy School",
+          title: "NUVORA SMP",
           role: "Developer",
-          description: "A school themed roleplay server I joined as a developer in July 2026. I handle the systems, plugins, and roleplay experience to keep everything neat and comfortable to play."
+          description: "A server rebranded from Legacy School, where I joined as a developer in July 2026. I handle the systems, plugins, and server development."
         }
       ],
       toolItems: [
@@ -128,7 +127,7 @@
           id: 2,
           title: "BarzzLy Portfolio",
           role: "Developer",
-          description: "BarzzLy portfolio website dedicated specifically to the Minecraft server ecosystem, showcasing projects, visual configuration tools, and technical skills without personal IRL data."
+          description: "BarzzLy's portfolio website uses a simple design to showcase projects, tools, and Minecraft server development expertise. Information is clear and concise, without unnecessary elements."
         }
       ]
     },
@@ -286,11 +285,10 @@
     hero: {
       status: "TERSEDIA UNTUK PROJECT SERVER MINECRAFT",
       eyebrow: "Minecraft Server",
-      desc: "Saya membangun server Minecraft dengan sistem yang rapi, performa stabil, dan pengalaman bermain yang matang. Saya mengurus plugin, ekonomi, proxy, dan persiapan rilis.",
+      desc: "Developer server Minecraft berpengalaman sejak 2022. Aktif membangun server berskala besar, bukan sekadar asal jadi.",
       descLines: [
-        "Saya membangun server Minecraft dengan sistem yang rapi,",
-        "performa stabil, dan pengalaman bermain yang matang.",
-        "Saya mengurus plugin, ekonomi, proxy, dan persiapan rilis."
+        "Developer server Minecraft berpengalaman sejak 2022.",
+        "Aktif membangun server berskala besar, bukan sekadar asal jadi."
       ],
       stats: [
         { label: "FAST", value: "RESPON" },
@@ -360,9 +358,9 @@
         },
         {
           id: 4,
-          title: "Legacy School",
+          title: "NUVORA SMP",
           role: "Developer",
-          description: "Server roleplay bertema sekolahan tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengalaman roleplay agar tetap rapi dan nyaman dimainkan."
+          description: "Server hasil rebranding dari Legacy School, tempat saya bergabung sebagai developer sejak Juli 2026. Saya mengurus sistem, plugin, dan pengembangan server."
         }
       ],
       toolItems: [
@@ -402,7 +400,7 @@
           id: 2,
           title: "Portfolio BarzzLy",
           role: "Developer",
-          description: "Website portfolio BarzzLy khusus ekosistem server Minecraft, menampilkan showcase project, tools konfigurasi, dan keahlian teknis tanpa menyangkut data pribadi IRL."
+          description: "Website portofolio BarzzLy dengan desain sederhana yang menampilkan proyek, tools, dan keahlian pengembangan server Minecraft. Informasi disajikan jelas dan padat, tanpa elemen yang tidak perlu."
         }
       ]
     },
