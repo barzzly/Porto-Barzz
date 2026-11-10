@@ -99,7 +99,7 @@ npm run preview
 Porto-Barzz/
 ├── public/
 │   ├── fonts/           # Font woff2 self-hosted
-│   ├── favicon.png      # Favicon
+│   ├── favicon-light.png / favicon-dark.png / apple-touch-icon.png  # Favicons
 │   ├── og-image.jpg     # Social share preview
 │   ├── robots.txt
 │   └── sitemap.xml

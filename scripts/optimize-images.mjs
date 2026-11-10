@@ -42,9 +42,10 @@ for (const [file, opts] of Object.entries(PLAN)) {
   console.log(`${file.padEnd(20)} ${kb(orig).padStart(9)} -> ${kb(buf.length).padStart(9)}  (-${(100 - (buf.length / orig) * 100).toFixed(0)}%)`)
 }
 
-// Logo PNG: displayed at ~24px, keep small transparent PNG at 96px
-const logo = path.join(IMG_DIR, 'Logo_No_Backround.png')
-if (fs.existsSync(logo)) {
+// Logo PNGs: displayed at ~24px, keep small transparent PNGs at 96px
+for (const file of ['logo-hitam.png', 'logo-putih.png']) {
+  const logo = path.join(IMG_DIR, file)
+  if (!fs.existsSync(logo)) continue
   const input = fs.readFileSync(logo)
   const orig = input.length
   const buf = await sharp(input)
@@ -54,7 +55,7 @@ if (fs.existsSync(logo)) {
   fs.writeFileSync(logo, buf)
   before += orig
   after += buf.length
-  console.log(`${'Logo_No_Backround.png'.padEnd(20)} ${kb(orig).padStart(9)} -> ${kb(buf.length).padStart(9)}  (-${(100 - (buf.length / orig) * 100).toFixed(0)}%)`)
+  console.log(`${file.padEnd(20)} ${kb(orig).padStart(9)} -> ${kb(buf.length).padStart(9)}  (-${(100 - (buf.length / orig) * 100).toFixed(0)}%)`)
 }
 
 // Social share image (public/) — recompress jpeg

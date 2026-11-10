@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { Sun, Moon, Menu, X } from 'lucide-react'
-import logoNoBg from '../assets/images/Logo_No_Backround.png'
+import logoHitam from '../assets/images/logo-hitam.png'
+import logoPutih from '../assets/images/logo-putih.png'
 
 const NAV_SECTIONS = ['home', 'about', 'projects', 'tech-stack', 'testimonials', 'contact']
 // While a smooth scroll from a nav click is in flight, trust the clicked target
@@ -196,7 +197,8 @@ export function Navbar({ isDark, toggleTheme, lang, toggleLang, t }) {
           onClick={(event) => handleNavClick(event, '#home')}
           className="navbar-brand group flex items-center gap-2 font-mono font-bold tracking-tight text-sm text-text cursor-pointer"
         >
-          <img src={logoNoBg} alt="Barzz Logo" width="24" height="24" decoding="async" className="w-6 h-6 object-contain brand-logo" />
+          <img src={logoPutih} alt="Barzz Logo" width="24" height="24" decoding="async" className="w-6 h-6 object-contain brand-logo brand-logo-dark" />
+          <img src={logoHitam} alt="Barzz Logo" width="24" height="24" decoding="async" className="w-6 h-6 object-contain brand-logo brand-logo-light" />
           <span className="navbar-brand-text">BARZZ<span className="text-muted transition-colors duration-300 group-hover:text-text">.LY</span></span>
         </a>
 

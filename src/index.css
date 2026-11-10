@@ -184,12 +184,16 @@ body {
 
 /* Logo visibility adjustments (White in dark mode, original black in light mode) */
 .brand-logo {
-  filter: brightness(0) invert(1);
   transition: filter 0.3s ease, transform 0.3s ease;
 }
 
-html.light .brand-logo {
-  filter: none;
+.brand-logo-light,
+html.light .brand-logo-dark {
+  display: none;
+}
+
+html.light .brand-logo-light {
+  display: block;
 }
 
 /* ═══════════════════════════════════════════

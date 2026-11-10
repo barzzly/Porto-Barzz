@@ -1771,11 +1771,11 @@ html.light .footer-social:hover {
 }
 
 html.dark .brand-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 0 1px rgba(255,255,255,0.5));
+  filter: drop-shadow(0 0 1px rgba(255,255,255,0.5));
 }
 
 html.light .brand-logo {
-  filter: brightness(0) drop-shadow(0 0 1px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 0 1px rgba(0,0,0,0.2));
 }
 
 .footer-brand:hover .brand-logo {
@@ -1784,12 +1784,12 @@ html.light .brand-logo {
 
 html.dark .navbar-brand:is(:hover, :focus-visible) .brand-logo,
 html.dark .footer-brand:hover .brand-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
 }
 
 html.light .navbar-brand:is(:hover, :focus-visible) .brand-logo,
 html.light .footer-brand:hover .brand-logo {
-  filter: brightness(0) drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.3));
 }
 
 /* ═══════════════════════════════════════════════════════════════════
