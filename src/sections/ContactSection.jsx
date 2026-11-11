@@ -24,7 +24,7 @@ export function ContactSection({ t }) {
     },
     {
       label: 'TikTok',
-      value: '@barzzly',
+      value: 'BarzzLy',
       href: 'https://www.tiktok.com/@barzzly',
       Icon: Tiktok,
     },
