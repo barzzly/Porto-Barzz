@@ -1,5 +1,5 @@
 import { Card } from '../components/ui/Card'
-import { Github, Discord } from '../components/ui/BrandIcons'
+import { Github, Discord, Tiktok } from '../components/ui/BrandIcons'
 import { ExternalLink, Globe } from 'lucide-react'
 
 export function ContactSection({ t }) {
@@ -21,6 +21,12 @@ export function ContactSection({ t }) {
       value: 'BarzzLy',
       href: 'https://dev.barzzly.com',
       Icon: Globe,
+    },
+    {
+      label: 'TikTok',
+      value: '@barzzly',
+      href: 'https://www.tiktok.com/@barzzly',
+      Icon: Tiktok,
     },
   ]
 
@@ -48,7 +54,7 @@ export function ContactSection({ t }) {
           </p>
         </div>
 
-        <div className="reveal-right delay-150 grid grid-cols-1 sm:grid-cols-3 gap-5">
+        <div className="reveal-right delay-150 grid grid-cols-1 sm:grid-cols-2 gap-5">
           {contactLinks.map((item) => {
             const Icon = item.Icon
 

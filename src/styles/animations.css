@@ -1759,6 +1759,13 @@ html.light .footer-social:hover {
   .skill-card:active .skill-card-icon {
     transform: translateY(-1px) scale(1.06) !important;
   }
+
+  /* Bars must never depend on reveal JS or hover animations on mobile */
+  .skill-progress {
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
 }
 
 /* ═════════════════════════════════════════════════════════════════════════════

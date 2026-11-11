@@ -12,10 +12,10 @@
     hero: {
       status: "AVAILABLE FOR MINECRAFT SERVER WORK",
       eyebrow: "Minecraft Server",
-      desc: "Minecraft server developer with experience since 2022. Actively building servers at scale, not rushed setups.",
+      desc: "Minecraft server developer with experience since 2022. Actively building servers from small to large scale.",
       descLines: [
         "Minecraft server developer with experience since 2022.",
-        "Actively building servers at scale, not rushed setups."
+        "Actively building servers from small to large scale."
       ],
       stats: [
         { label: "FAST", value: "RESPONSE" },
@@ -247,7 +247,7 @@
       badge: "GET IN TOUCH",
       heading: "Start a",
       headingAccent: "Server",
-      subheading: "Contact me through Discord or visit my GitHub or website.",
+      subheading: "Contact me through Discord or visit my GitHub, website, or TikTok.",
       desc: "For server setup, plugin configuration, optimization, or long term maintenance, use the links here and we can discuss the build directly.",
       formName: "Name",
       formEmail: "Email",
@@ -285,10 +285,10 @@
     hero: {
       status: "TERSEDIA UNTUK PROJECT SERVER MINECRAFT",
       eyebrow: "Minecraft Server",
-      desc: "Developer server Minecraft berpengalaman sejak 2022. Aktif membangun server berskala besar, bukan sekadar asal jadi.",
+      desc: "Developer server Minecraft berpengalaman sejak 2022. Aktif membangun server skala kecil sampai dengan skala besar.",
       descLines: [
         "Developer server Minecraft berpengalaman sejak 2022.",
-        "Aktif membangun server berskala besar, bukan sekadar asal jadi."
+        "Aktif membangun server skala kecil sampai dengan skala besar."
       ],
       stats: [
         { label: "FAST", value: "RESPON" },
@@ -520,7 +520,7 @@
       badge: "HUBUNGI SAYA",
       heading: "Mulai",
       headingAccent: "Server",
-      subheading: "Hubungi saya melalui Discord atau kunjungi GitHub saya atau website saya.",
+      subheading: "Hubungi saya melalui Discord atau kunjungi GitHub, Website atau TikTok saya.",
       desc: "Kalau kamu butuh setup server, konfigurasi plugin, optimasi, atau maintenance jangka panjang, pakai link ini dan kita bahas buildnya langsung.",
       formName: "Nama",
       formEmail: "Email",
