@@ -1,5 +1,5 @@
-import { Github, Discord } from './ui/BrandIcons'
-import { ArrowUp } from 'lucide-react'
+import { Github, Discord, Tiktok } from './ui/BrandIcons'
+import { ArrowUp, Globe } from 'lucide-react'
 import logoHitam from '../assets/images/logo-hitam.png'
 import logoPutih from '../assets/images/logo-putih.png'
 
@@ -15,6 +15,8 @@ export function Footer({ t }) {
   const socialLinks = [
     { icon: <Github className="w-4.5 h-4.5" />, href: 'https://github.com/barzzly/', label: 'GitHub' },
     { icon: <Discord className="w-4.5 h-4.5" />, href: 'https://discord.com/users/1189813545018347580', label: 'Discord' },
+    { icon: <Globe className="w-4.5 h-4.5" />, href: 'https://dev.barzzly.com', label: 'Website' },
+    { icon: <Tiktok className="w-4.5 h-4.5" />, href: 'https://www.tiktok.com/@barzzly', label: 'TikTok' },
   ]
 
   const scrollTo = (event, href) => {
