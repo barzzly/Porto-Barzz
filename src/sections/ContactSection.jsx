@@ -19,7 +19,7 @@ export function ContactSection({ t }) {
     {
       label: 'Website',
       value: 'BarzzLy',
-      href: 'https://dev.barzzly.com',
+      href: 'https://store.barzzly.com',
       Icon: Globe,
     },
     {
